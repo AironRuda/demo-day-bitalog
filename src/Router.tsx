@@ -1,9 +1,17 @@
-import React from "react";
 import { Route, Routes } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import App from "./App";
+import Login from "./pages/Login";
 
-const Router = () => {
-  return <div>Router</div>;
-};
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path="login" element={<Login />} />
+    </Route>
+  )
+);
 
-export default Router;
+export default router;
