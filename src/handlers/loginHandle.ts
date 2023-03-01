@@ -6,7 +6,8 @@ import { FirebaseError } from "firebase/app";
 
 export const handleLogin = async (values: LoginValues) => {
     try {
-        await signInWithEmailAndPassword(auth, values.email, values.password)
+        const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password)
+        return userCredential
     } catch (error) {
         if (error instanceof FirebaseError) return error.message
     }

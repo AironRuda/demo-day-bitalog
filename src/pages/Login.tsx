@@ -1,9 +1,14 @@
 import { Formik, Form } from "formik";
-import * as React from "react";
 import TextFieldFormik from "../components/form/TextFieldFormik";
 import { handleLogin } from "../handlers/loginHandle";
 import LoginValues from "../model/login.model";
 import { LOGIN_VALIDATION_SCHEMA } from "../utilities/formValidations";
+
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { Outlet, useNavigate } from "react-router-dom";
+import { fetchUser, selectUser } from "../context/userSlice";
+import { useEffect } from "react";
+import { User } from "../model/user.model";
 
 const INITIAL_VALUES: LoginValues = {
   email: "",
@@ -11,12 +16,24 @@ const INITIAL_VALUES: LoginValues = {
 };
 
 const Login: React.FunctionComponent = (props) => {
+  const dispatch = useDispatch<any>();
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    if (user.id !== "") navigate("dashboard");
+  }, [user]);
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}
       onSubmit={async (values, helpers) => {
         const error = await handleLogin(values);
-        error ? helpers.setStatus(error) : helpers.resetForm();
+        if (typeof error === "string") {
+          helpers.setStatus(error);
+        } else if (error) {
+          dispatch(fetchUser(error.user.uid));
+        }
       }}
       validationSchema={LOGIN_VALIDATION_SCHEMA}
     >
