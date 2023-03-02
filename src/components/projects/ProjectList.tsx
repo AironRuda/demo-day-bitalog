@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { selectProjects } from '../../context/userSlice';
+import * as React from "react";
+import { useSelector } from "react-redux";
+import { selectProjects } from "../../context/userSlice";
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
@@ -10,7 +10,11 @@ const ProjectList: React.FunctionComponent = (props) => {
       <h1>Proyectos</h1>
       <ul>
         {!!projects ? (
-          projects.map((project) => <li>{project.name}</li>)
+          projects.map((project, index) => (
+            <li key={index} onClick={() => {}}>
+              {project.name}
+            </li>
+          ))
         ) : (
           <div>En el momento no hay proyectos disponibles :c</div>
         )}
