@@ -1,5 +1,5 @@
 export interface Material {
-    reference: string
+    material: string
     amount: number
     unit: string
 }

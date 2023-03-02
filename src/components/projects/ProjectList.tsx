@@ -1,9 +1,11 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProject } from "../../context/selectedProjectSlice";
 import { selectProjects } from "../../context/userSlice";
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -11,7 +13,12 @@ const ProjectList: React.FunctionComponent = (props) => {
       <ul>
         {!!projects ? (
           projects.map((project, index) => (
-            <li key={index} onClick={() => {}}>
+            <li
+              key={index}
+              onClick={() => {
+                dispatch(selectProject(project.id));
+              }}
+            >
               {project.name}
             </li>
           ))

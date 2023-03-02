@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { searchProjectsAdmin } from '../firebase/queries';
+import { Activity } from '../model/activity.model';
 import { Project } from '../model/projects.model';
 import { User } from '../model/user.model';
 
@@ -28,7 +29,7 @@ const fetchAllProjectsAdmin = createAsyncThunk(
     if (user.id) {
       const projects = await (
         await getDocs(searchProjectsAdmin(user.id))
-      ).docs.map((item) => item.data());
+      ).docs.map((item) => { return { ...item.data(), id: item.id } });
       return projects as Project[] | undefined;
     }
   }
@@ -67,6 +68,10 @@ const userSlice = createSlice({
 
 export const selectUser = (state: { user: User }) => state.user;
 export const selectProjects = (state: { user: User }) => state.user.projects;
+
+export const getActivities = (state: { user: { projects: Project[] } }, projectId: string) => {
+  return state.user.projects.find(projects => projects.id === projectId)
+}
 
 export { fetchUser, fetchAllProjectsAdmin };
 export const { logOut, addProject } = userSlice.actions;

@@ -8,3 +8,5 @@ export interface Activity {
     materials: Material[];
     updatedAt: Date
 }
+
+export type createActivitiesDTO = Pick<Activity, "activityName" | "priority" | "materials">
