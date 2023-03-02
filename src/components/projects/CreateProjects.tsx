@@ -1,32 +1,59 @@
-import { Form, Formik } from "formik";
-import { createProjectDTO } from "../../model/projects.model";
-import CreateListItems from "../form/CreateListItems";
-import TextFieldFormik from "../form/TextFieldFormik";
+import { getDocs } from 'firebase/firestore';
+import { Form, Formik } from 'formik';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProject } from '../../context/userSlice';
+import { searchWorkers } from '../../firebase/queries';
+import { handleCreateProject } from '../../handlers/handleCreateProject';
+import { createProjectDTO } from '../../model/projects.model';
+import { CREATE_PROJECT_VALIDATION_SCHEMA } from '../../utilities/formValidations';
+import SelectFormik from '../form/SelectFormik';
+import TextFieldFormik from '../form/TextFieldFormik';
 
 const INITIAL_VALUES: createProjectDTO = {
-  name: "",
-  workers: ["worker 1"],
+  name: '',
+  workers: [],
 };
 
 const CreateProjects: React.FunctionComponent = (props) => {
-  return (
-    <div>
-      <h1>
-        crear project por nombre y asignar trabajadores de un pool mediante
-        select y asignalo a array mediante el currentUser, mediante adminId
-      </h1>
-      <Formik initialValues={INITIAL_VALUES} onSubmit={() => {}}>
-        {({ values }) => (
-          <Form>
-            <TextFieldFormik name="name" placeholder="Project Name" />
+  const [avalaibleWorkers, setAvalaibleWorkers] = useState<string[]>([]);
+  const dispatch = useDispatch();
 
-            <div>
-              <CreateListItems name={"workers"} />
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </div>
+  useEffect(() => {
+    getDocs(searchWorkers).then((res) => {
+      const workers = res.docs.map((doc) => doc.id);
+      setAvalaibleWorkers(workers);
+    });
+  }, []);
+
+  return (
+    <Formik
+      initialValues={INITIAL_VALUES}
+      validationSchema={CREATE_PROJECT_VALIDATION_SCHEMA}
+      onSubmit={async (values, helpers) => {
+        const newProject = await handleCreateProject(values);
+        if (typeof newProject === 'string') helpers.setStatus(newProject);
+        else if (newProject) {
+          helpers.resetForm();
+          dispatch(addProject(newProject));
+        }
+      }}
+    >
+      {({ status }) => (
+        <Form>
+          <TextFieldFormik name='name' placeholder='Project Name' />
+          <SelectFormik
+            name='workers'
+            options={avalaibleWorkers}
+            placeholder='Selecciona a los encargados'
+          />
+          <button type='submit' className='btn'>
+            Create
+          </button>
+          {!!status && <div>{status}</div>}
+        </Form>
+      )}
+    </Formik>
   );
 };
 

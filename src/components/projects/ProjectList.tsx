@@ -1,13 +1,20 @@
-import * as React from "react";
+import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { selectProjects } from '../../context/userSlice';
 
-interface IAppProps {}
+const ProjectList: React.FunctionComponent = (props) => {
+  const projects = useSelector(selectProjects);
 
-const ProjectList: React.FunctionComponent<IAppProps> = (props) => {
   return (
     <div>
-      leer array de proyectos asignados un ususario admin y mostrar las cartas
-      de proyectos
-      <h1>array a leer, está en projecto, projecto está en firebase</h1>
+      <h1>Proyectos</h1>
+      <ul>
+        {!!projects ? (
+          projects.map((project) => <li>{project.name}</li>)
+        ) : (
+          <div>En el momento no hay proyectos disponibles :c</div>
+        )}
+      </ul>
     </div>
   );
 };
