@@ -4,9 +4,13 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import App from "./App";
+import AcityiesList from "./components/activities/AcityiesList";
 import ActivityContainer from "./components/activities/ActivityContainer";
+import CreateActivities from "./components/activities/CreateActivities";
 import Inventory from "./components/Inventory";
+import CreateProjects from "./components/projects/CreateProjects";
 import ProjectContainer from "./components/projects/ProjectContainer";
+import ProjectList from "./components/projects/ProjectList";
 import Team from "./components/Team";
 import Dashboard from "./pages/Dashboard";
 import Display from "./pages/Display";
@@ -21,13 +25,13 @@ const router = createBrowserRouter(
         <Route index element={<Login />} />
         <Route path="dashboard" element={<Dashboard />}>
           <Route path="projects" element={<ProjectContainer />}>
-            <Route index />
-            <Route path="create-project" />
+            <Route path="create-project" element={<CreateProjects />} />
+            <Route index element={<ProjectList />} />
           </Route>
 
           <Route path="activities" element={<ActivityContainer />}>
-            <Route index />
-            <Route path="create-activities" />
+            <Route path="create-activities" element={<CreateActivities />} />
+            <Route index element={<AcityiesList />} />
           </Route>
 
           <Route path="team" element={<Team />} />

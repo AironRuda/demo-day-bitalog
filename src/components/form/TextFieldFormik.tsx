@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useField } from "formik";
 
 interface IAppProps {
@@ -6,6 +5,7 @@ interface IAppProps {
   name: string;
   type?: string;
 }
+
 const TextFieldFormik: React.FunctionComponent<IAppProps> = ({
   name,
   placeholder,
@@ -14,7 +14,12 @@ const TextFieldFormik: React.FunctionComponent<IAppProps> = ({
   const [field, meta] = useField(name);
   return (
     <>
-      <input type={type ?? "text"} placeholder={placeholder} {...field} />
+      <input
+        type={type ?? "text"}
+        placeholder={placeholder}
+        {...field}
+        className="input"
+      />
       {meta.touched && meta.error ? <div>{meta.error}</div> : null}
     </>
   );
