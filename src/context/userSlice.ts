@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { searchProjectsAdmin } from '../firebase/queries';
-import { Activity } from '../model/activity.model';
+import { Activity, createActivitiesDTO } from '../model/activity.model';
 import { Project } from '../model/projects.model';
 import { User } from '../model/user.model';
 
@@ -44,6 +44,16 @@ const userSlice = createSlice({
     addProject: (state, action: PayloadAction<Project>) => {
       state.projects.push(action.payload);
     },
+    addActivity: (
+      state,
+      action: PayloadAction<{ projectId: string; activity: Activity }>
+    ) => {
+      const currentProject = state.projects.findIndex(
+        (projects) => projects.id === action.payload.projectId
+      );
+      if (currentProject >= 0)
+        state.projects[currentProject].activities.push(action.payload.activity);
+    },
     logOut: (state) => {
       return initialState;
     },
@@ -79,5 +89,5 @@ export const getCurrentProject = (
 };
 
 export { fetchUser, fetchAllProjectsAdmin };
-export const { logOut, addProject } = userSlice.actions;
+export const { logOut, addProject, addActivity } = userSlice.actions;
 export default userSlice.reducer;

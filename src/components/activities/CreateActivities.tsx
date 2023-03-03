@@ -1,5 +1,5 @@
 import { doc, getDoc } from 'firebase/firestore';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
 import { createActivitiesDTO } from '../../model/activity.model';
@@ -8,8 +8,8 @@ import SelectPriority from './form/SelectPriority';
 import TextFieldFormik from '../form/TextFieldFormik';
 import SelectMaterials from './form/SelectMaterials';
 import { CREATE_ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
-import { useSelector } from 'react-redux';
-import { getCurrentProject } from '../../context/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addActivity, getCurrentProject } from '../../context/userSlice';
 import { Project } from '../../model/projects.model';
 import { selectedProject } from '../../context/selectedProjectSlice';
 import { handleCreateActivity } from '../../handlers/handleCreateActivity';
@@ -22,6 +22,7 @@ const INITIAL_VALUES: createActivitiesDTO = {
 
 const CreateActivities: React.FunctionComponent = (props) => {
   const [materials, setMaterial] = useState<Material[]>([]);
+  const dispatch = useDispatch();
   const selectedProjectId = useSelector(selectedProject);
   const currentProject = useSelector(
     (state: { user: { projects: Project[] } }) =>
@@ -35,13 +36,25 @@ const CreateActivities: React.FunctionComponent = (props) => {
     });
   }, []);
 
+  const handleSubmit = async (
+    values: createActivitiesDTO,
+    helpers: FormikHelpers<createActivitiesDTO>
+  ) => {
+    if (currentProject) {
+      const response = await handleCreateActivity(values, currentProject);
+      if (typeof response === 'string') helpers.setStatus(response);
+      else if (response) {
+        helpers.resetForm();
+        dispatch(addActivity(response));
+      }
+    }
+  };
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}
       validationSchema={CREATE_ACTIVITY_VALIDATION_SCHEMA}
-      onSubmit={async (values) => {
-        currentProject && (await handleCreateActivity(values, currentProject));
-      }}
+      onSubmit={handleSubmit}
     >
       {() => (
         <Form>
