@@ -37,10 +37,11 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
       <input
         type='number'
         value={amount}
-        onChange={(e) =>
+        onChange={(e) => {
           !isNaN(parseInt(e.target.value)) &&
-          setAmount(parseInt(e.target.value))
-        }
+            setAmount(parseInt(e.target.value));
+          isNaN(parseInt(e.target.value)) && setAmount(0);
+        }}
       />
       <span>{currentMaterial.unit}</span>
       <span onClick={deleteMaterial}>x</span>
