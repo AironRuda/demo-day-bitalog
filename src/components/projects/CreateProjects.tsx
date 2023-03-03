@@ -1,5 +1,5 @@
 import { getDocs } from 'firebase/firestore';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProject } from '../../context/userSlice';
@@ -26,18 +26,23 @@ const CreateProjects: React.FunctionComponent = (props) => {
     });
   }, []);
 
+  const handleSubmit = async (
+    values: createProjectDTO,
+    helpers: FormikHelpers<createProjectDTO>
+  ) => {
+    const newProject = await handleCreateProject(values);
+    if (typeof newProject === 'string') helpers.setStatus(newProject);
+    else if (newProject) {
+      helpers.resetForm();
+      dispatch(addProject(newProject));
+    }
+  };
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}
       validationSchema={CREATE_PROJECT_VALIDATION_SCHEMA}
-      onSubmit={async (values, helpers) => {
-        const newProject = await handleCreateProject(values);
-        if (typeof newProject === 'string') helpers.setStatus(newProject);
-        else if (newProject) {
-          helpers.resetForm();
-          dispatch(addProject(newProject));
-        }
-      }}
+      onSubmit={handleSubmit}
     >
       {({ status }) => (
         <Form>
@@ -46,6 +51,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
             name='workers'
             options={avalaibleWorkers}
             placeholder='Selecciona a los encargados'
+            renderList
           />
           <button type='submit' className='btn'>
             Create
