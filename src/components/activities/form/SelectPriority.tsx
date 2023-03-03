@@ -5,7 +5,7 @@ interface Props {}
 
 const SelectPriority: React.FunctionComponent<Props> = () => {
   const [field, meta, helpers] = useField('priority');
-  const [priority, setPriority] = useState(1);
+  const [priority, setPriority] = useState(3);
 
   useEffect(() => {
     helpers.setValue(priority);

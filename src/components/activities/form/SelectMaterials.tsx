@@ -45,8 +45,14 @@ const SelectMaterials: React.FunctionComponent<Props> = ({
             ))
           : null}
       </select>
-      <SelectedMaterials helpers={helpers} selectedMaterials={field.value} />
-      {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+      <SelectedMaterials
+        meta={meta}
+        helpers={helpers}
+        selectedMaterials={field.value}
+      />
+      {meta.touched && meta.error && typeof meta.error === 'string' ? (
+        <div>{meta.error}</div>
+      ) : null}
     </div>
   );
 };

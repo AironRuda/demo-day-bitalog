@@ -23,15 +23,27 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
     helpers.setValue(selectedMaterials);
   }, [amount]);
 
+  function deleteMaterial() {
+    helpers.setValue(
+      selectedMaterials.filter(
+        (item) => item.material !== currentMaterial.material
+      )
+    );
+  }
+
   return (
     <li>
       <span>{currentMaterial.material}</span>
       <input
         type='number'
         value={amount}
-        onChange={(e) => setAmount(parseInt(e.target.value))}
+        onChange={(e) =>
+          !isNaN(parseInt(e.target.value)) &&
+          setAmount(parseInt(e.target.value))
+        }
       />
       <span>{currentMaterial.unit}</span>
+      <span onClick={deleteMaterial}>x</span>
     </li>
   );
 };
