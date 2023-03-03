@@ -29,7 +29,9 @@ const fetchAllProjectsAdmin = createAsyncThunk(
     if (user.id) {
       const projects = await (
         await getDocs(searchProjectsAdmin(user.id))
-      ).docs.map((item) => { return { ...item.data(), id: item.id } });
+      ).docs.map((item) => {
+        return { ...item.data(), id: item.id };
+      });
       return projects as Project[] | undefined;
     }
   }
@@ -69,9 +71,12 @@ const userSlice = createSlice({
 export const selectUser = (state: { user: User }) => state.user;
 export const selectProjects = (state: { user: User }) => state.user.projects;
 
-export const getActivities = (state: { user: { projects: Project[] } }, projectId: string) => {
-  return state.user.projects.find(projects => projects.id === projectId)
-}
+export const getCurrentProject = (
+  state: { user: { projects: Project[] } },
+  projectId: string
+) => {
+  return state.user.projects.find((projects) => projects.id === projectId);
+};
 
 export { fetchUser, fetchAllProjectsAdmin };
 export const { logOut, addProject } = userSlice.actions;

@@ -1,23 +1,21 @@
-import { useSelector } from "react-redux";
-import { selectedProject } from "../../context/selectedProjectSlice";
-import { getActivities } from "../../context/userSlice";
-import { Project } from "../../model/projects.model";
+import { useSelector } from 'react-redux';
+import { selectedProject } from '../../context/selectedProjectSlice';
+import { getCurrentProject } from '../../context/userSlice';
+import { Project } from '../../model/projects.model';
 
-interface IAppProps {}
-
-const AcityiesList: React.FunctionComponent<IAppProps> = (props) => {
+const ActivitiesList: React.FunctionComponent = (props) => {
   const selectedProjectId = useSelector(selectedProject);
-  const activitiesList = useSelector(
+  const currentProject = useSelector(
     (state: { user: { projects: Project[] } }) =>
-      getActivities(state, selectedProjectId)
+      getCurrentProject(state, selectedProjectId)
   );
 
   return (
     <main>
       <h1>Lista tareas</h1>
       <ul>
-        {activitiesList && !!activitiesList.activities.length ? (
-          activitiesList.activities.map((activity) => (
+        {currentProject && !!currentProject.activities.length ? (
+          currentProject.activities.map((activity) => (
             <li key={activity.id}>
               <h1>{activity.activityName}</h1>
             </li>
@@ -30,4 +28,4 @@ const AcityiesList: React.FunctionComponent<IAppProps> = (props) => {
   );
 };
 
-export default AcityiesList;
+export default ActivitiesList;

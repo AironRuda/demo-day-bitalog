@@ -1,4 +1,5 @@
 import { FieldHelperProps, FieldMetaProps } from 'formik';
+import { useEffect } from 'react';
 import { Material } from '../../../model/material.model';
 import MaterialItem from './MaterialItem';
 
@@ -13,6 +14,9 @@ const SelectedMaterials: React.FunctionComponent<Props> = ({
   helpers,
   meta,
 }) => {
+  useEffect(() => {
+    console.log(meta);
+  }, [meta]);
   return (
     <ul>
       {selectedMaterials.map((material, index) => (
@@ -23,12 +27,12 @@ const SelectedMaterials: React.FunctionComponent<Props> = ({
             helpers={helpers}
             selectedMaterials={selectedMaterials}
           />
-          {meta.touched &&
+          {/* {meta.touched &&
           meta.error &&
           Array.isArray(meta.error) &&
           meta.error.length ? (
             <div>{meta.error[0].amount}</div>
-          ) : null}
+          ) : null} */}
         </div>
       ))}
     </ul>

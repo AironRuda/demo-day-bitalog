@@ -8,6 +8,11 @@ import SelectPriority from './form/SelectPriority';
 import TextFieldFormik from '../form/TextFieldFormik';
 import SelectMaterials from './form/SelectMaterials';
 import { CREATE_ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
+import { useSelector } from 'react-redux';
+import { getCurrentProject } from '../../context/userSlice';
+import { Project } from '../../model/projects.model';
+import { selectedProject } from '../../context/selectedProjectSlice';
+import { handleCreateActivity } from '../../handlers/handleCreateActivity';
 
 const INITIAL_VALUES: createActivitiesDTO = {
   activityName: '',
@@ -17,6 +22,12 @@ const INITIAL_VALUES: createActivitiesDTO = {
 
 const CreateActivities: React.FunctionComponent = (props) => {
   const [materials, setMaterial] = useState<Material[]>([]);
+  const selectedProjectId = useSelector(selectedProject);
+  const currentProject = useSelector(
+    (state: { user: { projects: Project[] } }) =>
+      getCurrentProject(state, selectedProjectId)
+  );
+
   useEffect(() => {
     getDoc(doc(db, 'inventory', 'basic')).then((response) => {
       const materialsData = response.data() as { materials: Material[] };
@@ -28,8 +39,8 @@ const CreateActivities: React.FunctionComponent = (props) => {
     <Formik
       initialValues={INITIAL_VALUES}
       validationSchema={CREATE_ACTIVITY_VALIDATION_SCHEMA}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async (values) => {
+        currentProject && (await handleCreateActivity(values, currentProject));
       }}
     >
       {() => (
