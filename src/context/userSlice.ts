@@ -14,6 +14,10 @@ const initialState: User = {
   projects: [],
 };
 
+const getCurrentProjectIndex = (state: User, projectId: string) => {
+  return state.projects.findIndex((projects) => projects.id === projectId);
+};
+
 const userSlice = createSlice({
   name: 'users',
   initialState,
@@ -25,27 +29,31 @@ const userSlice = createSlice({
       state,
       action: PayloadAction<{ projectId: string; activity: Activity }>
     ) => {
-      const currentProject = state.projects.findIndex(
-        (projects) => projects.id === action.payload.projectId
+      const currentProjectIndex = getCurrentProjectIndex(
+        state,
+        action.payload.projectId
       );
-      if (currentProject >= 0)
-        state.projects[currentProject].activities.push(action.payload.activity);
+      if (currentProjectIndex >= 0)
+        state.projects[currentProjectIndex].activities.push(
+          action.payload.activity
+        );
     },
     updateActivity: (
       state,
       action: PayloadAction<{ projectId: string; activity: Activity }>
     ) => {
-      const currentProject = state.projects.findIndex(
-        (projects) => projects.id === action.payload.projectId
+      const currentProjectIndex = getCurrentProjectIndex(
+        state,
+        action.payload.projectId
       );
-      if (currentProject >= 0) {
-        const currentActivity = state.projects[
-          currentProject
+      if (currentProjectIndex >= 0) {
+        const currentActivityIndex = state.projects[
+          currentProjectIndex
         ].activities.findIndex(
           (activity) => activity.id === action.payload.activity.id
         );
-        if (currentActivity >= 0)
-          state.projects[currentProject].activities[currentActivity] =
+        if (currentActivityIndex >= 0)
+          state.projects[currentProjectIndex].activities[currentActivityIndex] =
             action.payload.activity;
       }
     },
@@ -53,14 +61,41 @@ const userSlice = createSlice({
       state,
       action: PayloadAction<{ activityId: string; projectId: string }>
     ) => {
-      const currentProject = state.projects.findIndex(
-        (projects) => projects.id === action.payload.projectId
+      const currentProjectIndex = getCurrentProjectIndex(
+        state,
+        action.payload.projectId
       );
-      if (currentProject >= 0) {
-        const newActivities = state.projects[currentProject].activities.filter(
+      if (currentProjectIndex >= 0) {
+        const newActivities = state.projects[
+          currentProjectIndex
+        ].activities.filter(
           (activity) => activity.id !== action.payload.activityId
         );
-        state.projects[currentProject].activities = newActivities;
+        state.projects[currentProjectIndex].activities = newActivities;
+      }
+    },
+    updateStatusActivity: (
+      state,
+      action: PayloadAction<{ activityId: string; projectId: string }>
+    ) => {
+      const currentProjectIndex = getCurrentProjectIndex(
+        state,
+        action.payload.projectId
+      );
+      if (currentProjectIndex >= 0) {
+        const currentActivityIndex = state.projects[
+          currentProjectIndex
+        ].activities.findIndex(
+          (activity) => activity.id === action.payload.activityId
+        );
+        if (currentActivityIndex >= 0) {
+          state.projects[currentProjectIndex].activities[
+            currentActivityIndex
+          ].completed =
+            !state.projects[currentProjectIndex].activities[
+              currentActivityIndex
+            ].completed;
+        }
       }
     },
     logOut: (state) => {
@@ -96,5 +131,6 @@ export const {
   addActivity,
   updateActivity,
   deleteActivity,
+  updateStatusActivity,
 } = userSlice.actions;
 export default userSlice.reducer;

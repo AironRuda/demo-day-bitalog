@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteActivity } from '../../context/userSlice';
+import { deleteActivity, updateStatusActivity } from '../../context/userSlice';
 import { selectRol } from '../../context/userSelectors';
-import { handleDeleteActivity } from '../../handlers/handleActivity';
+import {
+  handleDeleteActivity,
+  handleStatusActivity,
+} from '../../handlers/handleActivity';
 import { Activity } from '../../model/activity.model';
 import { Project } from '../../model/projects.model';
 
@@ -31,6 +34,18 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
       );
   }
 
+  async function handleClickStatus() {
+    const response = await handleStatusActivity(activity.id, currentProject);
+    if (typeof response === 'string') console.log('hubo un error');
+    else if (!response)
+      dispatch(
+        updateStatusActivity({
+          activityId: activity.id,
+          projectId: currentProject.id,
+        })
+      );
+  }
+
   return (
     <li>
       <span>{activity.activityName}</span>
@@ -42,7 +57,7 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
           <span onClick={handleClickDelete}>x</span>
         </>
       ) : (
-        <span>Cumplir actividad</span>
+        <span onClick={handleClickStatus}>Cumplir actividad</span>
       )}
     </li>
   );

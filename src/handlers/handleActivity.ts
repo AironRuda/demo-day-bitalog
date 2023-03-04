@@ -66,3 +66,29 @@ export const handleDeleteActivity = async (
     if (error instanceof FirebaseError) return error.message;
   }
 };
+
+export const handleStatusActivity = async (
+  activityId: string,
+  project: Project
+) => {
+  try {
+    if (project.activities.find((activity) => activity.id === activityId)) {
+      const currentActivity = {
+        ...project.activities.find((activity) => activity.id === activityId),
+      };
+      const activities = project.activities.filter(
+        (activity) => activity.id !== activityId
+      );
+      currentActivity.completed = !currentActivity.completed;
+      activities.push(currentActivity as Activity);
+      await updateDoc(getRef(project.id), {
+        activities: activities,
+      });
+    } else {
+      throw new Error('No hemos podido encontrar la actividad');
+    }
+  } catch (error) {
+    if (error instanceof Error || error instanceof FirebaseError)
+      return error.message;
+  }
+};
