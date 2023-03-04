@@ -25,7 +25,7 @@ const router = createBrowserRouter(
       <Route path='app' element={<App />}>
         <Route index element={<Login />} />
         <Route path='dashboard' element={<Dashboard />}>
-          <Route path='projects' element={<ProjectContainer />}>
+          <Route path='' element={<ProjectContainer />}>
             <Route path='create-project' element={<CreateProjects />} />
             <Route index element={<ProjectList />} />
           </Route>

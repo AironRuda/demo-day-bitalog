@@ -3,10 +3,10 @@ import { createActivitiesDTO } from '../../model/activity.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivity } from '../../context/userSlice';
-import { getCurrentProject } from '../../context/userSliceSelectors';
+import { getCurrentProject } from '../../context/userSelectors';
 import { Project } from '../../model/projects.model';
 import { selectedProject } from '../../context/selectedProjectSlice';
-import { handleCreateActivity } from '../../handlers/handleCreateActivity';
+import { handleCreateActivity } from '../../handlers/handleActivity';
 import FormActivity from './form/FormActivity';
 
 const INITIAL_VALUES: createActivitiesDTO = {

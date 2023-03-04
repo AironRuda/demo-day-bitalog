@@ -6,8 +6,8 @@ import { updateActivity } from '../../context/userSlice';
 import {
   getActivityById,
   getCurrentProject,
-} from '../../context/userSliceSelectors';
-import { handleUpdate } from '../../handlers/handleUpdateActivity';
+} from '../../context/userSelectors';
+import { handleUpdateActivity } from '../../handlers/handleActivity';
 import { createActivitiesDTO } from '../../model/activity.model';
 import { Material } from '../../model/material.model';
 import { Project } from '../../model/projects.model';
@@ -54,7 +54,11 @@ const UpdateActivity: React.FunctionComponent = (props) => {
     helpers: FormikHelpers<createActivitiesDTO>
   ) {
     if (currentProject) {
-      const response = await handleUpdate(values, id ?? '', currentProject);
+      const response = await handleUpdateActivity(
+        values,
+        id ?? '',
+        currentProject
+      );
       if (typeof response === 'string') helpers.setStatus(response);
       else if (response) {
         dispatch(

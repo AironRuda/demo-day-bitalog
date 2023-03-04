@@ -1,41 +1,14 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { doc, getDoc, getDocs } from 'firebase/firestore';
-import { db } from '../firebase/config';
-import { searchProjectsAdmin } from '../firebase/queries';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Activity } from '../model/activity.model';
 import { Project } from '../model/projects.model';
 import { User } from '../model/user.model';
+import { fetchAllProjectsAdmin, fetchUser } from './userThunks';
 
 const initialState: User = {
   id: '',
   rol: '',
   projects: [],
 };
-
-const fetchUser = createAsyncThunk('users/fetchUser', async (id: string) => {
-  const userRef = doc(db, 'users', id);
-  const firebaseUserDocument = await (await getDoc(userRef)).data();
-  if (firebaseUserDocument) {
-    const rol = firebaseUserDocument.rol;
-    const user: User = { id, projects: [], rol };
-    return user;
-  }
-});
-
-const fetchAllProjectsAdmin = createAsyncThunk(
-  'users/fetchAllProjectsAdmin',
-  async (args, { getState }) => {
-    const { user } = getState() as { user: User };
-    if (user.id) {
-      const projects = await (
-        await getDocs(searchProjectsAdmin(user.id))
-      ).docs.map((item) => {
-        return { ...item.data(), id: item.id };
-      });
-      return projects as Project[] | undefined;
-    }
-  }
-);
 
 const userSlice = createSlice({
   name: 'users',
@@ -110,7 +83,6 @@ const userSlice = createSlice({
   },
 });
 
-export { fetchUser, fetchAllProjectsAdmin };
 export const {
   logOut,
   addProject,

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectedProject } from '../../context/selectedProjectSlice';
-import { getCurrentProject } from '../../context/userSliceSelectors';
+import { getCurrentProject } from '../../context/userSelectors';
 import { Project } from '../../model/projects.model';
 import ActivityItem from './ActivityItem';
 

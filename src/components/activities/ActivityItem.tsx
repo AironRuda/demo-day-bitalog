@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteActivity } from '../../context/userSlice';
-import { handleDeleteActivity } from '../../handlers/handleDeleteActivity';
+import { selectRol } from '../../context/userSelectors';
+import { handleDeleteActivity } from '../../handlers/handleActivity';
 import { Activity } from '../../model/activity.model';
 import { Project } from '../../model/projects.model';
 
@@ -17,6 +17,7 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const rol = useSelector(selectRol);
 
   async function handleClickDelete() {
     const response = await handleDeleteActivity(activity.id, currentProject);
@@ -33,10 +34,16 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   return (
     <li>
       <span>{activity.activityName}</span>
-      <span onClick={() => navigate(`update-project/${activity.id}`)}>
-        edit
-      </span>
-      <span onClick={handleClickDelete}>x</span>
+      {rol === 'admin' ? (
+        <>
+          <span onClick={() => navigate(`update-project/${activity.id}`)}>
+            edit
+          </span>
+          <span onClick={handleClickDelete}>x</span>
+        </>
+      ) : (
+        <span>Cumplir actividad</span>
+      )}
     </li>
   );
 };

@@ -1,7 +1,6 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectProject } from "../../context/selectedProjectSlice";
-import { selectProjects } from "../../context/userSliceSelectors";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectProject } from '../../context/selectedProjectSlice';
+import { selectProjects } from '../../context/userSelectors';
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
@@ -11,7 +10,7 @@ const ProjectList: React.FunctionComponent = (props) => {
     <div>
       <h1>Proyectos</h1>
       <ul>
-        {!!projects ? (
+        {projects.length ? (
           projects.map((project, index) => (
             <li
               key={index}
@@ -23,7 +22,10 @@ const ProjectList: React.FunctionComponent = (props) => {
             </li>
           ))
         ) : (
-          <div>En el momento no hay proyectos disponibles :c</div>
+          <div>
+            En el momento no hay proyectos disponibles, crea alguno o contacta a
+            tu encargado para que te asigne a alguno
+          </div>
         )}
       </ul>
     </div>
