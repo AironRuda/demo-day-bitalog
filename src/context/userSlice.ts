@@ -2,7 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Activity } from '../model/activity.model';
 import { Project } from '../model/projects.model';
 import { User } from '../model/user.model';
-import { fetchAllProjectsAdmin, fetchUser } from './userThunks';
+import {
+  fetchAllProjectsAdmin,
+  fetchProjectsWorker,
+  fetchUser,
+} from './userThunks';
 
 const initialState: User = {
   id: '',
@@ -78,6 +82,9 @@ const userSlice = createSlice({
         console.log('Hubo un error llamando al usuario');
       });
     builder.addCase(fetchAllProjectsAdmin.fulfilled, (state, action) => {
+      if (action.payload) state.projects = [...action.payload];
+    });
+    builder.addCase(fetchProjectsWorker.fulfilled, (state, action) => {
       if (action.payload) state.projects = [...action.payload];
     });
   },

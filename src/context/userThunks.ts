@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
-import { searchProjectsAdmin } from '../firebase/queries';
+import { searchProjectsAdmin, searchProjectsWorker } from '../firebase/queries';
 import { Project } from '../model/projects.model';
 import { User } from '../model/user.model';
 
@@ -25,6 +25,21 @@ export const fetchAllProjectsAdmin = createAsyncThunk(
     if (user.id) {
       const projects = await (
         await getDocs(searchProjectsAdmin(user.id))
+      ).docs.map((item) => {
+        return { ...item.data(), id: item.id };
+      });
+      return projects as Project[] | undefined;
+    }
+  }
+);
+
+export const fetchProjectsWorker = createAsyncThunk(
+  'users/fetchProjectsWorker',
+  async (args, { getState }) => {
+    const { user } = getState() as { user: User };
+    if (user.id) {
+      const projects = await (
+        await getDocs(searchProjectsWorker(user.id))
       ).docs.map((item) => {
         return { ...item.data(), id: item.id };
       });

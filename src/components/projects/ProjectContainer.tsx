@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { fetchAllProjectsAdmin } from '../../context/userThunks';
+import {
+  fetchAllProjectsAdmin,
+  fetchProjectsWorker,
+} from '../../context/userThunks';
 import { selectRol } from '../../context/userSelectors';
 
 const ProjectContainer: React.FunctionComponent = () => {
@@ -11,6 +14,7 @@ const ProjectContainer: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (rol === 'admin') dispatch(fetchAllProjectsAdmin());
+    else if (rol === 'worker') dispatch(fetchProjectsWorker());
   }, []);
 
   return (
