@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import { selectUser } from "../context/userSlice";
-import { User } from "../model/user.model";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import { selectUser } from '../context/userSliceSelectors';
+import { User } from '../model/user.model';
 
 interface IAppProps {}
 
@@ -12,7 +12,7 @@ const Dashboard: React.FunctionComponent<IAppProps> = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.id === "") navigate("/app");
+    if (user.id === '') navigate('/app');
   }, [user]);
 
   return (

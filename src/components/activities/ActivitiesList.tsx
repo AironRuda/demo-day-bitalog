@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { selectedProject } from '../../context/selectedProjectSlice';
-import { getCurrentProject } from '../../context/userSlice';
+import { getCurrentProject } from '../../context/userSliceSelectors';
 import { Project } from '../../model/projects.model';
+import ActivityItem from './ActivityItem';
 
 const ActivitiesList: React.FunctionComponent = (props) => {
   const selectedProjectId = useSelector(selectedProject);
@@ -16,9 +17,11 @@ const ActivitiesList: React.FunctionComponent = (props) => {
       <ul>
         {currentProject && !!currentProject.activities.length ? (
           currentProject.activities.map((activity) => (
-            <li key={activity.id}>
-              <h1>{activity.activityName}</h1>
-            </li>
+            <ActivityItem
+              key={activity.id}
+              activity={activity}
+              currentProject={currentProject}
+            />
           ))
         ) : (
           <div>En el momento no hay tareas disponibles :c</div>

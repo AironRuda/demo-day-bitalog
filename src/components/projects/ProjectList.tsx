@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProject } from "../../context/selectedProjectSlice";
-import { selectProjects } from "../../context/userSlice";
+import { selectProjects } from "../../context/userSliceSelectors";
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);

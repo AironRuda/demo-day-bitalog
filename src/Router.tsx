@@ -7,6 +7,7 @@ import App from './App';
 import AcityiesList from './components/activities/ActivitiesList';
 import ActivityContainer from './components/activities/ActivityContainer';
 import CreateActivities from './components/activities/CreateActivities';
+import UpdateActivity from './components/activities/UpdateActivity';
 import Inventory from './components/Inventory';
 import CreateProjects from './components/projects/CreateProjects';
 import ProjectContainer from './components/projects/ProjectContainer';
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
 
           <Route path='activities' element={<ActivityContainer />}>
             <Route path='create-activities' element={<CreateActivities />} />
+            <Route path='update-project/:id' element={<UpdateActivity />} />
             <Route index element={<AcityiesList />} />
           </Route>
 

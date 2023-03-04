@@ -1,9 +1,15 @@
 import { useField } from 'formik';
 import { useEffect, useState } from 'react';
 
-const SelectPriority: React.FunctionComponent = () => {
+interface Props {
+  defaultPriority?: number;
+}
+
+const SelectPriority: React.FunctionComponent<Props> = ({
+  defaultPriority,
+}) => {
   const [field, meta, helpers] = useField('priority');
-  const [priority, setPriority] = useState(3);
+  const [priority, setPriority] = useState(defaultPriority ?? 3);
 
   useEffect(() => {
     helpers.setValue(priority);

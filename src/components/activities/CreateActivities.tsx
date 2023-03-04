@@ -1,18 +1,13 @@
-import { doc, getDoc } from 'firebase/firestore';
-import { Form, Formik, FormikHelpers } from 'formik';
-import { useEffect, useState } from 'react';
-import { db } from '../../firebase/config';
+import { Formik, FormikHelpers } from 'formik';
 import { createActivitiesDTO } from '../../model/activity.model';
-import { Material } from '../../model/material.model';
-import SelectPriority from './form/SelectPriority';
-import TextFieldFormik from '../form/TextFieldFormik';
-import SelectMaterials from './form/SelectMaterials';
-import { CREATE_ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
+import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import { useDispatch, useSelector } from 'react-redux';
-import { addActivity, getCurrentProject } from '../../context/userSlice';
+import { addActivity } from '../../context/userSlice';
+import { getCurrentProject } from '../../context/userSliceSelectors';
 import { Project } from '../../model/projects.model';
 import { selectedProject } from '../../context/selectedProjectSlice';
 import { handleCreateActivity } from '../../handlers/handleCreateActivity';
+import FormActivity from './form/FormActivity';
 
 const INITIAL_VALUES: createActivitiesDTO = {
   activityName: '',
@@ -21,20 +16,12 @@ const INITIAL_VALUES: createActivitiesDTO = {
 };
 
 const CreateActivities: React.FunctionComponent = (props) => {
-  const [materials, setMaterial] = useState<Material[]>([]);
   const dispatch = useDispatch();
   const selectedProjectId = useSelector(selectedProject);
   const currentProject = useSelector(
     (state: { user: { projects: Project[] } }) =>
       getCurrentProject(state, selectedProjectId)
   );
-
-  useEffect(() => {
-    getDoc(doc(db, 'inventory', 'basic')).then((response) => {
-      const materialsData = response.data() as { materials: Material[] };
-      if (materialsData) setMaterial([...materialsData.materials]);
-    });
-  }, []);
 
   const handleSubmit = async (
     values: createActivitiesDTO,
@@ -53,23 +40,11 @@ const CreateActivities: React.FunctionComponent = (props) => {
   return (
     <Formik
       initialValues={INITIAL_VALUES}
-      validationSchema={CREATE_ACTIVITY_VALIDATION_SCHEMA}
+      validationSchema={ACTIVITY_VALIDATION_SCHEMA}
       onSubmit={handleSubmit}
     >
-      {() => (
-        <Form>
-          <TextFieldFormik
-            name='activityName'
-            placeholder='Nombre de la actividad'
-          ></TextFieldFormik>
-          <SelectPriority />
-          <SelectMaterials
-            name='materials'
-            options={materials}
-            placeholder='Seleccione los materiales'
-          />
-          <button type='submit'>Generar tarea</button>
-        </Form>
+      {({ status }) => (
+        <FormActivity status={status} buttonText='Crear tarea' />
       )}
     </Formik>
   );

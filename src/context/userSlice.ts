@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { searchProjectsAdmin } from '../firebase/queries';
-import { Activity, createActivitiesDTO } from '../model/activity.model';
+import { Activity } from '../model/activity.model';
 import { Project } from '../model/projects.model';
 import { User } from '../model/user.model';
 
@@ -54,6 +54,38 @@ const userSlice = createSlice({
       if (currentProject >= 0)
         state.projects[currentProject].activities.push(action.payload.activity);
     },
+    updateActivity: (
+      state,
+      action: PayloadAction<{ projectId: string; activity: Activity }>
+    ) => {
+      const currentProject = state.projects.findIndex(
+        (projects) => projects.id === action.payload.projectId
+      );
+      if (currentProject >= 0) {
+        const currentActivity = state.projects[
+          currentProject
+        ].activities.findIndex(
+          (activity) => activity.id === action.payload.activity.id
+        );
+        if (currentActivity >= 0)
+          state.projects[currentProject].activities[currentActivity] =
+            action.payload.activity;
+      }
+    },
+    deleteActivity: (
+      state,
+      action: PayloadAction<{ activityId: string; projectId: string }>
+    ) => {
+      const currentProject = state.projects.findIndex(
+        (projects) => projects.id === action.payload.projectId
+      );
+      if (currentProject >= 0) {
+        const newActivities = state.projects[currentProject].activities.filter(
+          (activity) => activity.id !== action.payload.activityId
+        );
+        state.projects[currentProject].activities = newActivities;
+      }
+    },
     logOut: (state) => {
       return initialState;
     },
@@ -78,16 +110,12 @@ const userSlice = createSlice({
   },
 });
 
-export const selectUser = (state: { user: User }) => state.user;
-export const selectProjects = (state: { user: User }) => state.user.projects;
-
-export const getCurrentProject = (
-  state: { user: { projects: Project[] } },
-  projectId: string
-) => {
-  return state.user.projects.find((projects) => projects.id === projectId);
-};
-
 export { fetchUser, fetchAllProjectsAdmin };
-export const { logOut, addProject, addActivity } = userSlice.actions;
+export const {
+  logOut,
+  addProject,
+  addActivity,
+  updateActivity,
+  deleteActivity,
+} = userSlice.actions;
 export default userSlice.reducer;
