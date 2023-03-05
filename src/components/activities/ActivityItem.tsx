@@ -14,6 +14,8 @@ interface IActivityItemProps {
   currentProject: Project;
 }
 
+//TODO proponer manejar el inventario de gastos al momento de cerrar el proyecto.
+
 const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   activity,
   currentProject,
