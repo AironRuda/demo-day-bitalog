@@ -16,7 +16,7 @@ const SelectedMaterials: React.FunctionComponent<Props> = ({
 }) => {
   return (
     <ul>
-      {selectedMaterials.map((material, index) => (
+      {selectedMaterials?.map((material, index) => (
         <div key={index}>
           <MaterialItem
             index={index}

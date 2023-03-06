@@ -9,9 +9,13 @@ const SelectFormik: React.FunctionComponent<Props> = ({
   name,
   options,
   placeholder,
-  renderList,
 }) => {
   const [field, meta, helpers] = useField(name);
+
+  function removeItem(index: number) {
+    Array.isArray(field.value) &&
+      helpers.setValue(field.value.filter((item, i) => i !== index));
+  }
 
   return (
     <div>
@@ -35,9 +39,13 @@ const SelectFormik: React.FunctionComponent<Props> = ({
           : null}
       </select>
       <ul>
-        {renderList &&
-          Array.isArray(field.value) &&
-          field.value.map((item) => <li key={item}>{item}</li>)}
+        {Array.isArray(field.value) &&
+          field.value.map((item, index) => (
+            <li key={item}>
+              <span>{item}</span>
+              <span onClick={() => removeItem(index)}>x</span>
+            </li>
+          ))}
       </ul>
       {meta.touched && meta.error ? <div>{meta.error}</div> : null}
     </div>

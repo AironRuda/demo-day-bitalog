@@ -1,28 +1,36 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { fetchAllProjectsAdmin } from '../../context/userSlice';
+import {
+  fetchAllProjectsAdmin,
+  fetchProjectsWorker,
+} from '../../context/userThunks';
+import { selectRol } from '../../context/userSelectors';
 
-interface IAppProps {}
-
-const ProjectContainer: React.FunctionComponent<IAppProps> = (props) => {
+const ProjectContainer: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<any>();
+  const rol = useSelector(selectRol);
 
   useEffect(() => {
-    dispatch(fetchAllProjectsAdmin());
+    if (rol === 'admin') dispatch(fetchAllProjectsAdmin());
+    else if (rol === 'worker') dispatch(fetchProjectsWorker());
   }, []);
 
   return (
     <main>
       <h1>PROJECTS</h1>
       <menu className='btn-group'>
-        <button className='btn btn-active' onClick={() => navigate('')}>
-          Ver lista de proyectos
-        </button>
-        <button className='btn' onClick={() => navigate('create-project')}>
-          Crear proyecto
-        </button>
+        {rol === 'admin' && (
+          <>
+            <button className='btn btn-active' onClick={() => navigate('')}>
+              Ver lista de proyectos
+            </button>
+            <button className='btn' onClick={() => navigate('create-project')}>
+              Crear proyecto
+            </button>
+          </>
+        )}
       </menu>
       <Outlet />
     </main>

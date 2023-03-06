@@ -16,7 +16,7 @@ const CREATE_PROJECT_VALIDATION_SCHEMA = yup.object().shape({
     .required('Campo requerido'),
 });
 
-const CREATE_ACTIVITY_VALIDATION_SCHEMA = yup.object().shape({
+const ACTIVITY_VALIDATION_SCHEMA = yup.object().shape({
   activityName: yup.string().required('Campo requerido'),
   materials: yup
     .array(
@@ -37,5 +37,5 @@ const CREATE_ACTIVITY_VALIDATION_SCHEMA = yup.object().shape({
 export {
   LOGIN_VALIDATION_SCHEMA,
   CREATE_PROJECT_VALIDATION_SCHEMA,
-  CREATE_ACTIVITY_VALIDATION_SCHEMA,
+  ACTIVITY_VALIDATION_SCHEMA,
 };

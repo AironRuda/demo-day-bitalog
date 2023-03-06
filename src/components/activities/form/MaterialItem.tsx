@@ -1,5 +1,5 @@
 import { FieldHelperProps } from 'formik';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Material } from '../../../model/material.model';
 
 interface IMaterialInputProps {
@@ -15,7 +15,7 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
   helpers,
   index,
 }) => {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(currentMaterial.amount || 0);
 
   useEffect(() => {
     const selected = [...selectedMaterials];
