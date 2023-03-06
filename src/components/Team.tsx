@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectedProject } from "../context/selectedProjectSlice";
-import { getCurrentProject } from "../context/userSlice";
+import { getCurrentProject } from "../context/userSelectors";
 import { Project } from "../model/projects.model";
 
 interface IAppProps {}

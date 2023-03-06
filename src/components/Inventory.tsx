@@ -27,9 +27,6 @@ const Inventory: React.FunctionComponent = (props) => {
     }
   }, [currentProjectId]);
 
-  useEffect(() => {
-    console.log(inventory);
-  }, [inventory]);
   return (
     <main>
       <h1>Lista de Gastos</h1>
