@@ -25,6 +25,12 @@ const userSlice = createSlice({
     addProject: (state, action: PayloadAction<Project>) => {
       state.projects.push(action.payload);
     },
+    updateStatusProject: (state, action: PayloadAction<string>) => {
+      const currentProjectIndex = getCurrentProjectIndex(state, action.payload);
+      if (currentProjectIndex >= 0)
+        state.projects[currentProjectIndex].completed =
+          !state.projects[currentProjectIndex].completed;
+    },
     addActivity: (
       state,
       action: PayloadAction<{ projectId: string; activity: Activity }>
@@ -132,5 +138,6 @@ export const {
   updateActivity,
   deleteActivity,
   updateStatusActivity,
+  updateStatusProject,
 } = userSlice.actions;
 export default userSlice.reducer;

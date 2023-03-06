@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectedProject } from '../../context/selectedProjectSlice';
 import { getCurrentProject } from '../../context/userSelectors';
@@ -16,13 +17,20 @@ const ActivitiesList: React.FunctionComponent = (props) => {
       <h1>Lista tareas</h1>
       <ul>
         {currentProject && !!currentProject.activities.length ? (
-          currentProject.activities.map((activity) => (
-            <ActivityItem
-              key={activity.id}
-              activity={activity}
-              currentProject={currentProject}
-            />
-          ))
+          currentProject.activities
+            .filter((item) => item)
+            .sort((a, b) => {
+              if (!a.completed) return -1;
+              if (a.completed) return 1;
+              return 0;
+            })
+            .map((activity) => (
+              <ActivityItem
+                key={activity.id}
+                activity={activity}
+                currentProject={currentProject}
+              />
+            ))
         ) : (
           <div>En el momento no hay tareas disponibles :c</div>
         )}

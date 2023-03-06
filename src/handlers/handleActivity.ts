@@ -96,7 +96,6 @@ const updateActivity = async (project: Project, activityId: string) => {
     const currentActivity = {
       ...project.activities.find((activity) => activity.id === activityId),
     };
-    console.log(currentActivity.materials);
     await updateInventory(project.inventoryId, currentActivity.materials ?? []);
     const activities = project.activities.filter(
       (activity) => activity.id !== activityId
