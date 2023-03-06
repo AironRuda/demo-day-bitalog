@@ -2,7 +2,7 @@ import { getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectedProject } from "../context/selectedProjectSlice";
-import { getCurrentProject } from "../context/userSlice";
+import { getCurrentProject } from "../context/userSelectors";
 import { searInventory } from "../firebase/queries";
 import { Inventory } from "../model/inventory.model";
 import { Material } from "../model/material.model";
