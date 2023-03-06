@@ -1,9 +1,11 @@
 import { FirebaseError, uuidv4 } from '@firebase/util';
 import { format } from 'date-fns';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { Activity, createActivitiesDTO } from '../model/activity.model';
+import { Material } from '../model/material.model';
 import { Project } from '../model/projects.model';
+import { formatNewInventory } from '../utilities/formatInventory';
 
 const getRef = (id: string) => doc(db, 'projects', id);
 
@@ -67,23 +69,55 @@ export const handleDeleteActivity = async (
   }
 };
 
+const updateInventory = async (inventoryId: string, materials: Material[]) => {
+  try {
+    const inventory = await (
+      await getDoc(doc(db, 'inventory', inventoryId))
+    ).data();
+    if (inventory) {
+      if (!inventory.materials) {
+        await updateDoc(doc(db, 'inventory', inventoryId), {
+          materials: materials,
+        });
+      } else {
+        const newInventory = formatNewInventory(inventory.materials, materials);
+        await updateDoc(doc(db, 'inventory', inventoryId), {
+          materials: newInventory,
+        });
+      }
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateActivity = async (project: Project, activityId: string) => {
+  try {
+    const currentActivity = {
+      ...project.activities.find((activity) => activity.id === activityId),
+    };
+    console.log(currentActivity.materials);
+    await updateInventory(project.inventoryId, currentActivity.materials ?? []);
+    const activities = project.activities.filter(
+      (activity) => activity.id !== activityId
+    );
+    currentActivity.completed = !currentActivity.completed;
+    activities.push(currentActivity as Activity);
+    return await updateDoc(getRef(project.id), {
+      activities: activities,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const handleStatusActivity = async (
   activityId: string,
   project: Project
 ) => {
   try {
     if (project.activities.find((activity) => activity.id === activityId)) {
-      const currentActivity = {
-        ...project.activities.find((activity) => activity.id === activityId),
-      };
-      const activities = project.activities.filter(
-        (activity) => activity.id !== activityId
-      );
-      currentActivity.completed = !currentActivity.completed;
-      activities.push(currentActivity as Activity);
-      await updateDoc(getRef(project.id), {
-        activities: activities,
-      });
+      await updateActivity(project, activityId);
     } else {
       throw new Error('No hemos podido encontrar la actividad');
     }

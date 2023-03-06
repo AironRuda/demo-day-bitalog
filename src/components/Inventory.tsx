@@ -1,14 +1,13 @@
-import { getDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectedProject } from "../context/selectedProjectSlice";
-import { getCurrentProject } from "../context/userSelectors";
-import { searInventory } from "../firebase/queries";
-import { Inventory } from "../model/inventory.model";
-import { Material } from "../model/material.model";
-import { Project } from "../model/projects.model";
+import { getDoc } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectedProject } from '../context/selectedProjectSlice';
+import { getCurrentProject } from '../context/userSelectors';
+import { searInventory } from '../firebase/queries';
+import { Inventory } from '../model/inventory.model';
+import { Project } from '../model/projects.model';
 
-const Inventory: React.FunctionComponent = (props) => {
+const Inventory: React.FunctionComponent = () => {
   const currentProjectId = useSelector(selectedProject);
 
   const currentProject: any = useSelector(
@@ -27,14 +26,11 @@ const Inventory: React.FunctionComponent = (props) => {
     }
   }, [currentProjectId]);
 
-  useEffect(() => {
-    console.log(inventory);
-  }, [inventory]);
   return (
     <main>
       <h1>Lista de Gastos</h1>
       <ul>
-        {currentProjectId && inventory ? (
+        {currentProjectId && inventory && inventory.materials ? (
           inventory.materials.map((item) => (
             <li key={item.material}>
               <h1>material: {item.material}</h1>

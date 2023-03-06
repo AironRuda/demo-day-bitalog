@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { deleteActivity, updateStatusActivity } from '../../context/userSlice';
-import { selectRol } from '../../context/userSelectors';
+import { getActivityById, selectRol } from '../../context/userSelectors';
 import {
   handleDeleteActivity,
   handleStatusActivity,
 } from '../../handlers/handleActivity';
 import { Activity } from '../../model/activity.model';
 import { Project } from '../../model/projects.model';
+import { User } from '../../model/user.model';
 
 interface IActivityItemProps {
   activity: Activity;
   currentProject: Project;
 }
-
-//TODO proponer manejar el inventario de gastos al momento de cerrar el proyecto.
 
 const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   activity,
@@ -23,6 +22,9 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rol = useSelector(selectRol);
+  const currentActivity = useSelector((state: { user: User }) =>
+    getActivityById(state, currentProject.id, activity.id)
+  );
 
   async function handleClickDelete() {
     const response = await handleDeleteActivity(activity.id, currentProject);
@@ -59,7 +61,11 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
           <span onClick={handleClickDelete}>x</span>
         </>
       ) : (
-        <span onClick={handleClickStatus}>Cumplir actividad</span>
+        <>
+          {!currentActivity?.completed && (
+            <span onClick={handleClickStatus}>Cumplir actividad</span>
+          )}
+        </>
       )}
     </li>
   );
