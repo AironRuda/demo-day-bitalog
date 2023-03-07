@@ -9,6 +9,7 @@ import { createActivitiesDTO } from '../../model/activity.model';
 import { Project } from '../../model/projects.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import FormActivity from './form/FormActivity';
+import Swal from 'sweetalert2';
 
 const EMPTY_VALUES: createActivitiesDTO = {
   activityName: '',
@@ -34,7 +35,7 @@ const UpdateActivity: React.FunctionComponent = (props) => {
   const INITIAL_VALUES = currentActivity
     ? {
         priority: currentActivity.priority,
-        materials: currentActivity.materials,
+        materials: [...currentActivity.materials],
         activityName: currentActivity.activityName,
       }
     : EMPTY_VALUES;
@@ -52,6 +53,10 @@ const UpdateActivity: React.FunctionComponent = (props) => {
       if (typeof response === 'string') helpers.setStatus(response);
       else if (response) {
         dispatch(updateActivity(response));
+        Swal.fire({
+          icon: 'success',
+          text: 'La actividad se ha actualizado correctamente 😃',
+        });
       }
     }
   }

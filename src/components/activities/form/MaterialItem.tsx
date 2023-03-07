@@ -18,7 +18,15 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
   const [amount, setAmount] = useState(currentMaterial.amount || 0);
 
   useEffect(() => {
-    helpers.setValue(selectedMaterials);
+    const selected = selectedMaterials.map((material) => {
+      return {
+        material: material.material,
+        amount: material.amount,
+        unit: material.unit,
+      };
+    });
+    selected[index].amount = amount;
+    helpers.setValue(selected);
   }, [amount]);
 
   function deleteMaterial() {

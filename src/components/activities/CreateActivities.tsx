@@ -8,6 +8,7 @@ import { Project } from '../../model/projects.model';
 import { getSelectedProject } from '../../context/projectsSlice';
 import { handleCreateActivity } from '../../handlers/handleActivity';
 import FormActivity from './form/FormActivity';
+import Swal from 'sweetalert2';
 
 const INITIAL_VALUES: createActivitiesDTO = {
   activityName: '',
@@ -33,6 +34,10 @@ const CreateActivities: React.FunctionComponent = (props) => {
       else if (response) {
         helpers.resetForm();
         dispatch(addActivity(response.activity));
+        Swal.fire({
+          icon: 'success',
+          text: 'La actividad se ha generado correctamente 😃',
+        });
       }
     }
   };
