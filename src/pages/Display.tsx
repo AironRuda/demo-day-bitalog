@@ -11,8 +11,6 @@ const Display: React.FunctionComponent<IAppProps> = (props) => {
     <div>
       <Presentation />
       <PresentatiosFirstSecction />
-      display
-      <Link to="app">app</Link>
     </div>
   );
 };

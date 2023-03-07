@@ -32,13 +32,13 @@ const Presentation: React.FunctionComponent = (props) => {
               Iniciar sesión
             </Link>
 
-            <a
-              href="#"
+            <Link
+              to="register"
               className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-rose-600 shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500 sm:w-auto"
               style={{ color: "#215A6D" }}
             >
               Registro
-            </a>
+            </Link>
           </div>
         </div>
       </div>

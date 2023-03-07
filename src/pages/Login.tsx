@@ -1,17 +1,17 @@
-import { Formik, Form } from 'formik';
-import TextFieldFormik from '../components/form/TextFieldFormik';
-import { handleLogin } from '../handlers/loginHandle';
-import LoginValues from '../model/login.model';
-import { LOGIN_VALIDATION_SCHEMA } from '../utilities/formValidations';
-import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { useNavigate } from 'react-router-dom';
-import { fetchUser } from '../context/userThunks';
-import { selectUser } from '../context/userSelectors';
-import { useEffect } from 'react';
+import { Formik, Form } from "formik";
+import TextFieldFormik from "../components/form/TextFieldFormik";
+import { handleLogin } from "../handlers/loginHandle";
+import LoginValues from "../model/login.model";
+import { LOGIN_VALIDATION_SCHEMA } from "../utilities/formValidations";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { useNavigate } from "react-router-dom";
+import { fetchUser } from "../context/userThunks";
+import { selectUser } from "../context/userSelectors";
+import { useEffect } from "react";
 
 const INITIAL_VALUES: LoginValues = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 };
 
 const Login: React.FunctionComponent = (props) => {
@@ -20,7 +20,7 @@ const Login: React.FunctionComponent = (props) => {
   const user = useSelector(selectUser);
 
   useEffect(() => {
-    if (user.id !== '') navigate('dashboard');
+    if (user.id !== "") navigate("dashboard");
   }, [user]);
 
   return (
@@ -28,7 +28,7 @@ const Login: React.FunctionComponent = (props) => {
       initialValues={INITIAL_VALUES}
       onSubmit={async (values, helpers) => {
         const response = await handleLogin(values);
-        if (typeof response === 'string') {
+        if (typeof response === "string") {
           helpers.setStatus(response);
         } else if (response) {
           dispatch(fetchUser(response.user.uid));
@@ -38,14 +38,14 @@ const Login: React.FunctionComponent = (props) => {
     >
       {({ status }) => (
         <Form>
-          <TextFieldFormik name='email' placeholder='Email' type='email' />
+          <TextFieldFormik name="email" placeholder="Email" type="email" />
           <TextFieldFormik
-            name='password'
-            placeholder='Password'
-            type='password'
+            name="password"
+            placeholder="Password"
+            type="password"
           />
 
-          <button type='submit'>Login</button>
+          <button type="submit">Login</button>
           {!!status && <div>{status}</div>}
         </Form>
       )}
