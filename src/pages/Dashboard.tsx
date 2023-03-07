@@ -3,11 +3,8 @@ import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { selectUser } from '../context/selectors';
-import { User } from '../model/user.model';
 
-interface IAppProps {}
-
-const Dashboard: React.FunctionComponent<IAppProps> = (props) => {
+const Dashboard: React.FunctionComponent = (props) => {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
 

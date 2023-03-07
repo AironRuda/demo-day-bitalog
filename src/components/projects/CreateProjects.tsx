@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProject } from '../../context/projectsSlice';
 import { searchWorkers } from '../../firebase/queries';
-import { handleCreateProject } from '../../handlers/handleCreateProject';
+import { handleCreateProject } from '../../handlers/handleProject';
 import { createProjectDTO } from '../../model/projects.model';
 import { CREATE_PROJECT_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import SelectFormik from '../form/SelectFormik';

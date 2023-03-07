@@ -1,7 +1,6 @@
-import * as React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Presentation from "../components/Presentation";
-import PresentatiosFirstSecction from "../components/PresentatiosFirstSecction";
+import { useNavigate } from 'react-router-dom';
+import Presentation from '../components/presentation/Presentation';
+import PresentatiosFirstSecction from '../components/presentation/PresentatiosFirstSecction';
 
 interface IAppProps {}
 

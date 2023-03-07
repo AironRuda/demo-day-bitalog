@@ -22,3 +22,5 @@ export const inventoryCollection = collection(db, 'inventory');
 export const projectsCollection = collection(db, 'projects');
 
 export const basicInventoryRef = doc(db, 'inventory', 'basic');
+export const projectsRef = (id: string) => doc(db, 'projects', id);
+export const inventoryRef = (id: string) => doc(db, 'inventory', id);

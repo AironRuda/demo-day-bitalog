@@ -1,13 +1,11 @@
 import { FirebaseError, uuidv4 } from '@firebase/util';
 import { format } from 'date-fns';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../firebase/config';
+import { db, inventoryRef, projectsRef } from '../firebase/config';
 import { Activity, createActivitiesDTO } from '../model/activity.model';
 import { Material } from '../model/material.model';
 import { Project } from '../model/projects.model';
 import { formatNewInventory } from '../utilities/formatInventory';
-
-const getRef = (id: string) => doc(db, 'projects', id);
 
 export const handleCreateActivity = async (
   values: createActivitiesDTO,
@@ -21,7 +19,7 @@ export const handleCreateActivity = async (
       completed: false,
       updatedAt: format(new Date(), 'dd/MM/yyyy'),
     };
-    await updateDoc(getRef(currentProject.id), {
+    await updateDoc(projectsRef(currentProject.id), {
       activities: [...activities, newActivity],
     });
     return { projectId: currentProject.id, activity: newActivity };
@@ -45,7 +43,9 @@ export const handleUpdateActivity = async (
         ...currentProject.activities[activityIndex],
         ...values,
       };
-      await updateDoc(getRef(currentProject.id), { activities: activities });
+      await updateDoc(projectsRef(currentProject.id), {
+        activities: activities,
+      });
       return activities[activityIndex];
     }
   } catch (error) {
@@ -61,7 +61,7 @@ export const handleDeleteActivity = async (
     const filteredActivities = project.activities.filter(
       (activity) => activity.id !== activityId
     );
-    await updateDoc(getRef(project.id), {
+    await updateDoc(projectsRef(project.id), {
       activities: filteredActivities,
     });
   } catch (error) {
@@ -71,12 +71,10 @@ export const handleDeleteActivity = async (
 
 const updateInventory = async (inventoryId: string, materials: Material[]) => {
   try {
-    const inventory = await (
-      await getDoc(doc(db, 'inventory', inventoryId))
-    ).data();
+    const inventory = await (await getDoc(inventoryRef(inventoryId))).data();
     if (inventory) {
       if (!inventory.materials) {
-        await updateDoc(doc(db, 'inventory', inventoryId), {
+        await updateDoc(inventoryRef(inventoryId), {
           materials: materials.map((material) => {
             return {
               material: material.material,
@@ -123,7 +121,7 @@ const updateActivity = async (project: Project, activityId: string) => {
     );
     currentActivity.completed = !currentActivity.completed;
     activities.push(currentActivity as Activity);
-    return await updateDoc(getRef(project.id), {
+    return await updateDoc(projectsRef(project.id), {
       activities: activities,
     });
   } catch (error) {
