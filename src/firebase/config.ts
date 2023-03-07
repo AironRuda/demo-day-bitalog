@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
-import { collection, getFirestore } from 'firebase/firestore';
+import { collection, doc, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDSl-RAz3v6AyyX9pS7EY3l86g6-rb5A8A',
@@ -20,3 +20,5 @@ export const db = getFirestore(app);
 
 export const inventoryCollection = collection(db, 'inventory');
 export const projectsCollection = collection(db, 'projects');
+
+export const basicInventoryRef = doc(db, 'inventory', 'basic');

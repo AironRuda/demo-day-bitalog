@@ -77,12 +77,24 @@ const updateInventory = async (inventoryId: string, materials: Material[]) => {
     if (inventory) {
       if (!inventory.materials) {
         await updateDoc(doc(db, 'inventory', inventoryId), {
-          materials: materials,
+          materials: materials.map((material) => {
+            return {
+              material: material.material,
+              amount: material.amount,
+              unit: material.unit,
+            };
+          }),
         });
       } else {
         const newInventory = formatNewInventory(inventory.materials, materials);
         await updateDoc(doc(db, 'inventory', inventoryId), {
-          materials: newInventory,
+          materials: newInventory.map((material) => {
+            return {
+              material: material.material,
+              amount: material.amount,
+              unit: material.unit,
+            };
+          }),
         });
       }
     }
@@ -96,7 +108,16 @@ const updateActivity = async (project: Project, activityId: string) => {
     const currentActivity = {
       ...project.activities.find((activity) => activity.id === activityId),
     };
-    await updateInventory(project.inventoryId, currentActivity.materials ?? []);
+    await updateInventory(
+      project.inventoryId,
+      currentActivity.materials?.map((material: Material) => {
+        return {
+          amount: material.amount,
+          material: material.material,
+          unit: material.unit,
+        };
+      }) ?? []
+    );
     const activities = project.activities.filter(
       (activity) => activity.id !== activityId
     );

@@ -6,7 +6,6 @@ import { updateActivity } from '../../context/projectsSlice';
 import { getActivityById, getCurrentProject } from '../../context/selectors';
 import { handleUpdateActivity } from '../../handlers/handleActivity';
 import { createActivitiesDTO } from '../../model/activity.model';
-import { Material } from '../../model/material.model';
 import { Project } from '../../model/projects.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import FormActivity from './form/FormActivity';
@@ -35,13 +34,7 @@ const UpdateActivity: React.FunctionComponent = (props) => {
   const INITIAL_VALUES = currentActivity
     ? {
         priority: currentActivity.priority,
-        materials: currentActivity.materials.map((material): Material => {
-          return {
-            amount: material.amount,
-            material: material.material,
-            unit: material.unit,
-          };
-        }),
+        materials: currentActivity.materials,
         activityName: currentActivity.activityName,
       }
     : EMPTY_VALUES;
@@ -58,9 +51,7 @@ const UpdateActivity: React.FunctionComponent = (props) => {
       );
       if (typeof response === 'string') helpers.setStatus(response);
       else if (response) {
-        dispatch(
-          updateActivity({ projectId: currentProjectId, activity: response })
-        );
+        dispatch(updateActivity(response));
       }
     }
   }

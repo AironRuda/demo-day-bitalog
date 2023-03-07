@@ -32,25 +32,13 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   async function handleClickDelete() {
     const response = await handleDeleteActivity(activity.id, currentProject);
     if (typeof response === 'string') console.log('hubo un error');
-    else if (!response)
-      dispatch(
-        deleteActivity({
-          activityId: activity.id,
-          projectId: currentProject.id,
-        })
-      );
+    else if (!response) dispatch(deleteActivity(activity.id));
   }
 
   async function handleClickStatus() {
     const response = await handleStatusActivity(activity.id, currentProject);
     if (typeof response === 'string') console.log('hubo un error');
-    else if (!response)
-      dispatch(
-        updateStatusActivity({
-          activityId: activity.id,
-          projectId: currentProject.id,
-        })
-      );
+    else if (!response) dispatch(updateStatusActivity(activity.id));
   }
 
   return (

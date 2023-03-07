@@ -32,7 +32,7 @@ const CreateActivities: React.FunctionComponent = (props) => {
       if (typeof response === 'string') helpers.setStatus(response);
       else if (response) {
         helpers.resetForm();
-        dispatch(addActivity(response));
+        dispatch(addActivity(response.activity));
       }
     }
   };

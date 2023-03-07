@@ -18,8 +18,6 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
   const [amount, setAmount] = useState(currentMaterial.amount || 0);
 
   useEffect(() => {
-    const selected = [...selectedMaterials];
-    selected[index].amount = amount;
     helpers.setValue(selectedMaterials);
   }, [amount]);
 
@@ -38,7 +36,9 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
         type='number'
         value={amount}
         onChange={(e) => {
-          setAmount(parseInt(e.target.value));
+          setAmount(
+            !isNaN(parseInt(e.target.value)) ? parseInt(e.target.value) : 0
+          );
         }}
       />
       <span>{currentMaterial.unit}</span>

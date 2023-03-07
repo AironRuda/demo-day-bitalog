@@ -4,7 +4,7 @@ import { getCurrentProject } from '../../context/selectors';
 import { Project } from '../../model/projects.model';
 import ActivityItem from './ActivityItem';
 
-const ActivitiesList: React.FunctionComponent = (props) => {
+const ActivitiesList: React.FunctionComponent = () => {
   const selectedProjectId = useSelector(getSelectedProject);
   const currentProject = useSelector(
     (state: { projects: { projects: Project[] } }) =>

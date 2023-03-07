@@ -1,7 +1,7 @@
-import { doc, getDoc } from 'firebase/firestore';
+import { getDoc } from 'firebase/firestore';
 import { Form } from 'formik';
 import { useEffect, useState } from 'react';
-import { db } from '../../../firebase/config';
+import { basicInventoryRef } from '../../../firebase/config';
 import { Material } from '../../../model/material.model';
 import TextFieldFormik from '../../form/TextFieldFormik';
 import SelectMaterials from './SelectMaterials';
@@ -19,9 +19,10 @@ const FormActivity: React.FunctionComponent<IFormProps> = ({
   defaultPriority,
 }) => {
   const [materials, setMaterial] = useState<Material[]>([]);
+
   useEffect(() => {
-    getDoc(doc(db, 'inventory', 'basic')).then((response) => {
-      const materialsData = response.data() as { materials: Material[] };
+    getDoc(basicInventoryRef).then((response) => {
+      const materialsData = response.data();
       if (materialsData) setMaterial([...materialsData.materials]);
     });
   }, []);

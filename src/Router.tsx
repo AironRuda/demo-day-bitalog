@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router';
+import { Route } from 'react-router';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -24,6 +24,7 @@ const router = createBrowserRouter(
 
       <Route path='app' element={<App />}>
         <Route index element={<Login />} />
+
         <Route path='dashboard' element={<Dashboard />}>
           <Route path='' element={<ProjectContainer />}>
             <Route path='create-project' element={<CreateProjects />} />

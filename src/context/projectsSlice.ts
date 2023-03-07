@@ -12,6 +12,18 @@ const getCurrentProjectIndex = (projects: Project[], projectId: string) => {
   return projects.findIndex((projects) => projects.id === projectId);
 };
 
+const getCurrentActivityIndex = (
+  projects: Project[],
+  projectId: string,
+  activityId: string
+) => {
+  const currentProjectIndex = getCurrentProjectIndex(projects, projectId);
+  const currentActivityIndex = projects[
+    currentProjectIndex
+  ].activities.findIndex((activity) => activity.id === activityId);
+  return { currentProjectIndex, currentActivityIndex };
+};
+
 const projectSlice = createSlice({
   name: 'projects',
   initialState,
@@ -31,77 +43,52 @@ const projectSlice = createSlice({
         state.projects[currentProjectIndex].completed =
           !state.projects[currentProjectIndex].completed;
     },
-    addActivity: (
-      state,
-      action: PayloadAction<{ projectId: string; activity: Activity }>
-    ) => {
+    addActivity: (state, action: PayloadAction<Activity>) => {
       const currentProjectIndex = getCurrentProjectIndex(
         state.projects,
-        action.payload.projectId
+        state.selectedProject
       );
       if (currentProjectIndex >= 0)
-        state.projects[currentProjectIndex].activities.push(
-          action.payload.activity
-        );
+        state.projects[currentProjectIndex].activities.push(action.payload);
     },
-    updateActivity: (
-      state,
-      action: PayloadAction<{ projectId: string; activity: Activity }>
-    ) => {
+    updateActivity: (state, action: PayloadAction<Activity>) => {
+      const { currentProjectIndex, currentActivityIndex } =
+        getCurrentActivityIndex(
+          state.projects,
+          state.selectedProject,
+          action.payload.id
+        );
+      console.log(currentActivityIndex);
+      if (currentActivityIndex >= 0)
+        state.projects[currentProjectIndex].activities[currentActivityIndex] = {
+          ...action.payload,
+        };
+    },
+    deleteActivity: (state, action: PayloadAction<string>) => {
       const currentProjectIndex = getCurrentProjectIndex(
         state.projects,
-        action.payload.projectId
-      );
-      if (currentProjectIndex >= 0) {
-        const currentActivityIndex = state.projects[
-          currentProjectIndex
-        ].activities.findIndex(
-          (activity) => activity.id === action.payload.activity.id
-        );
-        if (currentActivityIndex >= 0)
-          state.projects[currentProjectIndex].activities[currentActivityIndex] =
-            action.payload.activity;
-      }
-    },
-    deleteActivity: (
-      state,
-      action: PayloadAction<{ activityId: string; projectId: string }>
-    ) => {
-      const currentProjectIndex = getCurrentProjectIndex(
-        state.projects,
-        action.payload.projectId
+        state.selectedProject
       );
       if (currentProjectIndex >= 0) {
         const newActivities = state.projects[
           currentProjectIndex
-        ].activities.filter(
-          (activity) => activity.id !== action.payload.activityId
-        );
+        ].activities.filter((activity) => activity.id !== action.payload);
         state.projects[currentProjectIndex].activities = newActivities;
       }
     },
-    updateStatusActivity: (
-      state,
-      action: PayloadAction<{ activityId: string; projectId: string }>
-    ) => {
-      const currentProjectIndex = getCurrentProjectIndex(
-        state.projects,
-        action.payload.projectId
-      );
-      if (currentProjectIndex >= 0) {
-        const currentActivityIndex = state.projects[
-          currentProjectIndex
-        ].activities.findIndex(
-          (activity) => activity.id === action.payload.activityId
+    updateStatusActivity: (state, action: PayloadAction<string>) => {
+      const { currentProjectIndex, currentActivityIndex } =
+        getCurrentActivityIndex(
+          state.projects,
+          state.selectedProject,
+          action.payload
         );
-        if (currentActivityIndex >= 0) {
-          state.projects[currentProjectIndex].activities[
-            currentActivityIndex
-          ].completed =
-            !state.projects[currentProjectIndex].activities[
-              currentActivityIndex
-            ].completed;
-        }
+      if (currentActivityIndex >= 0) {
+        state.projects[currentProjectIndex].activities[
+          currentActivityIndex
+        ].completed =
+          !state.projects[currentProjectIndex].activities[currentActivityIndex]
+            .completed;
       }
     },
   },
