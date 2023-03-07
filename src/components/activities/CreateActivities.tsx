@@ -2,10 +2,10 @@ import { Formik, FormikHelpers } from 'formik';
 import { createActivitiesDTO } from '../../model/activity.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import { useDispatch, useSelector } from 'react-redux';
-import { addActivity } from '../../context/userSlice';
-import { getCurrentProject } from '../../context/userSelectors';
+import { addActivity } from '../../context/projectsSlice';
+import { getCurrentProject } from '../../context/selectors';
 import { Project } from '../../model/projects.model';
-import { selectedProject } from '../../context/selectedProjectSlice';
+import { getSelectedProject } from '../../context/projectsSlice';
 import { handleCreateActivity } from '../../handlers/handleActivity';
 import FormActivity from './form/FormActivity';
 
@@ -17,9 +17,9 @@ const INITIAL_VALUES: createActivitiesDTO = {
 
 const CreateActivities: React.FunctionComponent = (props) => {
   const dispatch = useDispatch();
-  const selectedProjectId = useSelector(selectedProject);
+  const selectedProjectId = useSelector(getSelectedProject);
   const currentProject = useSelector(
-    (state: { user: { projects: Project[] } }) =>
+    (state: { projects: { projects: Project[] } }) =>
       getCurrentProject(state, selectedProjectId)
   );
 

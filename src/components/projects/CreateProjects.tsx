@@ -2,7 +2,7 @@ import { getDocs } from 'firebase/firestore';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addProject } from '../../context/userSlice';
+import { addProject } from '../../context/projectsSlice';
 import { searchWorkers } from '../../firebase/queries';
 import { handleCreateProject } from '../../handlers/handleCreateProject';
 import { createProjectDTO } from '../../model/projects.model';

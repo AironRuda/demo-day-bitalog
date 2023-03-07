@@ -1,5 +1,4 @@
 import { FieldHelperProps, FieldMetaProps } from 'formik';
-import { useEffect } from 'react';
 import { Material } from '../../../model/material.model';
 import MaterialItem from './MaterialItem';
 

@@ -1,17 +1,17 @@
 import { getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectedProject } from '../context/selectedProjectSlice';
-import { getCurrentProject } from '../context/userSelectors';
+import { getSelectedProject } from '../context/projectsSlice';
+import { getCurrentProject } from '../context/selectors';
 import { searInventory } from '../firebase/queries';
 import { Inventory } from '../model/inventory.model';
 import { Project } from '../model/projects.model';
 
 const Inventory: React.FunctionComponent = () => {
-  const currentProjectId = useSelector(selectedProject);
+  const currentProjectId = useSelector(getSelectedProject);
 
   const currentProject: any = useSelector(
-    (state: { user: { projects: Project[] } }) =>
+    (state: { projects: { projects: Project[] } }) =>
       getCurrentProject(state, currentProjectId)
   );
 

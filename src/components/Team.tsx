@@ -1,15 +1,12 @@
 import { useSelector } from 'react-redux';
-import { selectedProject } from '../context/selectedProjectSlice';
-import { getCurrentProject } from '../context/userSelectors';
+import { getSelectedProject } from '../context/projectsSlice';
+import { getCurrentProject } from '../context/selectors';
 import { Project } from '../model/projects.model';
 
-interface IAppProps {}
-
-const Team: React.FunctionComponent<IAppProps> = (props) => {
-  const currentProjectId = useSelector(selectedProject);
+const Team: React.FunctionComponent = () => {
+  const currentProjectId = useSelector(getSelectedProject);
   const currentProject = useSelector(
-    // se crea un state, con el tipo requerido para el "getCurrentPRoject"
-    (state: { user: { projects: Project[] } }) =>
+    (state: { projects: { projects: Project[] } }) =>
       getCurrentProject(state, currentProjectId)
   );
   const workerArray = currentProject?.workers;

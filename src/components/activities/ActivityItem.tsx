@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { deleteActivity, updateStatusActivity } from '../../context/userSlice';
-import { getActivityById, selectRol } from '../../context/userSelectors';
+import {
+  deleteActivity,
+  updateStatusActivity,
+} from '../../context/projectsSlice';
+import { getActivityById, selectRol } from '../../context/selectors';
 import {
   handleDeleteActivity,
   handleStatusActivity,
 } from '../../handlers/handleActivity';
 import { Activity } from '../../model/activity.model';
 import { Project } from '../../model/projects.model';
-import { User } from '../../model/user.model';
 
 interface IActivityItemProps {
   activity: Activity;
@@ -22,8 +24,9 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rol = useSelector(selectRol);
-  const currentActivity = useSelector((state: { user: User }) =>
-    getActivityById(state, currentProject.id, activity.id)
+  const currentActivity = useSelector(
+    (state: { projects: { projects: Project[] } }) =>
+      getActivityById(state, currentProject.id, activity.id)
   );
 
   async function handleClickDelete() {

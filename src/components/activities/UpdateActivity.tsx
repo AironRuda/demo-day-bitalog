@@ -1,17 +1,13 @@
 import { Formik, FormikHelpers } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { selectedProject } from '../../context/selectedProjectSlice';
-import { updateActivity } from '../../context/userSlice';
-import {
-  getActivityById,
-  getCurrentProject,
-} from '../../context/userSelectors';
+import { getSelectedProject } from '../../context/projectsSlice';
+import { updateActivity } from '../../context/projectsSlice';
+import { getActivityById, getCurrentProject } from '../../context/selectors';
 import { handleUpdateActivity } from '../../handlers/handleActivity';
 import { createActivitiesDTO } from '../../model/activity.model';
 import { Material } from '../../model/material.model';
 import { Project } from '../../model/projects.model';
-import { User } from '../../model/user.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import FormActivity from './form/FormActivity';
 
@@ -24,12 +20,13 @@ const EMPTY_VALUES: createActivitiesDTO = {
 const UpdateActivity: React.FunctionComponent = (props) => {
   const { id } = useParams();
 
-  const currentProjectId = useSelector(selectedProject);
-  const currentActivity = useSelector((state: { user: User }) =>
-    getActivityById(state, currentProjectId, id ?? '')
+  const currentProjectId = useSelector(getSelectedProject);
+  const currentActivity = useSelector(
+    (state: { projects: { projects: Project[] } }) =>
+      getActivityById(state, currentProjectId, id ?? '')
   );
   const currentProject = useSelector(
-    (state: { user: { projects: Project[] } }) =>
+    (state: { projects: { projects: Project[] } }) =>
       getCurrentProject(state, currentProjectId)
   );
 

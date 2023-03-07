@@ -19,7 +19,7 @@ export const fetchUser = createAsyncThunk(
 );
 
 export const fetchAllProjectsAdmin = createAsyncThunk(
-  'users/fetchAllProjectsAdmin',
+  'projects/fetchAllProjectsAdmin',
   async (args, { getState }) => {
     const { user } = getState() as { user: User };
     if (user.id) {
@@ -34,7 +34,7 @@ export const fetchAllProjectsAdmin = createAsyncThunk(
 );
 
 export const fetchProjectsWorker = createAsyncThunk(
-  'users/fetchProjectsWorker',
+  'projects/fetchProjectsWorker',
   async (args, { getState }) => {
     const { user } = getState() as { user: User };
     if (user.id) {

@@ -4,8 +4,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import {
   fetchAllProjectsAdmin,
   fetchProjectsWorker,
-} from '../../context/userThunks';
-import { selectRol } from '../../context/userSelectors';
+} from '../../context/thunks';
+import { selectRol } from '../../context/selectors';
 
 const ProjectContainer: React.FunctionComponent = () => {
   const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { selectedProject } from '../../context/selectedProjectSlice';
-import { selectRol } from '../../context/userSelectors';
+import { getSelectedProject } from '../../context/projectsSlice';
+import { selectRol } from '../../context/selectors';
 
 const ActivityContainer: React.FunctionComponent = () => {
-  const currentProject = useSelector(selectedProject);
+  const currentProject = useSelector(getSelectedProject);
   const rol = useSelector(selectRol);
   const navigate = useNavigate();
   return (

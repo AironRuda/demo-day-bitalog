@@ -5,8 +5,8 @@ import LoginValues from '../model/login.model';
 import { LOGIN_VALIDATION_SCHEMA } from '../utilities/formValidations';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { useNavigate } from 'react-router-dom';
-import { fetchUser } from '../context/userThunks';
-import { selectUser } from '../context/userSelectors';
+import { fetchUser } from '../context/thunks';
+import { selectUser } from '../context/selectors';
 import { useEffect } from 'react';
 
 const INITIAL_VALUES: LoginValues = {

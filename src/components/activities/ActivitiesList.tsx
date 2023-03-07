@@ -1,14 +1,13 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectedProject } from '../../context/selectedProjectSlice';
-import { getCurrentProject } from '../../context/userSelectors';
+import { getSelectedProject } from '../../context/projectsSlice';
+import { getCurrentProject } from '../../context/selectors';
 import { Project } from '../../model/projects.model';
 import ActivityItem from './ActivityItem';
 
 const ActivitiesList: React.FunctionComponent = (props) => {
-  const selectedProjectId = useSelector(selectedProject);
+  const selectedProjectId = useSelector(getSelectedProject);
   const currentProject = useSelector(
-    (state: { user: { projects: Project[] } }) =>
+    (state: { projects: { projects: Project[] } }) =>
       getCurrentProject(state, selectedProjectId)
   );
 

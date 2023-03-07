@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { selectUser } from '../context/userSelectors';
+import { selectUser } from '../context/selectors';
 import { User } from '../model/user.model';
 
 interface IAppProps {}
