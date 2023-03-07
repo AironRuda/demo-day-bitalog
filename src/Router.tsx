@@ -16,15 +16,16 @@ import Team from './components/Team';
 import Dashboard from './pages/Dashboard';
 import Display from './pages/Display';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route index element={<Display />} />
 
+      <Route path="register" element={<Register />} />
       <Route path='app' element={<App />}>
         <Route index element={<Login />} />
-
         <Route path='dashboard' element={<Dashboard />}>
           <Route path='' element={<ProjectContainer />}>
             <Route path='create-project' element={<CreateProjects />} />

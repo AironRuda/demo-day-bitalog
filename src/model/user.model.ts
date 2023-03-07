@@ -5,3 +5,8 @@ export interface User {
   rol: 'admin' | 'worker' | '';
   projects: Project[];
 }
+
+export interface RegisterDTO extends Pick<User, "rol"> {
+  email: string,
+  password: string
+}
