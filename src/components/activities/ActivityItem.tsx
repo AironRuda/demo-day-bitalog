@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import {
   deleteActivity,
   updateStatusActivity,
@@ -30,9 +31,32 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   );
 
   async function handleClickDelete() {
-    const response = await handleDeleteActivity(activity.id, currentProject);
-    if (typeof response === 'string') console.log('hubo un error');
-    else if (!response) dispatch(deleteActivity(activity.id));
+    Swal.fire({
+      title: '¿Estás seguro de eliminar la actividad?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Eliminar',
+      confirmButtonColor: 'red',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await handleDeleteActivity(
+          activity.id,
+          currentProject
+        );
+        if (typeof response === 'string')
+          Swal.fire({
+            text: 'Hubo un error al eliminar la actividad',
+            icon: 'error',
+          });
+        else if (!response) {
+          dispatch(deleteActivity(activity.id));
+          Swal.fire({
+            text: 'La actividad se ha eliminado correctamente',
+            icon: 'success',
+          });
+        }
+      }
+    });
   }
 
   async function handleClickStatus() {

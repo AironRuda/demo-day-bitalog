@@ -58,7 +58,6 @@ const projectSlice = createSlice({
           state.selectedProject,
           action.payload.id
         );
-      console.log(currentActivityIndex);
       if (currentActivityIndex >= 0)
         state.projects[currentProjectIndex].activities[currentActivityIndex] = {
           ...action.payload,

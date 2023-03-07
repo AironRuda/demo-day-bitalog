@@ -2,6 +2,7 @@ import { getDocs } from 'firebase/firestore';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import { addProject } from '../../context/projectsSlice';
 import { searchWorkers } from '../../firebase/queries';
 import { handleCreateProject } from '../../handlers/handleProject';
@@ -35,6 +36,10 @@ const CreateProjects: React.FunctionComponent = (props) => {
     else if (newProject) {
       helpers.resetForm();
       dispatch(addProject(newProject));
+      Swal.fire({
+        text: 'Se ha creado el proyecto de forma exitosa',
+        icon: 'success',
+      });
     }
   };
 
