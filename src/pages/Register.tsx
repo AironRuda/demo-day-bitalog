@@ -1,13 +1,12 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { Form, Formik, FormikHelpers } from "formik";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TextFieldFormik from "../components/form/TextFieldFormik";
 import { selectUser } from "../context/userSelectors";
 import { fetchUser } from "../context/userThunks";
-import { auth, db } from "../firebase/config";
+import { db } from "../firebase/config";
 import { registerHandle } from "../handlers/registerHandle";
 import { RegisterDTO } from "../model/user.model";
 import { REGISTER_VALIDATION_SCHEMA } from "../utilities/formValidations";
@@ -48,39 +47,45 @@ const Register: React.FunctionComponent = (props) => {
   };
 
   return (
-    <Formik
-      initialValues={INITIAL_VALUES}
-      onSubmit={handleSubmit}
-      validationSchema={REGISTER_VALIDATION_SCHEMA}
-    >
-      {({ status, values, handleChange, errors }) => (
-        <Form>
-          <h1>Register</h1>
-          <TextFieldFormik name="email" placeholder="Email" type="email" />
+    <div className="w-full h-full" style={{ background: "#215A6D" }}>
+      <Formik
+        initialValues={INITIAL_VALUES}
+        onSubmit={handleSubmit}
+        validationSchema={REGISTER_VALIDATION_SCHEMA}
+      >
+        {({ status, values, handleChange, errors }) => (
+          <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <h1>Register</h1>
+            <TextFieldFormik name="email" placeholder="Email" type="email" />
 
-          <select
-            name="rol"
-            value={values.rol}
-            id="rol"
-            onChange={handleChange}
-          >
-            <option value="">Seleccione rol</option>
-            <option value="admin">Admin</option>
-            <option value="worker">worker</option>
-          </select>
-          {errors.rol && <div className="input-feedback">{errors.rol}</div>}
+            <select
+              name="rol"
+              value={values.rol}
+              id="rol"
+              onChange={handleChange}
+            >
+              <option value="">Seleccione rol</option>
+              <option value="admin">Admin</option>
+              <option value="worker">worker</option>
+            </select>
+            {errors.rol && <div className="input-feedback">{errors.rol}</div>}
 
-          <TextFieldFormik
-            name="password"
-            placeholder="Password"
-            type="password"
-          />
-          <button type="submit">Login</button>
+            <TextFieldFormik
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
+            <button type="submit">Login</button>
 
-          {!!status && <div>{status}</div>}
-        </Form>
-      )}
-    </Formik>
+            {!!status && <div>{status}</div>}
+          </Form>
+        )}
+      </Formik>
+      <span>
+        Ya tiene una cuenta?
+        <Link to="/app">Iniciar sesión </Link>
+      </span>
+    </div>
   );
 };
 

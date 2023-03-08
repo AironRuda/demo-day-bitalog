@@ -1,11 +1,11 @@
-import { getDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectedProject } from '../context/selectedProjectSlice';
-import { getCurrentProject } from '../context/userSelectors';
-import { searInventory } from '../firebase/queries';
-import { Inventory } from '../model/inventory.model';
-import { Project } from '../model/projects.model';
+import { getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectedProject } from "../context/selectedProjectSlice";
+import { getCurrentProject } from "../context/userSelectors";
+import { searInventory } from "../firebase/queries";
+import { Inventory } from "../model/inventory.model";
+import { Project } from "../model/projects.model";
 
 const Inventory: React.FunctionComponent = () => {
   const currentProjectId = useSelector(selectedProject);
@@ -27,20 +27,33 @@ const Inventory: React.FunctionComponent = () => {
   }, [currentProjectId]);
 
   return (
-    <main>
-      <h1>Lista de Gastos</h1>
+    <main className="flex items-center flex-col m-5">
+      <h1 className="items-center font-bold text-3xl ">
+        Lista de trabajadores
+      </h1>
       <ul>
         {currentProjectId && inventory && inventory.materials ? (
           inventory.materials.map((item) => (
-            <li key={item.material}>
-              <h1>material: {item.material}</h1>
-              <p>
+            <li
+              key={item.material}
+              className="flex flex-col items-center p-2 m-2 rounded-xl"
+              style={{ background: "#31C48D" }}
+            >
+              <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                {item.material}
+              </h5>
+              <span className="text-sm text-black dark:text-gray-400">
                 Cantidad gastada: {item.amount} {item.unit}
-              </p>
+              </span>
+              <p></p>
             </li>
           ))
         ) : (
-          <li>No hay materiales gastados</li>
+          <li className="flex flex-col items-center p-2 m-2 rounded-xl">
+            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+              No hay materiales gastados
+            </h5>
+          </li>
         )}
       </ul>
     </main>

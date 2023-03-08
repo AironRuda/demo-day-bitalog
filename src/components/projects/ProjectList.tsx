@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectProject } from '../../context/selectedProjectSlice';
-import { selectProjects } from '../../context/userSelectors';
-import { updateStatusProject } from '../../context/userSlice';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProject } from "../../context/selectedProjectSlice";
+import { selectProjects } from "../../context/userSelectors";
+import { updateStatusProject } from "../../context/userSlice";
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
@@ -19,7 +19,6 @@ const ProjectList: React.FunctionComponent = (props) => {
         dispatch(updateStatusProject(project.id));
       }
     });
-    console.log(projects);
   }, [projects]);
 
   return (
