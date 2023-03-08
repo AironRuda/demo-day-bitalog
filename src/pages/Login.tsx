@@ -24,32 +24,41 @@ const Login: React.FunctionComponent = (props) => {
   }, [user]);
 
   return (
-    <Formik
-      initialValues={INITIAL_VALUES}
-      onSubmit={async (values, helpers) => {
-        const response = await handleLogin(values);
-        if (typeof response === 'string') {
-          helpers.setStatus(response);
-        } else if (response) {
-          dispatch(fetchUser(response.user.uid));
-        }
-      }}
-      validationSchema={LOGIN_VALIDATION_SCHEMA}
-    >
-      {({ status }) => (
-        <Form>
-          <TextFieldFormik name='email' placeholder='Email' type='email' />
-          <TextFieldFormik
-            name='password'
-            placeholder='Password'
-            type='password'
-          />
+    <div className='w-full h-full flex items-center justify-center bg-secondary'>
+      <div className='lg:w-1/2 w-full lg:h-1/2 h-2/3 flex flex-col items-center justify-center'>
+        <Formik
+          initialValues={INITIAL_VALUES}
+          onSubmit={async (values, helpers) => {
+            const response = await handleLogin(values);
+            if (typeof response === 'string') {
+              helpers.setStatus(response);
+            } else if (response) {
+              dispatch(fetchUser(response.user.uid));
+            }
+          }}
+          validationSchema={LOGIN_VALIDATION_SCHEMA}
+        >
+          {({ status }) => (
+            <Form className='lg:w-1/2 md:w-2/3 w-full flex flex-col justify-center px-10 py-40 rounded gap-5 bg-white h-full'>
+              <h1 className='self-center text-center font-bold text-4xl text-slate-600 mb-5'>
+                Inicia Sesión
+              </h1>
+              <TextFieldFormik name='email' placeholder='Email' type='email' />
+              <TextFieldFormik
+                name='password'
+                placeholder='Password'
+                type='password'
+              />
 
-          <button type='submit'>Login</button>
-          {!!status && <div>{status}</div>}
-        </Form>
-      )}
-    </Formik>
+              <button type='submit' className='btn btn-primary text-white'>
+                Login
+              </button>
+              {!!status && <div>{status}</div>}
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </div>
   );
 };
 

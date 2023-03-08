@@ -18,22 +18,29 @@ const ProjectContainer: React.FunctionComponent = () => {
   }, []);
 
   return (
-    <main>
-      <h1>PROJECTS</h1>
-      <menu className='btn-group'>
-        {rol === 'admin' && (
-          <>
-            <button className='btn btn-active' onClick={() => navigate('')}>
-              Ver lista de proyectos
-            </button>
-            <button className='btn' onClick={() => navigate('create-project')}>
-              Crear proyecto
-            </button>
-          </>
-        )}
-      </menu>
+    <div className='w-full h-full flex flex-col items-center justify-start'>
+      <div className='flex flex-col gap-5 mb-10'>
+        <h1 className='text-center text-4xl text-slate-700 font-bold'>
+          PROYECTOS
+        </h1>
+        <menu className='btn-group '>
+          {rol === 'admin' && (
+            <>
+              <button className='btn btn-active' onClick={() => navigate('')}>
+                Ver lista de proyectos
+              </button>
+              <button
+                className='btn btn-outline btn-primary'
+                onClick={() => navigate('create-project')}
+              >
+                Crear proyecto
+              </button>
+            </>
+          )}
+        </menu>
+      </div>
       <Outlet />
-    </main>
+    </div>
   );
 };
 

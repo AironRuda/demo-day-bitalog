@@ -1,4 +1,4 @@
-import { useField } from "formik";
+import { useField } from 'formik';
 
 interface IAppProps {
   placeholder: string;
@@ -13,15 +13,15 @@ const TextFieldFormik: React.FunctionComponent<IAppProps> = ({
 }) => {
   const [field, meta] = useField(name);
   return (
-    <>
+    <div className='w-full'>
       <input
-        type={type ?? "text"}
+        type={type ?? 'text'}
         placeholder={placeholder}
         {...field}
-        className="input"
+        className='input input-primary w-full bg-white text-slate-600'
       />
-      {meta.touched && meta.error ? <div>{meta.error}</div> : null}
-    </>
+      {meta.touched && meta.error ? <div className='text-red-500 pl-2'>{meta.error}</div> : null}
+    </div>
   );
 };
 
