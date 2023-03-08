@@ -90,6 +90,9 @@ const projectSlice = createSlice({
             .completed;
       }
     },
+    cleanProjects: (state) => {
+      return initialState;
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchAllProjectsAdmin.fulfilled, (state, action) => {
@@ -113,5 +116,6 @@ export const {
   updateStatusActivity,
   updateStatusProject,
   deleteActivity,
+  cleanProjects,
 } = projectSlice.actions;
 export default projectSlice.reducer;

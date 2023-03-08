@@ -55,6 +55,7 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
           Swal.fire({
             text: 'La actividad se ha eliminado correctamente',
             icon: 'success',
+            confirmButtonColor: '#31C48D',
           });
         }
       }
@@ -62,9 +63,33 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   }
 
   async function handleClickStatus() {
-    const response = await handleStatusActivity(activity.id, currentProject);
-    if (typeof response === 'string') console.log('hubo un error');
-    else if (!response) dispatch(updateStatusActivity(activity.id));
+    Swal.fire({
+      title: '¿Estás seguro de finalizar la actividad?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Finalizar',
+      confirmButtonColor: '#31C48D',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await handleStatusActivity(
+          activity.id,
+          currentProject
+        );
+        if (typeof response === 'string')
+          Swal.fire({
+            text: 'Hubo un error al cambiar el estado de la actividad',
+            icon: 'error',
+          });
+        else if (!response) {
+          dispatch(updateStatusActivity(activity.id));
+          Swal.fire({
+            text: 'La actividad ha finalizado correctamente',
+            icon: 'success',
+            confirmButtonColor: '#31C48D',
+          });
+        }
+      }
+    });
   }
 
   return (
@@ -109,9 +134,15 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
             </span>
           </div>
         ) : (
-          <div>
+          <div className='flex justify-center'>
             {!currentActivity?.completed && (
-              <span onClick={handleClickStatus}>Cumplir</span>
+              <button
+                className='btn btn-xs btn-primary'
+                type='button'
+                onClick={handleClickStatus}
+              >
+                Cumplir
+              </button>
             )}
           </div>
         )}

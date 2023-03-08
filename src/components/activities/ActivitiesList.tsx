@@ -61,7 +61,8 @@ const ActivitiesList: React.FunctionComponent = () => {
         </div>
       ) : (
         <div className='text-3xl text-center px-20 text-secondary'>
-          En el momento no hay tareas disponibles :c
+          En el momento no hay tareas disponibles :c <br />
+          Asigna alguna o contacta con tu encargado.
         </div>
       )}
     </div>
@@ -69,12 +70,3 @@ const ActivitiesList: React.FunctionComponent = () => {
 };
 
 export default ActivitiesList;
-
-/* <thead>
-<tr>
-  <th></th>
-  <th>Name</th>
-  <th>Job</th>
-  <th>Favorite Color</th>
-</tr>
-</thead> */
