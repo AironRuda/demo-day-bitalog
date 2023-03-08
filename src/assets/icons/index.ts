@@ -5,6 +5,7 @@ import historyLogo from './historyLogo.svg';
 import userLogo from './userLogo.svg';
 import projectsLogo from './projectsLogo.svg';
 import priorityListLogo from './priorityListLogo.svg';
+import teamUserLogo from './teamUserLogo.svg';
 
 export {
   pointerLogo,
@@ -13,5 +14,6 @@ export {
   historyLogo,
   userLogo,
   projectsLogo,
+  teamUserLogo,
   priorityListLogo,
 };
