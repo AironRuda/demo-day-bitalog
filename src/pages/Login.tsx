@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUser } from '../context/thunks';
 import { selectUser } from '../context/selectors';
 import { useEffect } from 'react';
+import { leftArrow } from '../assets/icons';
 
 const INITIAL_VALUES: LoginValues = {
   email: '',
@@ -25,6 +26,20 @@ const Login: React.FunctionComponent = (props) => {
 
   return (
     <div className='w-full h-full flex items-center justify-center bg-secondary'>
+      <div
+        className='absolute top-10 left-5 flex items-center cursor-pointer'
+        onClick={() => navigate('/')}
+      >
+        <img
+          src={leftArrow}
+          style={{
+            filter:
+              'invert(100%) sepia(94%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%)',
+          }}
+          className='w-12 '
+        />
+        <span className='text-white font-bold text-lg'>Regresar</span>
+      </div>
       <div className='lg:w-1/2 w-full lg:h-1/2 h-2/3 flex flex-col items-center justify-center'>
         <Formik
           initialValues={INITIAL_VALUES}

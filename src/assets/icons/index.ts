@@ -11,6 +11,7 @@ import teamUserLogo from './teamUserLogo.svg';
 import spreadsheet from './spreadsheet.svg';
 import group from './group.svg';
 import logout from './logout.svg';
+import leftArrow from './leftArrow.svg';
 
 export {
   pointerLogo,
@@ -26,4 +27,5 @@ export {
   spreadsheet,
   group,
   logout,
+  leftArrow,
 };
