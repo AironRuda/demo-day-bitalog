@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProject } from '../../context/projectsSlice';
+import { getSelectedProject, selectProject } from '../../context/projectsSlice';
 import { selectProjects } from '../../context/selectors';
 import { updateStatusProject } from '../../context/projectsSlice';
+import { folder } from '../../assets/icons';
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
+  const currentProject = useSelector(getSelectedProject);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,9 +24,8 @@ const ProjectList: React.FunctionComponent = (props) => {
   }, [projects]);
 
   return (
-    <div>
-      <h1>Proyectos</h1>
-      <ul>
+    <div className='h-4/5 w-full flex justify-center items-center'>
+      <ul className='h-full md:w-4/5 w-11/12 border-2 p-5 border-secondary flex flex-wrap justify-center items-center lg:gap-10 gap-5 cursor-pointer overflow-auto'>
         {projects.length ? (
           projects
             .filter((item) => item)
@@ -33,14 +34,33 @@ const ProjectList: React.FunctionComponent = (props) => {
               if (a.completed) return 1;
               return 0;
             })
-            .map((project, index) => (
+            .map((project) => (
               <li
-                key={index}
+                key={project.id}
+                className={`flex flex-col md:w-40 w-36 h-36 justify-center items-center p-3 rounded ${
+                  !project.completed
+                    ? 'text-white bg-primary'
+                    : 'text-slate-700 bg-slate-300'
+                } ${
+                  currentProject === project.id && 'border-2 border-secondary'
+                }`}
                 onClick={() => {
                   dispatch(selectProject(project.id));
                 }}
               >
-                {project.name}
+                <img
+                  className='w-20'
+                  style={
+                    !project.completed
+                      ? {
+                          filter:
+                            'invert(100%) sepia(94%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%)',
+                        }
+                      : {}
+                  }
+                  src={folder}
+                />
+                <b>{project.name}</b>
               </li>
             ))
         ) : (

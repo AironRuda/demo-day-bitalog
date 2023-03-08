@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {
@@ -11,6 +11,7 @@ const ProjectContainer: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<any>();
   const rol = useSelector(selectRol);
+  const [selectedButton, setSelectedButton] = useState('list');
 
   useEffect(() => {
     if (rol === 'admin') dispatch(fetchAllProjectsAdmin());
@@ -23,15 +24,32 @@ const ProjectContainer: React.FunctionComponent = () => {
         <h1 className='text-center text-4xl text-slate-700 font-bold'>
           PROYECTOS
         </h1>
-        <menu className='btn-group '>
+        <menu className='btn-group mt-5'>
           {rol === 'admin' && (
             <>
-              <button className='btn btn-active' onClick={() => navigate('')}>
+              <button
+                className={`btn md:w-64 ${
+                  selectedButton === 'list'
+                    ? 'btn-active'
+                    : 'btn-outline btn-primary'
+                }`}
+                onClick={() => {
+                  setSelectedButton('list');
+                  navigate('');
+                }}
+              >
                 Ver lista de proyectos
               </button>
               <button
-                className='btn btn-outline btn-primary'
-                onClick={() => navigate('create-project')}
+                className={`btn md:w-64 ${
+                  selectedButton !== 'list'
+                    ? 'btn-active'
+                    : 'btn-outline btn-primary'
+                }`}
+                onClick={() => {
+                  setSelectedButton('form');
+                  navigate('create-project');
+                }}
               >
                 Crear proyecto
               </button>

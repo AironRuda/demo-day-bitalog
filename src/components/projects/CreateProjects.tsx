@@ -39,6 +39,8 @@ const CreateProjects: React.FunctionComponent = (props) => {
       Swal.fire({
         text: 'Se ha creado el proyecto de forma exitosa',
         icon: 'success',
+        confirmButtonColor: '#31C48D',
+        confirmButtonText: 'Aceptar'
       });
     }
   };
@@ -50,7 +52,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
       onSubmit={handleSubmit}
     >
       {({ status }) => (
-        <Form>
+        <Form className='h-11/12 flex flex-col items-center justify-evenly gap-5 border-2 border-secondary p-10'>
           <TextFieldFormik name='name' placeholder='Project Name' />
           <SelectFormik
             name='workers'
@@ -58,7 +60,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
             placeholder='Selecciona a los encargados'
             renderList
           />
-          <button type='submit' className='btn'>
+          <button type='submit' className='btn btn-primary text-white w-full'>
             Create
           </button>
           {!!status && <div>{status}</div>}

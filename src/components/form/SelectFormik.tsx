@@ -21,7 +21,7 @@ const SelectFormik: React.FunctionComponent<Props> = ({
   return (
     <div>
       <select
-        className='select w-full max-w-xs'
+        className='select bg-white border-1 border-primary text-slate-700 w-full max-w-xs'
         name={field.name}
         onChange={(e) =>
           Array.isArray(field.value) &&
@@ -39,16 +39,29 @@ const SelectFormik: React.FunctionComponent<Props> = ({
             ))
           : null}
       </select>
-      <ul>
+      {meta.touched && meta.error ? (
+        <div className='text-red-500 pl-2'>{meta.error}</div>
+      ) : null}
+      <ul className='my-5 overflow-auto h-16 w-11-12 [&>*:nth-child(odd)]:bg-slate-100'>
         {Array.isArray(field.value) &&
           field.value.map((item, index) => (
-            <li key={item}>
-              <span>{item}</span>
-              <span onClick={() => removeItem(index)}>x</span>
+            <li
+              key={item}
+              className='text-slate-800 w-full flex justify-between items-center px-5'
+            >
+              <span className='text-xs'>
+                <b>ID: </b>
+                {item}
+              </span>
+              <span
+                onClick={() => removeItem(index)}
+                className='text-lg text-red-500 cursor-pointer'
+              >
+                x
+              </span>
             </li>
           ))}
       </ul>
-      {meta.touched && meta.error ? <div>{meta.error}</div> : null}
     </div>
   );
 };
