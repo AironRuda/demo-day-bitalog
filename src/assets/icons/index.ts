@@ -7,6 +7,7 @@ import projectsLogo from './projectsLogo.svg';
 import priorityListLogo from './priorityListLogo.svg';
 import clipboard from './clipboard.svg';
 import folder from './folder.svg';
+import teamUserLogo from './teamUserLogo.svg';
 import spreadsheet from './spreadsheet.svg';
 import group from './group.svg';
 import logout from './logout.svg';
@@ -18,6 +19,7 @@ export {
   historyLogo,
   userLogo,
   projectsLogo,
+  teamUserLogo,
   priorityListLogo,
   clipboard,
   folder,
