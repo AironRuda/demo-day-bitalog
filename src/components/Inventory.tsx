@@ -28,9 +28,7 @@ const Inventory: React.FunctionComponent = () => {
 
   return (
     <main className='flex items-center flex-col m-5'>
-      <h1 className='items-center font-bold text-3xl '>
-        Lista de trabajadores
-      </h1>
+      <h1 className='items-center font-bold text-3xl '>Lista de Gastos</h1>
       <ul>
         {currentProjectId && inventory && inventory.materials ? (
           inventory.materials.map((item) => (
@@ -42,7 +40,7 @@ const Inventory: React.FunctionComponent = () => {
               <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
                 {item.material}
               </h5>
-              <span className='text-sm text-black dark:text-gray-400'>
+              <span className='text-sm text-black'>
                 Cantidad gastada: {item.amount} {item.unit}
               </span>
               <p></p>
