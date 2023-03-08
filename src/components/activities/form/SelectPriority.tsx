@@ -16,11 +16,13 @@ const SelectPriority: React.FunctionComponent<Props> = ({
   }, [priority]);
 
   return (
-    <div className='btn-group'>
+    <div className='btn-group w-full'>
       <input
         type='button'
         value='1'
-        className={`btn ${priority === 1 && 'bg-primary'}`}
+        className={`btn border-primary bg-white text-primary w-1/3 ${
+          priority === 1 && 'btn-primary btn-active'
+        }`}
         onClick={() => {
           setPriority(1);
         }}
@@ -28,13 +30,17 @@ const SelectPriority: React.FunctionComponent<Props> = ({
       <input
         type='button'
         value='2'
-        className={`btn ${priority === 2 && 'bg-primary'}`}
+        className={`btn border-primary bg-white text-primary w-1/3 ${
+          priority === 2 && 'btn-primary btn-active'
+        }`}
         onClick={() => setPriority(2)}
       />
       <input
         type='button'
         value='3'
-        className={`btn ${priority === 3 && 'bg-primary'}`}
+        className={`btn border-primary bg-white text-primary w-1/3 ${
+          priority === 3 && 'btn-primary btn-active'
+        }`}
         onClick={() => setPriority(3)}
       />
     </div>

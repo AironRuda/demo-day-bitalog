@@ -25,9 +25,9 @@ const ProjectList: React.FunctionComponent = (props) => {
 
   return (
     <div className='h-4/5 w-full flex justify-center items-center'>
-      <ul className='h-full md:w-4/5 w-11/12 border-2 p-5 border-secondary flex flex-wrap justify-center items-center lg:gap-10 gap-5 cursor-pointer overflow-auto'>
-        {projects.length ? (
-          projects
+      {projects.length ? (
+        <ul className='h-full md:w-4/5 border-2 py-5 px-3 mx-2 border-secondary flex flex-wrap justify-center items-center lg:gap-10 gap-5 cursor-pointer overflow-auto'>
+          {projects
             .filter((item) => item)
             .sort((a, b) => {
               if (!a.completed) return -1;
@@ -62,14 +62,14 @@ const ProjectList: React.FunctionComponent = (props) => {
                 />
                 <b>{project.name}</b>
               </li>
-            ))
-        ) : (
-          <div>
-            En el momento no hay proyectos disponibles, crea alguno o contacta a
-            tu encargado para que te asigne a alguno
-          </div>
-        )}
-      </ul>
+            ))}
+        </ul>
+      ) : (
+        <div className='text-3xl text-center px-20 text-secondary'>
+          En el momento no hay proyectos disponibles, crea alguno o contacta a
+          tu encargado para que te asigne a alguno
+        </div>
+      )}
     </div>
   );
 };

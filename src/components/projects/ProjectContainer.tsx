@@ -30,7 +30,7 @@ const ProjectContainer: React.FunctionComponent = () => {
               <button
                 className={`btn md:w-64 ${
                   selectedButton === 'list'
-                    ? 'btn-active'
+                    ? 'btn-active text-white'
                     : 'btn-outline btn-primary'
                 }`}
                 onClick={() => {
@@ -43,7 +43,7 @@ const ProjectContainer: React.FunctionComponent = () => {
               <button
                 className={`btn md:w-64 ${
                   selectedButton !== 'list'
-                    ? 'btn-active'
+                    ? 'btn-active text-white'
                     : 'btn-outline btn-primary'
                 }`}
                 onClick={() => {

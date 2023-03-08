@@ -40,7 +40,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
         text: 'Se ha creado el proyecto de forma exitosa',
         icon: 'success',
         confirmButtonColor: '#31C48D',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
       });
     }
   };
@@ -52,7 +52,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
       onSubmit={handleSubmit}
     >
       {({ status }) => (
-        <Form className='h-11/12 flex flex-col items-center justify-evenly gap-5 border-2 border-secondary p-10'>
+        <Form className='h-11/12 md:w-1/3 mx-2 flex flex-col items-center gap-5 border-2 border-secondary p-10 overflow-y-auto'>
           <TextFieldFormik name='name' placeholder='Project Name' />
           <SelectFormik
             name='workers'

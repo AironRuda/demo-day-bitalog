@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getSelectedProject } from '../../context/projectsSlice';
 import { getCurrentProject } from '../../context/selectors';
+import { Activity } from '../../model/activity.model';
 import { Project } from '../../model/projects.model';
 import ActivityItem from './ActivityItem';
 
@@ -11,31 +12,69 @@ const ActivitiesList: React.FunctionComponent = () => {
       getCurrentProject(state, selectedProjectId)
   );
 
+  function sortByPriority(activities: Activity[]) {
+    return activities.sort((a, b) => {
+      if (a.priority > b.priority) return 1;
+      if (a.priority < b.priority) return -1;
+      return 0;
+    });
+  }
+
+  function formatActivitiesList(activities: Activity[]) {
+    const pending = activities.filter((activity) => !activity.completed);
+    const done = activities.filter((activity) => activity.completed);
+    console.log(pending);
+    console.log(done);
+    return [...sortByPriority(pending), ...sortByPriority(done)];
+  }
+
   return (
-    <main>
-      <h1>Lista tareas</h1>
-      <ul>
-        {currentProject && !!currentProject.activities.length ? (
-          currentProject.activities
-            .filter((item) => item)
-            .sort((a, b) => {
-              if (!a.completed) return -1;
-              if (a.completed) return 1;
-              return 0;
-            })
-            .map((activity) => (
-              <ActivityItem
-                key={activity.id}
-                activity={activity}
-                currentProject={currentProject}
-              />
-            ))
-        ) : (
-          <div>En el momento no hay tareas disponibles :c</div>
-        )}
-      </ul>
-    </main>
+    <div className='h-4/5 w-full'>
+      {currentProject && !!currentProject.activities.length ? (
+        <div className='h-full overflow-auto w-full'>
+          <table className='table table-compact w-full '>
+            <thead>
+              <tr className='[&>*]:bg-primary [&>*]:text-white border-6'>
+                <th></th>
+                <th>Actividad</th>
+                <th>
+                  <span className='md:hidden block'>Pr</span>
+                  <span className='md:block hidden'>Prioridad</span>
+                </th>
+                <th>Materiales</th>
+                <th className='text-center'>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {formatActivitiesList(currentProject.activities).map(
+                (activity, index) => (
+                  <ActivityItem
+                    key={activity.id}
+                    index={index}
+                    activity={activity}
+                    currentProject={currentProject}
+                  />
+                )
+              )}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className='text-3xl text-center px-20 text-secondary'>
+          En el momento no hay tareas disponibles :c
+        </div>
+      )}
+    </div>
   );
 };
 
 export default ActivitiesList;
+
+/* <thead>
+<tr>
+  <th></th>
+  <th>Name</th>
+  <th>Job</th>
+  <th>Favorite Color</th>
+</tr>
+</thead> */

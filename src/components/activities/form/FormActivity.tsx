@@ -28,18 +28,20 @@ const FormActivity: React.FunctionComponent<IFormProps> = ({
   }, []);
 
   return (
-    <Form>
+    <Form className='h-11/12 md:w-1/3 flex flex-col items-center gap-5 border-2 border-secondary p-10 overflow-auto'>
       <TextFieldFormik
         name='activityName'
         placeholder='Nombre de la actividad'
-      ></TextFieldFormik>
+      />
       <SelectPriority defaultPriority={defaultPriority} />
       <SelectMaterials
         name='materials'
         options={materials}
         placeholder='Seleccione los materiales'
       />
-      <button type='submit'>{buttonText}</button>
+      <button type='submit' className='btn btn-primary text-white w-full'>
+        {buttonText}
+      </button>
       {!!status && <div>{status}</div>}
     </Form>
   );

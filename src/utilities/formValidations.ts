@@ -37,7 +37,7 @@ const ACTIVITY_VALIDATION_SCHEMA = yup.object().shape({
         amount: yup
           .number()
           .positive('La cantidad debe ser mayor a cero')
-          .required(),
+          .required('Se requiere de una cantidad'),
       })
     )
     .min(1, 'Debe haber al menos un material')

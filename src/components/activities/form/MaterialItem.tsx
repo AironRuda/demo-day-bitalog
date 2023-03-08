@@ -38,19 +38,24 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
   }
 
   return (
-    <li>
-      <span>{currentMaterial.material}</span>
-      <input
-        type='number'
-        value={amount}
-        onChange={(e) => {
-          setAmount(
-            !isNaN(parseInt(e.target.value)) ? parseInt(e.target.value) : 0
-          );
-        }}
-      />
-      <span>{currentMaterial.unit}</span>
-      <span onClick={deleteMaterial}>x</span>
+    <li className='flex w-full justify-between'>
+      <div className='[&>*]:text-slate-700 flex justify-between items-center w-5/6'>
+        <span>{currentMaterial.material}</span>
+        <div className='flex gap-2'>
+          <input
+            className='w-10 border-2 border-primary text-center'
+            type='number'
+            value={amount}
+            onChange={(e) => {
+              setAmount(
+                !isNaN(parseInt(e.target.value)) ? parseInt(e.target.value) : 0
+              );
+            }}
+          />
+          <span>{currentMaterial.unit}</span>
+        </div>
+      </div>
+      <span onClick={deleteMaterial}>❌</span>
     </li>
   );
 };

@@ -16,11 +16,13 @@ import { Project } from '../../model/projects.model';
 interface IActivityItemProps {
   activity: Activity;
   currentProject: Project;
+  index: number;
 }
 
 const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   activity,
   currentProject,
+  index,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -66,23 +68,55 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   }
 
   return (
-    <li>
-      <span>{activity.activityName}</span>
-      {rol === 'admin' ? (
-        <>
-          <span onClick={() => navigate(`update-project/${activity.id}`)}>
-            edit
-          </span>
-          <span onClick={handleClickDelete}>x</span>
-        </>
-      ) : (
-        <>
-          {!currentActivity?.completed && (
-            <span onClick={handleClickStatus}>Cumplir actividad</span>
-          )}
-        </>
-      )}
-    </li>
+    <tr
+      className={`[&>*]:bg-slate-100 [&>*]:text-black [&>*]:border-b-2 [&>*]:border-white`}
+    >
+      <td className='text-primary font-bold md:pl-5 pl-2'>
+        {activity.completed ? '✔️' : index + 1}
+      </td>
+      <td>{activity.activityName}</td>
+      <td>{activity.priority}</td>
+      <td className='flex flex-col overflow-x-hidden'>
+        {activity.materials.map((material, index) => (
+          <>
+            <span className='md:w-full w-10'>{material.material}</span>
+            <span
+              className={
+                activity.materials.length - 1 !== index
+                  ? 'border-b-2 border-white'
+                  : ''
+              }
+            >
+              {material.amount} {material.unit}
+            </span>
+          </>
+        ))}
+      </td>
+      <td>
+        {rol === 'admin' ? (
+          <div className='flex justify-around'>
+            <span
+              className='cursor-pointer text-secondary'
+              onClick={() => navigate(`update-project/${activity.id}`)}
+            >
+              ✏️
+            </span>
+            <span
+              className='cursor-pointer text-red-500'
+              onClick={handleClickDelete}
+            >
+              ❌
+            </span>
+          </div>
+        ) : (
+          <div>
+            {!currentActivity?.completed && (
+              <span onClick={handleClickStatus}>Cumplir</span>
+            )}
+          </div>
+        )}
+      </td>
+    </tr>
   );
 };
 

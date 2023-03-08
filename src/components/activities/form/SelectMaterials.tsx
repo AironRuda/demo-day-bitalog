@@ -30,9 +30,9 @@ const SelectMaterials: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <div>
+    <div className='w-full'>
       <select
-        className='select w-full max-w-xs'
+        className='select w-full bg-white border-1 border-primary text-slate-700'
         name={field.name}
         onChange={handleChange}
         onClick={() => helpers.setTouched(true)}
@@ -46,14 +46,14 @@ const SelectMaterials: React.FunctionComponent<Props> = ({
             ))
           : null}
       </select>
+      {meta.touched && meta.error && typeof meta.error === 'string' ? (
+        <div className='text-red-500 pl-2'>{meta.error}</div>
+      ) : null}
       <SelectedMaterials
         meta={meta}
         helpers={helpers}
         selectedMaterials={field.value}
       />
-      {meta.touched && meta.error && typeof meta.error === 'string' ? (
-        <div>{meta.error}</div>
-      ) : null}
     </div>
   );
 };

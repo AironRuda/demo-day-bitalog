@@ -14,9 +14,9 @@ const SelectedMaterials: React.FunctionComponent<Props> = ({
   meta,
 }) => {
   return (
-    <ul>
+    <ul className='h-30 my-5 overflow-auto'>
       {selectedMaterials?.map((material, index) => (
-        <div key={index}>
+        <div className='mb-5 border-b-2 pb-2 border-slate-100' key={index}>
           <MaterialItem
             index={index}
             currentMaterial={material}
@@ -27,7 +27,9 @@ const SelectedMaterials: React.FunctionComponent<Props> = ({
           meta.error &&
           Array.isArray(meta.error) &&
           meta.error.length ? (
-            <div>{meta.error[index]?.amount ?? null}</div>
+            <div className='text-red-500 pl-2'>
+              {meta.error[index]?.amount ?? null}
+            </div>
           ) : null}
         </div>
       ))}
