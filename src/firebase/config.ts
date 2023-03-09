@@ -20,6 +20,7 @@ export const db = getFirestore(app);
 
 export const inventoryCollection = collection(db, 'inventory');
 export const projectsCollection = collection(db, 'projects');
+export const noveltyCollection = collection(db, "novelty")
 
 export const basicInventoryRef = doc(db, 'inventory', 'basic');
 export const projectsRef = (id: string) => doc(db, 'projects', id);
