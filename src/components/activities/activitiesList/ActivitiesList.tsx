@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
-import { getSelectedProject } from '../../context/projectsSlice';
-import { getCurrentProject } from '../../context/selectors';
-import { Activity } from '../../model/activity.model';
-import { Project } from '../../model/projects.model';
+import { getSelectedProject } from '../../../context/projectsSlice';
+import { getCurrentProject } from '../../../context/selectors';
+import { Activity } from '../../../model/activity.model';
+import { Project } from '../../../model/projects.model';
+
 import ActivityItem from './ActivityItem';
 
 const ActivitiesList: React.FunctionComponent = () => {
@@ -31,7 +32,7 @@ const ActivitiesList: React.FunctionComponent = () => {
   return (
     <div className='h-4/5 w-full'>
       {currentProject && !!currentProject.activities.length ? (
-        <div className='h-full overflow-auto w-full'>
+        <div className='h-full w-full mt-12'>
           <table className='table table-compact w-full '>
             <thead>
               <tr className='[&>*]:bg-primary [&>*]:text-white border-6'>

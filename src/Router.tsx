@@ -4,11 +4,11 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import App from './App';
-import AcityiesList from './components/activities/ActivitiesList';
+import ActivitiesList from './components/activities/activitiesList/ActivitiesList';
 import ActivityContainer from './components/activities/ActivityContainer';
 import CreateActivities from './components/activities/CreateActivities';
 import UpdateActivity from './components/activities/UpdateActivity';
-import Inventory from './components/Inventory';
+import Inventory from './components/inventory/Inventory';
 import CreateProjects from './components/projects/CreateProjects';
 import ProjectContainer from './components/projects/ProjectContainer';
 import ProjectList from './components/projects/ProjectsList/ProjectList';
@@ -35,7 +35,7 @@ const router = createBrowserRouter(
           <Route path='activities' element={<ActivityContainer />}>
             <Route path='create-activities' element={<CreateActivities />} />
             <Route path='update-project/:id' element={<UpdateActivity />} />
-            <Route index element={<AcityiesList />} />
+            <Route index element={<ActivitiesList />} />
           </Route>
 
           <Route path='team' element={<Team />} />

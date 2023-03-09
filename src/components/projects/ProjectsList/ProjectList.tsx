@@ -24,13 +24,13 @@ const ProjectList: React.FunctionComponent = (props) => {
   }, [projects]);
 
   return (
-    <div className='h-full w-full flex flex-col gap-10 justify-center items-center  py-5 px-3 mx-2 '>
+    <div className='h-full w-full flex flex-col gap-10 justify-center items-center py-5 px-3 mx-2 '>
       <Filter
         filter={filter}
         setFilter={(filter: string) => setFilter(filter)}
       />
       {projects.length ? (
-        <ul className='h-full md:w-4/5  flex flex-wrap justify-center items-center lg:gap-10 gap-5'>
+        <ul className='h-full md:w-4/5 flex flex-wrap lg:justify-start justify-center items-center lg:gap-10 gap-5'>
           {<RenderProjects filter={filter} projects={projects} />}
         </ul>
       ) : (

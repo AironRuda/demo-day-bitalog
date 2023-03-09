@@ -4,14 +4,14 @@ import Swal from 'sweetalert2';
 import {
   deleteActivity,
   updateStatusActivity,
-} from '../../context/projectsSlice';
-import { getActivityById, selectRol } from '../../context/selectors';
+} from '../../../context/projectsSlice';
+import { getActivityById, selectRol } from '../../../context/selectors';
 import {
   handleDeleteActivity,
   handleStatusActivity,
-} from '../../handlers/handleActivity';
-import { Activity } from '../../model/activity.model';
-import { Project } from '../../model/projects.model';
+} from '../../../handlers/handleActivity';
+import { Activity } from '../../../model/activity.model';
+import { Project } from '../../../model/projects.model';
 
 interface IActivityItemProps {
   activity: Activity;

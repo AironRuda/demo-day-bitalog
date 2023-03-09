@@ -52,7 +52,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
       onSubmit={handleSubmit}
     >
       {({ status }) => (
-        <Form className='h-11/12 md:w-1/3 mx-2 flex flex-col items-center gap-5 border-2 border-secondary p-10 overflow-y-auto'>
+        <Form className='h-11/12 md:w-1/3 mx-2 flex flex-col items-center gap-5 p-10 '>
           <TextFieldFormik name='name' placeholder='Project Name' />
           <SelectFormik
             name='workers'

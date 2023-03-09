@@ -14,8 +14,8 @@ const Team: React.FunctionComponent = () => {
 
   return (
     <main className='flex items-center flex-col m-5'>
-      <h1 className='items-center font-bold text-3xl '>
-        Lista de trabajadores
+      <h1 className='text-center text-4xl text-slate-700 font-bold'>
+        EQUIPO DE TRABAJO
       </h1>
       <ul>
         {!!!currentProjectId && !!!workerArray ? (
