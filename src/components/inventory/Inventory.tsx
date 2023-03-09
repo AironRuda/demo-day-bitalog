@@ -37,7 +37,13 @@ const Inventory: React.FunctionComponent = () => {
       {!!currentProject ? (
         <ul className='mt-10 flex flex-wrap lg:gap-10 gap-4 justify-center [&>*]:text-center'>
           {inventory && inventory.length ? (
-            inventory.map((item) => <Spent key={item.material} spent={item} />)
+            inventory
+              .sort((a, b) => {
+                if (a.material > b.material) return 1;
+                if (a.material < b.material) return -1;
+                else return 0;
+              })
+              .map((item) => <Spent key={item.material} spent={item} />)
           ) : (
             <p className='text-3xl text-center px-20 text-secondary'>
               No se han gastado materiales hasta ahora

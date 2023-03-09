@@ -8,8 +8,9 @@ export function sortByPriority(activities: Activity[]) {
   });
 }
 
-export function formatActivitiesList(activities: Activity[]) {
+export function formatActivitiesList(activities: Activity[], filter: boolean) {
   const pending = activities.filter((activity) => !activity.completed);
   const done = activities.filter((activity) => activity.completed);
-  return [...sortByPriority(pending), ...sortByPriority(done)];
+  if (filter) return [...sortByPriority(pending), ...sortByPriority(done)];
+  return [...sortByPriority(done), ...sortByPriority(pending)];
 }

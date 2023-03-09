@@ -23,18 +23,14 @@ const RegisterForm: React.FunctionComponent = (props) => {
     helpers: FormikHelpers<RegisterDTO>
   ) => {
     const rol = values.rol;
-    try {
-      const response = await registerHandle(values);
-      if (typeof response === 'string') {
-        helpers.setStatus(response);
-      } else if (response) {
-        await setDoc(doc(db, 'users', response.user.uid), {
-          rol,
-        });
-        dispatch(fetchUser(response.user.uid));
-      }
-    } catch (error) {
-      console.log(error);
+    const response = await registerHandle(values);
+    if (typeof response === 'string') {
+      helpers.setStatus(response);
+    } else if (response) {
+      await setDoc(doc(db, 'users', response.user.uid), {
+        rol,
+      });
+      dispatch(fetchUser(response.user.uid));
     }
   };
 

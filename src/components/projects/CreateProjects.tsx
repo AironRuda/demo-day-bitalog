@@ -53,7 +53,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
     >
       {({ status }) => (
         <Form className='h-11/12 md:w-1/3 mx-2 flex flex-col items-center gap-5 p-10 '>
-          <TextFieldFormik name='name' placeholder='Project Name' />
+          <TextFieldFormik name='name' placeholder='Nombre del proyecto' />
           <SelectFormik
             name='workers'
             options={avalaibleWorkers}

@@ -21,8 +21,8 @@ const Project: React.FunctionComponent<IProjectProps> = ({ project }) => {
           ? 'bg-secondary text-white'
           : !project.activities.length
           ? 'text-white bg-primary'
-          : 'text-slate-700 bg-slate-300'
-      } ${currentProject === project.id && 'border-2 border-black'}`}
+          : 'text-slate-600 bg-slate-300'
+      } ${currentProject === project.id && 'border-4 border-slate-700'}`}
       onClick={() => {
         dispatch(selectProject(project.id));
       }}
@@ -35,7 +35,10 @@ const Project: React.FunctionComponent<IProjectProps> = ({ project }) => {
                 filter:
                   'invert(100%) sepia(94%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%)',
               }
-            : {}
+            : {
+                filter:
+                  'invert(20%) sepia(11%) saturate(1907%) hue-rotate(176deg) brightness(93%) contrast(81%)',
+              }
         }
         src={folder}
       />

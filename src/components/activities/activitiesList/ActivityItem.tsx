@@ -16,13 +16,11 @@ import ActivityOptions from './ActivityOptions';
 interface IActivityItemProps {
   activity: Activity;
   currentProject: Project;
-  index: number;
 }
 
 const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   activity,
   currentProject,
-  index,
 }) => {
   const dispatch = useDispatch();
   const currentActivity = useSelector(
@@ -68,8 +66,8 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
     <tr
       className={`[&>*]:bg-slate-100 [&>*]:text-black [&>*]:border-b-2 [&>*]:border-white`}
     >
-      <td className='text-primary font-bold md:pl-5 pl-2'>
-        {activity.completed ? '✔️' : index + 1}
+      <td className='md:pl-5 pl-2 w-10'>
+        {activity.completed ? '✔️' : '❕'}
       </td>
       <td>{activity.activityName}</td>
       <td>

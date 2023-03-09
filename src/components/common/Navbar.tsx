@@ -37,7 +37,11 @@ const Navbar: React.FunctionComponent = (props) => {
           }`}
           to='activities'
         >
-          <img style={location.includes('activities') ? iconSelected : iconBase} className='w-10' src={clipboard} />
+          <img
+            style={location.includes('activities') ? iconSelected : iconBase}
+            className='w-10'
+            src={clipboard}
+          />
           <b className=''>Actividades</b>
         </NavLink>
 
@@ -47,7 +51,11 @@ const Navbar: React.FunctionComponent = (props) => {
           }`}
           to='team'
         >
-          <img style={location.includes('team') ? iconSelected : iconBase} className='w-10' src={group} />
+          <img
+            style={location.includes('team') ? iconSelected : iconBase}
+            className='w-10'
+            src={group}
+          />
           <b className=''>Equipo</b>
         </NavLink>
 
@@ -57,7 +65,11 @@ const Navbar: React.FunctionComponent = (props) => {
           }`}
           to='inventory'
         >
-          <img style={location.includes('inventory') ? iconSelected : iconBase} className='w-10' src={spreadsheet} />
+          <img
+            style={location.includes('inventory') ? iconSelected : iconBase}
+            className='w-10'
+            src={spreadsheet}
+          />
           <b className=''>Inventario</b>
         </NavLink>
       </nav>

@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { selectRol } from '../../../context/selectors';
 import { Activity } from '../../../model/activity.model';
+import Swal from 'sweetalert2';
 
 interface Props {
   confirmDelete(): Promise<void>;
@@ -49,7 +48,7 @@ const ActivityOptions: React.FunctionComponent<Props> = ({
   return (
     <>
       {rol === 'admin' ? (
-        <div className='flex justify-around'>
+        <div className='h-full flex md:flex-row flex-col md:justify-around justify-between items-center'>
           <span
             className='cursor-pointer text-secondary'
             onClick={() => navigate(`update-project/${currentActivity.id}`)}

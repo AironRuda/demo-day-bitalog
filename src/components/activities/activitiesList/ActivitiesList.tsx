@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getSelectedProject } from '../../../context/projectsSlice';
 import { getCurrentProject } from '../../../context/selectors';
@@ -11,6 +12,7 @@ const ActivitiesList: React.FunctionComponent = () => {
     (state: { projects: { projects: Project[] } }) =>
       getCurrentProject(state, selectedProjectId)
   );
+  const [filter, setFilter] = useState(true);
 
   return (
     <div className='h-4/5 w-full'>
@@ -19,7 +21,12 @@ const ActivitiesList: React.FunctionComponent = () => {
           <table className='table table-compact w-full '>
             <thead>
               <tr className='[&>*]:bg-primary [&>*]:text-white border-6'>
-                <th></th>
+                <th
+                  className='md:pl-5 pl-2 w-10 cursor-pointer'
+                  onClick={() => setFilter((prev) => !prev)}
+                >
+                  {filter ? '❕' : '✔️'}
+                </th>
                 <th>Actividad</th>
                 <th>
                   <span className='md:hidden block'>Pr</span>
@@ -30,11 +37,10 @@ const ActivitiesList: React.FunctionComponent = () => {
               </tr>
             </thead>
             <tbody>
-              {formatActivitiesList(currentProject.activities).map(
-                (activity, index) => (
+              {formatActivitiesList(currentProject.activities, filter).map(
+                (activity) => (
                   <ActivityItem
                     key={activity.id}
-                    index={index}
                     activity={activity}
                     currentProject={currentProject}
                   />
