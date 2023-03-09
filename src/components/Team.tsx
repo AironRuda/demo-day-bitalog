@@ -3,6 +3,7 @@ import { getSelectedProject } from '../context/projectsSlice';
 import { getCurrentProject } from '../context/selectors';
 import { Project } from '../model/projects.model';
 import { teamUserLogo } from '../assets/icons';
+import SelectProjectMessage from './common/SelectProjectMessage';
 
 const Team: React.FunctionComponent = () => {
   const currentProjectId = useSelector(getSelectedProject);
@@ -18,12 +19,8 @@ const Team: React.FunctionComponent = () => {
         EQUIPO DE TRABAJO
       </h1>
       <ul>
-        {!!!currentProjectId && !!!workerArray ? (
-          <li className='flex flex-col items-center p-2 m-2 rounded-xl'>
-            <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
-              No se ha seleccionado un ptoyecto
-            </h5>
-          </li>
+        {!currentProjectId && !workerArray ? (
+          <SelectProjectMessage />
         ) : (
           workerArray?.map((worker) => (
             <li
@@ -40,9 +37,7 @@ const Team: React.FunctionComponent = () => {
               <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
                 Trabajador
               </h5>
-              <span className='text-sm text-black'>
-                {worker}
-              </span>
+              <span className='text-sm text-black'>{worker}</span>
             </li>
           ))
         )}

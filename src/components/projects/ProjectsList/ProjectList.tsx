@@ -4,6 +4,8 @@ import { selectProjects } from '../../../context/selectors';
 import { updateStatusProject } from '../../../context/projectsSlice';
 import Filter from './Filter';
 import RenderProjects from './RenderProjects';
+import { updateDoc } from 'firebase/firestore';
+import { projectsRef } from '../../../firebase/config';
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
@@ -11,13 +13,22 @@ const ProjectList: React.FunctionComponent = (props) => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    projects.forEach((project) => {
+    projects.forEach(async (project) => {
       if (
         (project.activities.every((activity) => activity.completed === true) &&
-          project.completed === false) ||
+          project.completed === false &&
+          !!project.activities.length) ||
         (project.activities.some((activity) => activity.completed === false) &&
-          project.completed === true)
+          project.completed === true &&
+          !!project.activities.length)
       ) {
+        try {
+          await updateDoc(projectsRef(project.id), {
+            completed: !project.completed,
+          });
+        } catch (error) {
+          console.log(error);
+        }
         dispatch(updateStatusProject(project.id));
       }
     });

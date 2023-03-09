@@ -46,7 +46,8 @@ const Inventory: React.FunctionComponent = () => {
               .map((item) => <Spent key={item.material} spent={item} />)
           ) : (
             <p className='text-3xl text-center px-20 text-secondary'>
-              No se han gastado materiales hasta ahora
+              No se han gastado materiales hasta el momento, cumple actividades
+              para que se vean reflejados los gastos en esta sección.
             </p>
           )}
         </ul>

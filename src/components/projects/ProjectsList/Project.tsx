@@ -17,10 +17,10 @@ const Project: React.FunctionComponent<IProjectProps> = ({ project }) => {
   return (
     <li
       className={`flex flex-col md:w-40 w-36 h-36 justify-center items-center p-3 rounded cursor-pointer ${
-        !project.completed
-          ? 'bg-secondary text-white'
-          : !project.activities.length
+        !project.completed && !project.activities.length
           ? 'text-white bg-primary'
+          : !project.completed && project.activities.length
+          ? 'bg-secondary text-white'
           : 'text-slate-600 bg-slate-300'
       } ${currentProject === project.id && 'border-4 border-slate-700'}`}
       onClick={() => {
