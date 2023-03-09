@@ -10,7 +10,7 @@ const Navbar: React.FunctionComponent = (props) => {
     'flex flex-col justify-center items-center cursor-pointer text-white';
 
   return (
-    <div className='w-full flex bg-primary py-5 px-5 absolute bottom-0'>
+    <div className='w-full flex bg-primary py-3 px-5 fixed bottom-0 '>
       <ul className='w-full flex flex-row md:justify-evenly justify-between'>
         <li className=''>
           <Link className={link} to=''>

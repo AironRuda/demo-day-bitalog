@@ -17,7 +17,7 @@ const Dashboard: React.FunctionComponent = (props) => {
   }, [user]);
 
   return (
-    <div className='w-[100vw] h-[100vh] bg-slate-50'>
+    <div className='w-[100vw] h-[100vh]'>
       <div
         className='absolute right-5 top-5 flex flex-col items-center justify-center cursor-pointer'
         onClick={() => {
@@ -27,7 +27,7 @@ const Dashboard: React.FunctionComponent = (props) => {
       >
         <img className='w-8' src={logout} alt='' />
       </div>
-      <main className='py-10 w-full h-[80vh]'>
+      <main className='py-10 w-full h-fit pb-32 bg-white'>
         <Outlet />
       </main>
       <Navbar />

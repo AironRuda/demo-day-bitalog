@@ -15,7 +15,7 @@ const Presentation: React.FunctionComponent = () => {
             className='text-3xl font-extrabold sm:text-5xl'
             style={{ color: '#31C48D' }}
           >
-            BITALOG.
+            BITALOG
             <strong className='block font-extrabold text-black'>
               Bitácora para sus proyectos
             </strong>

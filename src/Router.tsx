@@ -11,7 +11,7 @@ import UpdateActivity from './components/activities/UpdateActivity';
 import Inventory from './components/Inventory';
 import CreateProjects from './components/projects/CreateProjects';
 import ProjectContainer from './components/projects/ProjectContainer';
-import ProjectList from './components/projects/ProjectList';
+import ProjectList from './components/projects/ProjectsList/ProjectList';
 import Team from './components/Team';
 import Dashboard from './pages/Dashboard';
 import Display from './pages/Display';
