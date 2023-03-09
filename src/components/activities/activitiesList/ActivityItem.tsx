@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {
   deleteActivity,
   updateStatusActivity,
 } from '../../../context/projectsSlice';
-import { getActivityById, selectRol } from '../../../context/selectors';
+import { getActivityById } from '../../../context/selectors';
 import {
   handleDeleteActivity,
   handleStatusActivity,
 } from '../../../handlers/handleActivity';
 import { Activity } from '../../../model/activity.model';
 import { Project } from '../../../model/projects.model';
+import ActivityOptions from './ActivityOptions';
 
 interface IActivityItemProps {
   activity: Activity;
@@ -24,72 +24,44 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   currentProject,
   index,
 }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const rol = useSelector(selectRol);
   const currentActivity = useSelector(
     (state: { projects: { projects: Project[] } }) =>
       getActivityById(state, currentProject.id, activity.id)
   );
 
-  async function handleClickDelete() {
-    Swal.fire({
-      title: '¿Estás seguro de eliminar la actividad?',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Eliminar',
-      confirmButtonColor: 'red',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const response = await handleDeleteActivity(
-          activity.id,
-          currentProject
-        );
-        if (typeof response === 'string')
-          Swal.fire({
-            text: 'Hubo un error al eliminar la actividad',
-            icon: 'error',
-          });
-        else if (!response) {
-          dispatch(deleteActivity(activity.id));
-          Swal.fire({
-            text: 'La actividad se ha eliminado correctamente',
-            icon: 'success',
-            confirmButtonColor: '#31C48D',
-          });
-        }
-      }
-    });
+  async function confirmDelete() {
+    const response = await handleDeleteActivity(activity.id, currentProject);
+    if (typeof response === 'string')
+      Swal.fire({
+        text: 'Hubo un error al eliminar la actividad',
+        icon: 'error',
+      });
+    else if (!response) {
+      dispatch(deleteActivity(activity.id));
+      Swal.fire({
+        text: 'La actividad se ha eliminado correctamente',
+        icon: 'success',
+        confirmButtonColor: '#31C48D',
+      });
+    }
   }
 
-  async function handleClickStatus() {
-    Swal.fire({
-      title: '¿Estás seguro de finalizar la actividad?',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Finalizar',
-      confirmButtonColor: '#31C48D',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const response = await handleStatusActivity(
-          activity.id,
-          currentProject
-        );
-        if (typeof response === 'string')
-          Swal.fire({
-            text: 'Hubo un error al cambiar el estado de la actividad',
-            icon: 'error',
-          });
-        else if (!response) {
-          dispatch(updateStatusActivity(activity.id));
-          Swal.fire({
-            text: 'La actividad ha finalizado correctamente',
-            icon: 'success',
-            confirmButtonColor: '#31C48D',
-          });
-        }
-      }
-    });
+  async function confirmChangeStatus() {
+    const response = await handleStatusActivity(activity.id, currentProject);
+    if (typeof response === 'string')
+      Swal.fire({
+        text: 'Hubo un error al cambiar el estado de la actividad',
+        icon: 'error',
+      });
+    else if (!response) {
+      dispatch(updateStatusActivity(activity.id));
+      Swal.fire({
+        text: 'La actividad ha finalizado correctamente',
+        icon: 'success',
+        confirmButtonColor: '#31C48D',
+      });
+    }
   }
 
   return (
@@ -100,7 +72,13 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
         {activity.completed ? '✔️' : index + 1}
       </td>
       <td>{activity.activityName}</td>
-      <td>{activity.priority}</td>
+      <td>
+        {activity.priority === 1
+          ? 'Baja'
+          : activity.priority === 2
+          ? 'Media'
+          : 'Alta'}
+      </td>
       <td className='flex flex-col overflow-x-hidden'>
         {activity.materials.map((material, index) => (
           <>
@@ -118,33 +96,12 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
         ))}
       </td>
       <td>
-        {rol === 'admin' ? (
-          <div className='flex justify-around'>
-            <span
-              className='cursor-pointer text-secondary'
-              onClick={() => navigate(`update-project/${activity.id}`)}
-            >
-              ✏️
-            </span>
-            <span
-              className='cursor-pointer text-red-500'
-              onClick={handleClickDelete}
-            >
-              ❌
-            </span>
-          </div>
-        ) : (
-          <div className='flex justify-center'>
-            {!currentActivity?.completed && (
-              <button
-                className='btn btn-xs btn-primary'
-                type='button'
-                onClick={handleClickStatus}
-              >
-                Cumplir
-              </button>
-            )}
-          </div>
+        {currentActivity && (
+          <ActivityOptions
+            currentActivity={currentActivity}
+            confirmDelete={confirmDelete}
+            confirmChangeStatus={confirmChangeStatus}
+          />
         )}
       </td>
     </tr>

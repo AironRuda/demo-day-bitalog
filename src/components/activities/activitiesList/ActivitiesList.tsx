@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux';
 import { getSelectedProject } from '../../../context/projectsSlice';
 import { getCurrentProject } from '../../../context/selectors';
-import { Activity } from '../../../model/activity.model';
 import { Project } from '../../../model/projects.model';
-
+import { formatActivitiesList } from '../../../utilities/formatActivities';
 import ActivityItem from './ActivityItem';
 
 const ActivitiesList: React.FunctionComponent = () => {
@@ -12,22 +11,6 @@ const ActivitiesList: React.FunctionComponent = () => {
     (state: { projects: { projects: Project[] } }) =>
       getCurrentProject(state, selectedProjectId)
   );
-
-  function sortByPriority(activities: Activity[]) {
-    return activities.sort((a, b) => {
-      if (a.priority > b.priority) return 1;
-      if (a.priority < b.priority) return -1;
-      return 0;
-    });
-  }
-
-  function formatActivitiesList(activities: Activity[]) {
-    const pending = activities.filter((activity) => !activity.completed);
-    const done = activities.filter((activity) => activity.completed);
-    console.log(pending);
-    console.log(done);
-    return [...sortByPriority(pending), ...sortByPriority(done)];
-  }
 
   return (
     <div className='h-4/5 w-full'>
@@ -61,9 +44,9 @@ const ActivitiesList: React.FunctionComponent = () => {
           </table>
         </div>
       ) : (
-        <div className='text-3xl text-center px-20 text-secondary'>
-          En el momento no hay tareas disponibles :c <br />
-          Asigna alguna o contacta con tu encargado.
+        <div className='text-3xl text-center px-20 text-secondary mt-10'>
+          En el momento no hay actividades disponibles... <br />
+          Asigna alguna o contacta con tu encargado 🧐
         </div>
       )}
     </div>
