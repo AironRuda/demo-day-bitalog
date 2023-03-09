@@ -8,8 +8,8 @@ import { searchWorkers } from '../../firebase/queries';
 import { handleCreateProject } from '../../handlers/handleProject';
 import { createProjectDTO } from '../../model/projects.model';
 import { CREATE_PROJECT_VALIDATION_SCHEMA } from '../../utilities/formValidations';
-import SelectFormik from '../form/SelectFormik';
-import TextFieldFormik from '../form/TextFieldFormik';
+import SelectFormik from '../common/form/SelectFormik';
+import TextFieldFormik from '../common/form/TextFieldFormik';
 
 const INITIAL_VALUES: createProjectDTO = {
   name: '',

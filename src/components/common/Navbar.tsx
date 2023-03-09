@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { clipboard, folder, group, spreadsheet } from '../assets/icons';
+import { clipboard, folder, group, spreadsheet } from '../../assets/icons';
 
 const Navbar: React.FunctionComponent = (props) => {
   const icon = {

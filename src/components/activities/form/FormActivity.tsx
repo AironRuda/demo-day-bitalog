@@ -3,7 +3,7 @@ import { Form } from 'formik';
 import { useEffect, useState } from 'react';
 import { basicInventoryRef } from '../../../firebase/config';
 import { Material } from '../../../model/material.model';
-import TextFieldFormik from '../../form/TextFieldFormik';
+import TextFieldFormik from '../../common/form/TextFieldFormik';
 import SelectMaterials from './SelectMaterials';
 import SelectPriority from './SelectPriority';
 

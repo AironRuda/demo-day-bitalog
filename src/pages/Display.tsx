@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/presentation/Footer';
 import Presentation from '../components/presentation/Presentation';
 import PresentatiosFirstSecction from '../components/presentation/PresentatiosFirstSecction';
 
@@ -10,6 +11,7 @@ const Display: React.FunctionComponent<IAppProps> = (props) => {
     <div>
       <Presentation />
       <PresentatiosFirstSecction />
+      <Footer />
     </div>
   );
 };

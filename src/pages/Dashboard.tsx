@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { logout } from '../assets/icons';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/common/Navbar';
 import { cleanProjects } from '../context/projectsSlice';
 import { selectUser } from '../context/selectors';
 import { logOut } from '../context/userSlice';

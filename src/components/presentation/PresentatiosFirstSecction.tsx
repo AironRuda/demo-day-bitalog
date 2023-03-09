@@ -10,8 +10,8 @@ import {
 
 const PresentatiosFirstSecction: React.FunctionComponent = (props) => {
   return (
-    <section className='text-white' style={{ background: '#215A6D' }}>
-      <div className='max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8'>
+    <section className='text-white bg-secondary'>
+      <div className='max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8 mx-auto'>
         <div className='mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-3'>
           <div className='flex items-center gap-4'>
             <span className='shrink-0 rounded-lg bg-gray-800 p-4'>
