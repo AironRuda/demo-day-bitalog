@@ -47,7 +47,7 @@ const ProjectList: React.FunctionComponent = (props) => {
       ) : (
         <div className='text-3xl text-center px-20 text-secondary'>
           En el momento no hay proyectos disponibles, crea alguno o contacta a
-          tu encargado para que te asigne a alguno
+          tu encargado para que te asigne a alguno 🧐 
         </div>
       )}
     </div>
