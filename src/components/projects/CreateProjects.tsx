@@ -63,7 +63,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
           <button type="submit" className="btn btn-primary text-white w-full">
             Create
           </button>
-          {!!status && <div>{status}</div>}
+          {!!status && <div className='text-red-500 pl-2'>{status}</div>}
         </Form>
       )}
     </Formik>

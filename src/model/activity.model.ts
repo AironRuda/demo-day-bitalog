@@ -11,5 +11,5 @@ export interface Activity {
 
 export type createActivitiesDTO = Pick<
   Activity,
-  'activityName' | 'priority' | 'materials'
+  'activityName' | 'priority' | 'materials' | 'completed'
 >;

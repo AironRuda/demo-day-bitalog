@@ -6,17 +6,20 @@ import { Material } from '../../../model/material.model';
 import TextFieldFormik from '../../common/form/TextFieldFormik';
 import SelectMaterials from './SelectMaterials';
 import SelectPriority from './SelectPriority';
+import SelectStatus from './SelectStatus';
 
 interface IFormProps {
   status: any;
   buttonText: string;
   defaultPriority?: number;
+  statusField?: boolean;
 }
 
 const FormActivity: React.FunctionComponent<IFormProps> = ({
   status,
   buttonText,
   defaultPriority,
+  statusField,
 }) => {
   const [materials, setMaterial] = useState<Material[]>([]);
 
@@ -33,6 +36,7 @@ const FormActivity: React.FunctionComponent<IFormProps> = ({
         name='activityName'
         placeholder='Nombre de la actividad'
       />
+      {statusField !== undefined && <SelectStatus status={statusField} />}
       <SelectPriority defaultPriority={defaultPriority} />
       <SelectMaterials
         name='materials'
@@ -42,7 +46,7 @@ const FormActivity: React.FunctionComponent<IFormProps> = ({
       <button type='submit' className='btn btn-primary text-white w-full'>
         {buttonText}
       </button>
-      {!!status && <div>{status}</div>}
+      {!!status && <div className='text-red-500 pl-2'>{status}</div>}
     </Form>
   );
 };

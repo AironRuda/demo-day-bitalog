@@ -70,7 +70,7 @@ const RegisterForm: React.FunctionComponent = (props) => {
           <button type='submit' className='btn btn-primary text-white'>
             Registrarse
           </button>
-          {!!status && <div>{status}</div>}
+          {!!status && <div className='text-red-500 pl-2'>{status}</div>}
           <span className='text-slate-700 text-center'>
             Ya tienes una cuenta? {'    '}
             <Link to='/app' className='text-primary font-bold'>

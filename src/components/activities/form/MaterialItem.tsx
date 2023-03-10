@@ -43,7 +43,7 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
         <span>{currentMaterial.material}</span>
         <div className='flex gap-2'>
           <input
-            className='w-10 border-2 border-primary text-center'
+            className='w-16 border-2 border-primary text-center'
             type='number'
             value={amount}
             onChange={(e) => {
@@ -55,7 +55,9 @@ const MaterialItem: React.FunctionComponent<IMaterialInputProps> = ({
           <span>{currentMaterial.unit}</span>
         </div>
       </div>
-      <span onClick={deleteMaterial}>❌</span>
+      <span onClick={deleteMaterial} className='cursor-pointer'>
+        ❌
+      </span>
     </li>
   );
 };

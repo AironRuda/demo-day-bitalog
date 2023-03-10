@@ -15,6 +15,7 @@ const EMPTY_VALUES: createActivitiesDTO = {
   activityName: '',
   materials: [],
   priority: 3,
+  completed: false,
 };
 
 const UpdateActivity: React.FunctionComponent = (props) => {
@@ -37,6 +38,7 @@ const UpdateActivity: React.FunctionComponent = (props) => {
         priority: currentActivity.priority,
         materials: [...currentActivity.materials],
         activityName: currentActivity.activityName,
+        completed: currentActivity.completed,
       }
     : EMPTY_VALUES;
 
@@ -72,6 +74,7 @@ const UpdateActivity: React.FunctionComponent = (props) => {
           buttonText='Actualizar'
           status={status}
           defaultPriority={values.priority}
+          statusField={values.completed}
         />
       )}
     </Formik>
