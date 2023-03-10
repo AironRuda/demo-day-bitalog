@@ -17,9 +17,9 @@ const RenderProjects: React.FunctionComponent<IRenderProjectsProps> = ({
         ? projects
             .filter((project) =>
               filter === 'new'
-                ? project.completed && !project.activities.length
+                ? !project.completed && !project.activities.length
                 : filter === 'pending'
-                ? !project.completed
+                ? !project.completed && project.activities.length
                 : project.completed && project.activities.length
             )
             .map((project) => <Project key={project.id} project={project} />)
