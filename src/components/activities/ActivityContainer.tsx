@@ -12,8 +12,8 @@ const ActivityContainer: React.FunctionComponent = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='mt-10 w-full h-full flex flex-col items-center justify-center'>
-      <div className='h-full w-11/12 flex flex-col justify-center items-center gap-5 mb-10'>
+    <div className='w-full h-full flex flex-col items-center justify-center'>
+      <div className='h-full w-full flex flex-col justify-center items-center gap-5'>
         <h1 className='text-center text-4xl text-slate-700 font-bold'>
           ACTIVIDADES
         </h1>
