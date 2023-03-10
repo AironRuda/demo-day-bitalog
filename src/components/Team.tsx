@@ -29,7 +29,7 @@ const Team: React.FunctionComponent = () => {
               style={{ background: '#31C48D' }}
             >
               <img
-                src={teamUserLogo}
+                src={`https://api.dicebear.com/5.x/lorelei/svg?seed=${worker}`}
                 alt=''
                 className='w-24 h-24 mb-3 rounded-full shadow-lg'
                 style={{ background: 'white' }}
