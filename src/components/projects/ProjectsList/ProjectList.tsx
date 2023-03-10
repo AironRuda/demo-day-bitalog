@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectProjects } from '../../../context/selectors';
 import { updateStatusProject } from '../../../context/projectsSlice';
 import Filter from './Filter';
-import RenderProjects from './RenderProjects';
 import { updateDoc } from 'firebase/firestore';
 import { projectsRef } from '../../../firebase/config';
+import Project from './Project';
+import { formatProjectsList } from '../../../utilities/formatProjects';
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
@@ -42,7 +43,9 @@ const ProjectList: React.FunctionComponent = (props) => {
       />
       {projects.length ? (
         <ul className='h-full md:w-4/5 flex flex-wrap lg:justify-start justify-center items-center lg:gap-10 gap-5'>
-          {<RenderProjects filter={filter} projects={projects} />}
+          {formatProjectsList(projects, filter).map((project) => (
+            <Project key={project.id} project={project} />
+          ))}
         </ul>
       ) : (
         <div className='text-3xl text-center px-20 text-secondary'>
