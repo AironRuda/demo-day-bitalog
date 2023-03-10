@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
+import { hero } from '../../assets/bg';
 
-const Presentation: React.FunctionComponent = (props) => {
+const Presentation: React.FunctionComponent = () => {
   return (
-    <section className='relative bg-[url(https://realestatemarket.com.mx/images/2022/02-feb/1102/Industriadelaconstruccion-serecuperomarginalmente-2021.jpg)] bg-cover bg-center bg-no-repeat'>
+    <section
+      className='relative bg-cover bg-center bg-no-repeat'
+      style={{ backgroundImage: `url(${hero})` }}
+    >
       <div className='absolute h-full inset-0 bg-white/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-white/95 sm:to-white/25'></div>
 
       <div className='relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8'>
@@ -11,7 +15,7 @@ const Presentation: React.FunctionComponent = (props) => {
             className='text-3xl font-extrabold sm:text-5xl'
             style={{ color: '#31C48D' }}
           >
-            BITALOG.
+            BITALOG
             <strong className='block font-extrabold text-black'>
               Bitácora para sus proyectos
             </strong>
@@ -22,21 +26,16 @@ const Presentation: React.FunctionComponent = (props) => {
             concisa!
           </p>
 
-          <div className='mt-8 flex flex-wrap gap-4 text-center'>
-            <Link
-              to='app'
-              className='block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto'
-              style={{ background: '#215A6D' }}
-            >
-              Iniciar sesión
+          <div className='mt-8 flex flex-wrap gap-4 lg:justify-start justify-center'>
+            <Link className='text-white' to='app'>
+              <button className='btn btn-primary text-white rounded-sm'>
+                Iniciar sesión
+              </button>
             </Link>
-
-            <Link
-              to='register'
-              className='block w-full rounded bg-white px-12 py-3 text-sm font-medium text-rose-600 shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500 sm:w-auto'
-              style={{ color: '#215A6D' }}
-            >
-              Registro
+            <Link to='app/register'>
+              <button className='btn bg-white w-40 border-0 rounded-sm text-black hover:bg-slate-100'>
+                Registro
+              </button>
             </Link>
           </div>
         </div>

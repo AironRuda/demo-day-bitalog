@@ -10,6 +10,7 @@ const SelectFormik: React.FunctionComponent<Props> = ({
   name,
   options,
   placeholder,
+  renderList
 }) => {
   const [field, meta, helpers] = useField(name);
 

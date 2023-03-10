@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { getSelectedProject } from '../../context/projectsSlice';
 import { selectRol } from '../../context/selectors';
+import SelectProjectMessage from '../common/SelectProjectMessage';
 
 const ActivityContainer: React.FunctionComponent = () => {
   const [selectedButton, setSelectedButton] = useState('list');
@@ -14,7 +15,7 @@ const ActivityContainer: React.FunctionComponent = () => {
     <div className='mt-10 w-full h-full flex flex-col items-center justify-center'>
       <div className='h-full w-11/12 flex flex-col justify-center items-center gap-5 mb-10'>
         <h1 className='text-center text-4xl text-slate-700 font-bold'>
-          Actividades
+          ACTIVIDADES
         </h1>
         {!!currentProject ? (
           <>
@@ -53,10 +54,7 @@ const ActivityContainer: React.FunctionComponent = () => {
             <Outlet />
           </>
         ) : (
-          <div className='text-3xl text-center px-20 text-secondary'>
-            Selecciona un proyecto o habla con tu encargado para que te asigne a
-            alguno para poder visualizar tus actividades
-          </div>
+          <SelectProjectMessage />
         )}
       </div>
     </div>

@@ -3,7 +3,7 @@ import { Form } from 'formik';
 import { useEffect, useState } from 'react';
 import { basicInventoryRef } from '../../../firebase/config';
 import { Material } from '../../../model/material.model';
-import TextFieldFormik from '../../form/TextFieldFormik';
+import TextFieldFormik from '../../common/form/TextFieldFormik';
 import SelectMaterials from './SelectMaterials';
 import SelectPriority from './SelectPriority';
 
@@ -28,7 +28,7 @@ const FormActivity: React.FunctionComponent<IFormProps> = ({
   }, []);
 
   return (
-    <Form className='h-11/12 md:w-1/3 flex flex-col items-center gap-5 border-2 border-secondary p-10 overflow-auto'>
+    <Form className='h-11/12 md:w-1/3 w-full flex flex-col items-center gap-5 p-10'>
       <TextFieldFormik
         name='activityName'
         placeholder='Nombre de la actividad'

@@ -8,8 +8,8 @@ import { searchWorkers } from "../../firebase/queries";
 import { handleCreateProject } from "../../handlers/handleProject";
 import { createProjectDTO } from "../../model/projects.model";
 import { CREATE_PROJECT_VALIDATION_SCHEMA } from "../../utilities/formValidations";
-import SelectFormik from "../form/SelectFormik";
-import TextFieldFormik from "../form/TextFieldFormik";
+import SelectFormik from "../common/form/SelectFormik";
+import TextFieldFormik from "../common/form/TextFieldFormik";
 
 const INITIAL_VALUES: createProjectDTO = {
   name: "",
@@ -52,8 +52,8 @@ const CreateProjects: React.FunctionComponent = (props) => {
       onSubmit={handleSubmit}
     >
       {({ status }) => (
-        <Form className="h-11/12 md:w-1/3 mx-2 flex flex-col items-center gap-5 border-2 border-secondary p-10 overflow-y-auto">
-          <TextFieldFormik name="name" placeholder="Project Name" />
+        <Form className="h-11/12 md:w-1/3 mx-2 flex flex-col items-center gap-5 p-10 ">
+          <TextFieldFormik name="name" placeholder="Nombre del proyecto" />
           <SelectFormik
             name="workers"
             options={avalaibleWorkers}

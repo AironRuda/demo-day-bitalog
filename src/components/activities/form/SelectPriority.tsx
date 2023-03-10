@@ -16,34 +16,37 @@ const SelectPriority: React.FunctionComponent<Props> = ({
   }, [priority]);
 
   return (
-    <div className='btn-group w-full'>
-      <input
-        type='button'
-        value='1'
-        className={`btn border-primary bg-white text-primary w-1/3 ${
-          priority === 1 && 'btn-primary btn-active'
-        }`}
-        onClick={() => {
-          setPriority(1);
-        }}
-      />
-      <input
-        type='button'
-        value='2'
-        className={`btn border-primary bg-white text-primary w-1/3 ${
-          priority === 2 && 'btn-primary btn-active'
-        }`}
-        onClick={() => setPriority(2)}
-      />
-      <input
-        type='button'
-        value='3'
-        className={`btn border-primary bg-white text-primary w-1/3 ${
-          priority === 3 && 'btn-primary btn-active'
-        }`}
-        onClick={() => setPriority(3)}
-      />
-    </div>
+    <>
+      <label className='text-slate-600 -mb-4' htmlFor='priority'>Selecciona la prioridad</label>
+      <div className='btn-group w-full' id='priority'>
+        <input
+          type='button'
+          value='Baja'
+          className={`btn border-primary bg-white hover:text-white hover:border-0 hover:bg-primary text-primary w-1/3 ${
+            priority === 1 && 'btn-primary btn-active'
+          }`}
+          onClick={() => {
+            setPriority(1);
+          }}
+        />
+        <input
+          type='button'
+          value='Media'
+          className={`btn border-primary bg-white hover:text-white hover:border-0 hover:bg-primary text-primary w-1/3 ${
+            priority === 2 && 'btn-primary btn-active'
+          }`}
+          onClick={() => setPriority(2)}
+        />
+        <input
+          type='button'
+          value='Alta'
+          className={`btn border-primary bg-white hover:text-white hover:border-0 hover:bg-primary text-primary w-1/3 ${
+            priority === 3 && 'btn-primary btn-active'
+          }`}
+          onClick={() => setPriority(3)}
+        />
+      </div>
+    </>
   );
 };
 

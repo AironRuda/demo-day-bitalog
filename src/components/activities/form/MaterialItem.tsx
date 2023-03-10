@@ -1,5 +1,5 @@
 import { FieldHelperProps } from 'formik';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Material } from '../../../model/material.model';
 
 interface IMaterialInputProps {
