@@ -1,7 +1,10 @@
 import { Material } from '../model/material.model';
 
 export const getMajorSpents = (inventory: Material[]) => {
-  return inventory.sort((a, b) => a.amount - b.amount).reverse().slice(0, 5)
+  return inventory
+    .sort((a, b) => a.amount - b.amount)
+    .reverse()
+    .slice(0, 5);
 };
 
 export const formatNewInventory = (
@@ -20,4 +23,22 @@ export const formatNewInventory = (
     }
   });
   return newInventory;
+};
+
+export const formatSpentsList = (inventory: Material[], filter: string) => {
+  return filter === ''
+    ? inventory.sort((a, b) => {
+        if (a.material > b.material) return 1;
+        if (a.material < b.material) return -1;
+        else return 0;
+      })
+    : filter === 'reverse'
+    ? inventory.sort((a, b) => {
+        if (a.material < b.material) return 1;
+        if (a.material > b.material) return -1;
+        else return 0;
+      })
+    : filter === 'max'
+    ? inventory.sort((a, b) => b.amount - a.amount)
+    : inventory.sort((a, b) => a.amount - b.amount);
 };

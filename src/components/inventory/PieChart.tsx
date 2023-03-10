@@ -30,18 +30,12 @@ const PieChart: React.FunctionComponent<IPieProps> = ({ spents }) => {
   };
 
   return (
-    <div className='lg:w-1/3 w-screen h-1/2 lg:h-[60vh] md:mt-0 mt-10 flex justify-center'>
+    <div className='lg:w-1/3 w-screen h-1/2 lg:h-[60vh] md:mt-0 mt-10 flex flex-col justify-center items-center'>
+      <h2 className='text-center text-3xl mb-5 text-slate-500 font-semibold'>Mayores gastos</h2>
       <Pie
         data={data}
         options={{
           plugins: {
-            title: {
-              display: true,
-              text: 'Materiales más utilizados en el proyecto',
-              font: {
-                size: 18,
-              },
-            },
             legend: {
               labels: {
                 font: {

@@ -12,6 +12,8 @@ import spreadsheet from './spreadsheet.svg';
 import group from './group.svg';
 import logout from './logout.svg';
 import leftArrow from './leftArrow.svg';
+import upArrow from './upArrow.svg';
+import downArrow from './downArrow.svg';
 import imgLogo from './img.svg';
 
 export {
@@ -29,5 +31,7 @@ export {
   group,
   logout,
   leftArrow,
-  imgLogo
+  imgLogo,
+  upArrow,
+  downArrow,
 };

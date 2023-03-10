@@ -15,7 +15,7 @@ const ActivitiesList: React.FunctionComponent = () => {
   const [filter, setFilter] = useState(true);
 
   return (
-    <div className='h-4/5 w-full'>
+    <div className='h-4/5 lg:w-4/5 w-full'>
       {currentProject && !!currentProject.activities.length ? (
         <div className='h-full w-full mt-12'>
           <table className='table table-compact w-full '>
