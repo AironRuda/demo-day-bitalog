@@ -33,12 +33,12 @@ const Inventory: React.FunctionComponent = () => {
   }, [currentProjectId]);
 
   return (
-    <div className='w-full h-full flex items-center flex-col my-5'>
+    <div className='w-full h-full flex items-center justify-center flex-col my-5'>
       <h1 className='text-center text-4xl text-slate-700 font-bold mb-5'>GASTOS</h1>
       {!!currentProject ? (
-        <div className='w-full h-full mt-5 flex flex-wrap lg:gap-10 gap-4 justify-center [&>*]:text-center'>
+        <div className='w-full h-full mt-5 flex flex-wrap lg:gap-10 gap-4 justify-center [&>*]:text-center lg:mr-20'>
           {inventory && inventory.length ? (
-            <div className='w-full h-full flex lg:flex-row flex-col-reverse'>
+            <div className='w-full h-full flex items-center lg:flex-row flex-col'>
               <SpentsTable inventory={inventory} />
               <PieChart spents={inventory} />
             </div>

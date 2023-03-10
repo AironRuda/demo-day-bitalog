@@ -1,3 +1,4 @@
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { Material } from '../../model/material.model';
 import { getMajorSpents } from '../../utilities/formatInventory';
@@ -5,6 +6,8 @@ import { getMajorSpents } from '../../utilities/formatInventory';
 interface IPieProps {
   spents: Material[];
 }
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PieChart: React.FunctionComponent<IPieProps> = ({ spents }) => {
   const data = {
@@ -27,7 +30,7 @@ const PieChart: React.FunctionComponent<IPieProps> = ({ spents }) => {
   };
 
   return (
-    <div className='lg:w-1/2 w-screen h-1/2 lg:h-[60vh] mb-10'>
+    <div className='lg:w-1/3 w-screen h-1/2 lg:h-[60vh] md:mt-0 mt-10 flex justify-center'>
       <Pie
         data={data}
         options={{

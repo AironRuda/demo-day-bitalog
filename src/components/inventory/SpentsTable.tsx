@@ -7,8 +7,8 @@ interface Props {
 
 const SpentsTable: React.FunctionComponent<Props> = ({ inventory }) => {
   return (
-    <div className='lg:w-1/2 w-screen h-full'>
-      <table className='table table-compact mx-auto h-full'>
+    <div className='lg:w-2/3 w-screen h-full'>
+      <table className='table table-compact w-2/3 mx-auto h-full'>
         <thead>
           <tr className='[&>*]:bg-primary [&>*]:text-white border-6'>
             <th className='w-10 z-0'></th>
