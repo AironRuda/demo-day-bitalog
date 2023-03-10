@@ -10,7 +10,7 @@ const createNewInventory = async () => {
   ).id;
 };
 const createNewNovelty = async (projectId: string) => {
-  await setDoc(doc(db, "novelty", projectId), {})
+  await setDoc(doc(db, "novelty", projectId), { novelties: [] })
 };
 
 const createNewProject = async (project: Omit<Project, 'id'>) => {
