@@ -7,7 +7,7 @@ import { searInventory } from '../../firebase/queries';
 import { Material } from '../../model/material.model';
 import { Project } from '../../model/projects.model';
 import SelectProjectMessage from '../common/SelectProjectMessage';
-import Spent from './Spent';
+import SpentsTable from './SpentsTable';
 
 const Inventory: React.FunctionComponent = () => {
   const currentProjectId = useSelector(getSelectedProject);
@@ -32,25 +32,19 @@ const Inventory: React.FunctionComponent = () => {
   }, [currentProjectId]);
 
   return (
-    <div className='flex items-center flex-col my-5 mx-2'>
+    <div className='w-full h-full flex items-center flex-col my-5'>
       <h1 className='text-center text-4xl text-slate-700 font-bold'>GASTOS</h1>
       {!!currentProject ? (
-        <ul className='mt-10 flex flex-wrap lg:gap-10 gap-4 justify-center [&>*]:text-center'>
+        <div className='w-full h-full mt-10 flex flex-wrap lg:gap-10 gap-4 justify-center [&>*]:text-center'>
           {inventory && inventory.length ? (
-            inventory
-              .sort((a, b) => {
-                if (a.material > b.material) return 1;
-                if (a.material < b.material) return -1;
-                else return 0;
-              })
-              .map((item) => <Spent key={item.material} spent={item} />)
+            <SpentsTable inventory={inventory} />
           ) : (
             <p className='text-3xl text-center px-20 text-secondary'>
               No se han gastado materiales hasta el momento, cumple actividades
               para que se vean reflejados los gastos en esta sección.
             </p>
           )}
-        </ul>
+        </div>
       ) : (
         <SelectProjectMessage />
       )}

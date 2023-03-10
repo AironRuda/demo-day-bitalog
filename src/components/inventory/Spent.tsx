@@ -2,19 +2,19 @@ import { Material } from '../../model/material.model';
 
 interface SpentProps {
   spent: Material;
+  id: number;
 }
 
-const Spent: React.FunctionComponent<SpentProps> = ({ spent }) => {
+const Spent: React.FunctionComponent<SpentProps> = ({ spent, id }) => {
   return (
-    <li
-      key={spent.material}
-      className='flex flex-col items-center justify-center p-2 rounded-xl w-36 h-40 bg-primary hover:bg-secondary'
+    <tr
+      className={`[&>*]:bg-slate-100 [&>*]:text-black [&>*]:border-b-2 [&>*]:border-white`}
     >
-      <h5 className='mb-1 text-xl font-medium text-white'>{spent.material}</h5>
-      <span className='text-base text-black'>
-        <b>Gasto:</b> {spent.amount} {spent.unit}
-      </span>
-    </li>
+      <th>{id + 1}</th>
+      <td>{spent.material}</td>
+      <td>{spent.amount}</td>
+      <td className='text-center'>{spent.unit}</td>
+    </tr>
   );
 };
 
