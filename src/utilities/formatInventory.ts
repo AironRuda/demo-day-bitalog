@@ -1,5 +1,9 @@
 import { Material } from '../model/material.model';
 
+export const getMajorSpents = (inventory: Material[]) => {
+  return inventory.sort((a, b) => a.amount - b.amount).reverse().slice(0, 5)
+};
+
 export const formatNewInventory = (
   baseInventory: Material[],
   newMaterials: Material[]

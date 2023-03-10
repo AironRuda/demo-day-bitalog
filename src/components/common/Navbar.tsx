@@ -15,7 +15,7 @@ const Navbar: React.FunctionComponent = (props) => {
   const link = 'flex flex-col justify-center items-center cursor-pointer ';
 
   return (
-    <div className='w-full flex bg-primary py-3 px-5 fixed bottom-0'>
+    <div className='w-full flex bg-primary py-3 px-5 fixed bottom-0 z-50'>
       <nav className='w-full flex flex-row md:justify-evenly justify-between'>
         <NavLink
           className={`${link} ${

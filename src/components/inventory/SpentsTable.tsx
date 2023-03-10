@@ -11,7 +11,7 @@ const SpentsTable: React.FunctionComponent<Props> = ({ inventory }) => {
       <table className='table table-compact mx-auto h-full'>
         <thead>
           <tr className='[&>*]:bg-primary [&>*]:text-white border-6'>
-            <th className='w-10'></th>
+            <th className='w-10 z-0'></th>
             <th className='w-20 '>Material</th>
             <th className='w-10 '>Gasto</th>
             <th className='w-10 '>Unidad</th>

@@ -7,6 +7,7 @@ import { searInventory } from '../../firebase/queries';
 import { Material } from '../../model/material.model';
 import { Project } from '../../model/projects.model';
 import SelectProjectMessage from '../common/SelectProjectMessage';
+import PieChart from './PieChart';
 import SpentsTable from './SpentsTable';
 
 const Inventory: React.FunctionComponent = () => {
@@ -33,11 +34,14 @@ const Inventory: React.FunctionComponent = () => {
 
   return (
     <div className='w-full h-full flex items-center flex-col my-5'>
-      <h1 className='text-center text-4xl text-slate-700 font-bold'>GASTOS</h1>
+      <h1 className='text-center text-4xl text-slate-700 font-bold mb-5'>GASTOS</h1>
       {!!currentProject ? (
-        <div className='w-full h-full mt-10 flex flex-wrap lg:gap-10 gap-4 justify-center [&>*]:text-center'>
+        <div className='w-full h-full mt-5 flex flex-wrap lg:gap-10 gap-4 justify-center [&>*]:text-center'>
           {inventory && inventory.length ? (
-            <SpentsTable inventory={inventory} />
+            <div className='w-full h-full flex lg:flex-row flex-col-reverse'>
+              <SpentsTable inventory={inventory} />
+              <PieChart spents={inventory} />
+            </div>
           ) : (
             <p className='text-3xl text-center px-20 text-secondary'>
               No se han gastado materiales hasta el momento, cumple actividades
