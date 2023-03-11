@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { getSelectedProject } from '../context/projectsSlice';
 import { getCurrentProject } from '../context/selectors';
 import { Project } from '../model/projects.model';
-import { teamUserLogo } from '../assets/icons';
 import SelectProjectMessage from './common/SelectProjectMessage';
 
 const Team: React.FunctionComponent = () => {

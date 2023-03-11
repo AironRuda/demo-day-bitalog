@@ -1,5 +1,7 @@
-import { Material } from "./material.model";
+import { Material } from './material.model';
 
 export interface Inventory {
-    materials: Material[]
+  materials: Material[];
 }
+
+export type InventoryFilter = '' | 'reverse' | 'max' | 'min';

@@ -1,6 +1,8 @@
+import { filterProjects } from '../../../model/projects.model';
+
 interface Props {
   filter: string;
-  setFilter: (filter: string) => void;
+  setFilter: (filter: filterProjects) => void;
 }
 
 const Filter: React.FunctionComponent<Props> = ({ filter, setFilter }) => {

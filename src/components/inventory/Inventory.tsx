@@ -34,7 +34,9 @@ const Inventory: React.FunctionComponent = () => {
 
   return (
     <div className='w-full h-full flex items-center justify-center flex-col my-5'>
-      <h1 className='text-center text-4xl text-slate-700 font-bold mb-5'>GASTOS</h1>
+      <h1 className='text-center text-4xl text-slate-700 font-bold mb-5'>
+        GASTOS
+      </h1>
       {!!currentProject ? (
         <div className='w-full h-full mt-5 flex flex-wrap lg:gap-10 gap-4 justify-center [&>*]:text-center lg:mr-20'>
           {inventory && inventory.length ? (
@@ -44,8 +46,9 @@ const Inventory: React.FunctionComponent = () => {
             </div>
           ) : (
             <p className='text-3xl text-center px-20 text-secondary'>
-              No se han gastado materiales hasta el momento, cumple actividades
-              para que se vean reflejados los gastos en esta sección.
+              No se han gastado materiales hasta el momento. <br />
+              Se ha de cumplir alguna actividad para que se visualice en el
+              inventario 🤓 
             </p>
           )}
         </div>

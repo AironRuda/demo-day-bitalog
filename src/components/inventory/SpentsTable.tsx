@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { downArrow, upArrow } from '../../assets/icons';
+import { InventoryFilter } from '../../model/inventory.model';
 import { Material } from '../../model/material.model';
 import { formatSpentsList } from '../../utilities/formatInventory';
 import Spent from './Spent';
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const SpentsTable: React.FunctionComponent<Props> = ({ inventory }) => {
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState<InventoryFilter>('');
 
   return (
     <div className='lg:w-2/3 w-screen h-full'>

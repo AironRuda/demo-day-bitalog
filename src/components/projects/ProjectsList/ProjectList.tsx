@@ -7,11 +7,12 @@ import { updateDoc } from 'firebase/firestore';
 import { projectsRef } from '../../../firebase/config';
 import Project from './Project';
 import { formatProjectsList } from '../../../utilities/formatProjects';
+import { filterProjects } from '../../../model/projects.model';
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
   const dispatch = useDispatch();
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState<filterProjects>('');
 
   useEffect(() => {
     projects.forEach(async (project) => {
@@ -39,7 +40,7 @@ const ProjectList: React.FunctionComponent = (props) => {
     <div className='h-full w-full flex flex-col gap-10 justify-center items-center py-5 px-3 mx-2 '>
       <Filter
         filter={filter}
-        setFilter={(filter: string) => setFilter(filter)}
+        setFilter={(filter: filterProjects) => setFilter(filter)}
       />
       {projects.length ? (
         <ul className='h-full md:w-4/5 flex flex-wrap lg:justify-start justify-center items-center lg:gap-10 gap-5'>

@@ -1,4 +1,4 @@
-import { Project } from '../model/projects.model';
+import { filterProjects, Project } from '../model/projects.model';
 import { capitalizeFirstLetter } from './formatString';
 
 export const sortAlphabetically = (projects: Project[]) => {
@@ -9,7 +9,7 @@ export const sortAlphabetically = (projects: Project[]) => {
   });
 };
 
-const getCondition = (project: Project, filter: string) => {
+const getCondition = (project: Project, filter: filterProjects) => {
   return filter === 'new'
     ? !project.activities.length
     : filter === 'pending'
@@ -17,7 +17,10 @@ const getCondition = (project: Project, filter: string) => {
     : project.completed && project.activities.length;
 };
 
-const getProjectsByCondition = (projects: Project[], filter: string) => {
+const getProjectsByCondition = (
+  projects: Project[],
+  filter: filterProjects
+) => {
   return sortAlphabetically(
     projects
       .filter((project) => getCondition(project, filter))
@@ -27,7 +30,10 @@ const getProjectsByCondition = (projects: Project[], filter: string) => {
   );
 };
 
-export const formatProjectsList = (projects: Project[], filter: string) => {
+export const formatProjectsList = (
+  projects: Project[],
+  filter: filterProjects
+) => {
   if (filter === 'new') return getProjectsByCondition(projects, 'new');
   if (filter === 'pending') return getProjectsByCondition(projects, 'pending');
   if (filter === 'done') return getProjectsByCondition(projects, 'done');

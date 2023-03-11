@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { clipboard, folder, group, spreadsheet } from '../../assets/icons';
+import { selectRol } from '../../context/selectors';
 
-const Navbar: React.FunctionComponent = (props) => {
+const Navbar: React.FunctionComponent = () => {
   const location = useLocation().pathname;
+  const rol = useSelector(selectRol);
 
   const iconBase = {
     filter:
@@ -59,19 +62,21 @@ const Navbar: React.FunctionComponent = (props) => {
           <b className=''>Equipo</b>
         </NavLink>
 
-        <NavLink
-          className={`${link} ${
-            location.includes('inventory') ? 'text-slate-700' : ' text-white'
-          }`}
-          to='inventory'
-        >
-          <img
-            style={location.includes('inventory') ? iconSelected : iconBase}
-            className='w-10'
-            src={spreadsheet}
-          />
-          <b className=''>Inventario</b>
-        </NavLink>
+        {rol === 'admin' && (
+          <NavLink
+            className={`${link} ${
+              location.includes('inventory') ? 'text-slate-700' : ' text-white'
+            }`}
+            to='inventory'
+          >
+            <img
+              style={location.includes('inventory') ? iconSelected : iconBase}
+              className='w-10'
+              src={spreadsheet}
+            />
+            <b className=''>Inventario</b>
+          </NavLink>
+        )}
       </nav>
     </div>
   );

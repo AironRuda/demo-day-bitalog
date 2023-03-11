@@ -10,4 +10,6 @@ export interface Project {
   completed: boolean;
 }
 
+export type filterProjects = '' | 'new' | 'pending' | 'done';
+
 export type createProjectDTO = Pick<Project, 'name' | 'workers'>;

@@ -9,7 +9,7 @@ export interface Activity {
   updatedAt: string;
 }
 
-export type createActivitiesDTO = Pick<
-  Activity,
-  'activityName' | 'priority' | 'materials' | 'completed'
->;
+export interface createActivitiesDTO
+  extends Pick<Activity, 'activityName' | 'priority' | 'materials'> {
+  completed?: boolean;
+}

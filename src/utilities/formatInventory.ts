@@ -1,3 +1,4 @@
+import { InventoryFilter } from '../model/inventory.model';
 import { Material } from '../model/material.model';
 
 export const getMajorSpents = (inventory: Material[]) => {
@@ -25,7 +26,10 @@ export const formatNewInventory = (
   return newInventory;
 };
 
-export const formatSpentsList = (inventory: Material[], filter: string) => {
+export const formatSpentsList = (
+  inventory: Material[],
+  filter: InventoryFilter
+) => {
   return filter === ''
     ? inventory.sort((a, b) => {
         if (a.material > b.material) return 1;
