@@ -9,17 +9,18 @@ import {
   majorAmountInventory,
   minAmountInventory,
   newInventory,
+  reducedInventory,
   reverseAlphabeticallyInventory,
 } from './inventory.mock';
 
 describe('The utilities of inventory page works', () => {
-  test('Return the correct new array', () => {
-    expect(formatNewInventory(baseInventory, addition)).toStrictEqual(
+  test('Return the aumented array', () => {
+    expect(formatNewInventory(baseInventory, addition, false)).toStrictEqual(
       newInventory
     );
   });
 
-  test('Return the formatted array', () => {
+  test('Return the expected formatted array', () => {
     expect(formatSpentsList(newInventory, '')).toStrictEqual(
       alphabeticallyInventory
     );
@@ -31,6 +32,12 @@ describe('The utilities of inventory page works', () => {
     );
     expect(formatSpentsList(newInventory, 'min')).toStrictEqual(
       minAmountInventory
+    );
+  });
+
+  test('Return the reduced array', () => {
+    expect(formatNewInventory(baseInventory, addition, true)).toStrictEqual(
+      reducedInventory
     );
   });
 });

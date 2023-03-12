@@ -45,3 +45,9 @@ export const minAmountInventory: Material[] = [
   { amount: 30, material: 'vidrio', unit: 'units' },
   { amount: 50, material: 'arena', unit: 'units' },
 ];
+
+export const reducedInventory: Material[] = [
+  { amount: 15, material: 'carbón', unit: 'units' },
+  { amount: 25, material: 'arena', unit: 'units' },
+  { amount: 20, material: 'tierra', unit: 'units' },
+];

@@ -22,7 +22,7 @@ export const formatNewInventory = (
       !reduceInventory
         ? (newInventory[indexItem].amount += material.amount)
         : (newInventory[indexItem].amount -= material.amount);
-    } else {
+    } else if (!reduceInventory) {
       newInventory.push(material);
     }
   });

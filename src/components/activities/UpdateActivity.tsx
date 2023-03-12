@@ -54,7 +54,6 @@ const UpdateActivity: React.FunctionComponent = (props) => {
         currentProject
       );
       if (INITIAL_VALUES.completed !== values.completed) {
-        console.log('holi');
         await updateInventory(
           currentProject.inventoryId,
           values.materials,
