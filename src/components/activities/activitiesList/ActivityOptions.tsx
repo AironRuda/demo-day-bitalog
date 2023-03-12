@@ -21,7 +21,7 @@ const ActivityOptions: React.FunctionComponent<Props> = ({
   async function handleClickDelete() {
     Swal.fire({
       title: '¿Estás seguro de eliminar la actividad?',
-      text: 'Al eliminar la actividad, si esta ya se ha cumplido su registro permanecerá en el inventario. Para evitar esto puede modificar su estado antes de elimnarla.',
+      text: 'Al eliminar la actividad, si esta ya se ha cumplido su registro permanecerá en el inventario. Para evitar esto puede modificar el estado de la actividad antes de elimnarla.',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Eliminar',
@@ -35,6 +35,7 @@ const ActivityOptions: React.FunctionComponent<Props> = ({
   async function handleClickStatus() {
     Swal.fire({
       title: '¿Estás seguro de finalizar la actividad?',
+      text: 'Al cumplir con la actividad, sólo el encargado del proyecto podrá volver a modificar su estado. En caso de no estar seguro puede enviar una notificación a su encargado por medio del muro en la sección de equipo',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Finalizar',

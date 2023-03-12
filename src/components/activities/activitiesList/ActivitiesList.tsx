@@ -5,6 +5,7 @@ import { getCurrentProject } from '../../../context/selectors';
 import { Project } from '../../../model/projects.model';
 import { formatActivitiesList } from '../../../utilities/formatActivities';
 import ActivityItem from './ActivityItem';
+import { uuidv4 } from '@firebase/util';
 
 const ActivitiesList: React.FunctionComponent = () => {
   const selectedProjectId = useSelector(getSelectedProject);
@@ -40,7 +41,7 @@ const ActivitiesList: React.FunctionComponent = () => {
               {formatActivitiesList(currentProject.activities, filter).map(
                 (activity, index) => (
                   <ActivityItem
-                    key={index}
+                    key={uuidv4()}
                     activity={activity}
                     currentProject={currentProject}
                   />

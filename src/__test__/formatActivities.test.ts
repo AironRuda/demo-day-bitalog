@@ -1,3 +1,4 @@
+import { test, describe, expect } from 'vitest';
 import { formatActivitiesList } from '../utilities/formatActivities';
 import {
   orderedActivitiesFirstDone,

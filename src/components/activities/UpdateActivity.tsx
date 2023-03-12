@@ -56,7 +56,7 @@ const UpdateActivity: React.FunctionComponent = (props) => {
       if (INITIAL_VALUES.completed !== values.completed) {
         await updateInventory(
           currentProject.inventoryId,
-          values.materials,
+          INITIAL_VALUES.materials,
           values.completed ? false : true
         );
       }

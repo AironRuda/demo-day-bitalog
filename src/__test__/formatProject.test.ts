@@ -1,3 +1,4 @@
+import { test, describe, expect } from 'vitest';
 import { formatProjectsList } from '../utilities/formatProjects';
 import { orderedProjects, unorderedProjects } from './projects.mock';
 
