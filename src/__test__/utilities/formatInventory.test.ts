@@ -1,8 +1,7 @@
-import { test, describe, expect } from 'vitest';
 import {
   formatNewInventory,
   formatSpentsList,
-} from '../utilities/formatInventory';
+} from '../../utilities/formatInventory';
 import {
   addition,
   alphabeticallyInventory,
@@ -12,7 +11,7 @@ import {
   newInventory,
   reducedInventory,
   reverseAlphabeticallyInventory,
-} from './inventory.mock';
+} from '../mocks/inventory.mock';
 
 describe('The utilities of inventory page works', () => {
   test('Return the aumented array', () => {

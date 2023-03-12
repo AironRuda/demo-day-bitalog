@@ -1,21 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { folder } from '../../../assets/icons';
-import {
-  getSelectedProject,
-  selectProject,
-} from '../../../context/projectsSlice';
 import { Project } from '../../../model/projects.model';
 
 interface IProjectProps {
   project: Project;
+  currentProject: string;
+  handleClick(id: string): void;
 }
 
-const Project: React.FunctionComponent<IProjectProps> = ({ project }) => {
-  const currentProject = useSelector(getSelectedProject);
-  const dispatch = useDispatch();
-
+const Project: React.FunctionComponent<IProjectProps> = ({
+  project,
+  currentProject,
+  handleClick,
+}) => {
   return (
     <li
+      role='listitem'
       className={`flex flex-col md:w-40 w-36 h-36 justify-center items-center p-3 rounded cursor-pointer ${
         !project.completed && !project.activities.length
           ? 'text-white bg-primary'
@@ -23,9 +22,7 @@ const Project: React.FunctionComponent<IProjectProps> = ({ project }) => {
           ? 'bg-secondary text-white'
           : 'text-slate-600 bg-slate-300'
       } ${currentProject === project.id && 'border-4 border-slate-700'}`}
-      onClick={() => {
-        dispatch(selectProject(project.id));
-      }}
+      onClick={() => handleClick(project.id)}
     >
       <img
         className='w-20'

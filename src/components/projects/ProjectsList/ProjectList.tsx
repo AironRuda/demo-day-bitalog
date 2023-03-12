@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProjects } from '../../../context/selectors';
-import { updateStatusProject } from '../../../context/projectsSlice';
+import {
+  getSelectedProject,
+  selectProject,
+  updateStatusProject,
+} from '../../../context/projectsSlice';
 import Filter from './Filter';
 import { updateDoc } from 'firebase/firestore';
 import { projectsRef } from '../../../firebase/config';
@@ -11,8 +15,13 @@ import { filterProjects } from '../../../model/projects.model';
 
 const ProjectList: React.FunctionComponent = (props) => {
   const projects = useSelector(selectProjects);
+  const currentProject = useSelector(getSelectedProject);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState<filterProjects>('');
+
+  function handleClick(id: string) {
+    dispatch(selectProject(id));
+  }
 
   useEffect(() => {
     projects.forEach(async (project) => {
@@ -45,7 +54,12 @@ const ProjectList: React.FunctionComponent = (props) => {
       {projects.length ? (
         <ul className='h-full md:w-4/5 flex flex-wrap lg:justify-start justify-center items-center lg:gap-10 gap-5'>
           {formatProjectsList(projects, filter).map((project) => (
-            <Project key={project.id} project={project} />
+            <Project
+              key={project.id}
+              project={project}
+              currentProject={currentProject}
+              handleClick={handleClick}
+            />
           ))}
         </ul>
       ) : (

@@ -1,10 +1,9 @@
-import { test, describe, expect } from 'vitest';
-import { formatActivitiesList } from '../utilities/formatActivities';
+import { formatActivitiesList } from '../../utilities/formatActivities';
 import {
   orderedActivitiesFirstDone,
   orderedActivitiesFirstPending,
   unorderedActivities,
-} from './activities.mock';
+} from '../mocks/activities.mock';
 
 describe('The utilities of the activities page works', () => {
   test('Obtain the expected formated array', () => {

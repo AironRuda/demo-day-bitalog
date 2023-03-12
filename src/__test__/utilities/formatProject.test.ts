@@ -1,6 +1,5 @@
-import { test, describe, expect } from 'vitest';
-import { formatProjectsList } from '../utilities/formatProjects';
-import { orderedProjects, unorderedProjects } from './projects.mock';
+import { formatProjectsList } from '../../utilities/formatProjects';
+import { orderedProjects, unorderedProjects } from '../mocks/projects.mock';
 
 describe('The utilities of the projects page works', () => {
   test('obtain the expected formated array', () => {
