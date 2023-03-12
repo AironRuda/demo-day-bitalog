@@ -38,9 +38,9 @@ const ActivitiesList: React.FunctionComponent = () => {
             </thead>
             <tbody>
               {formatActivitiesList(currentProject.activities, filter).map(
-                (activity) => (
+                (activity, index) => (
                   <ActivityItem
-                    key={activity.id}
+                    key={index}
                     activity={activity}
                     currentProject={currentProject}
                   />

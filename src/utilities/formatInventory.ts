@@ -10,7 +10,8 @@ export const getMajorSpents = (inventory: Material[]) => {
 
 export const formatNewInventory = (
   baseInventory: Material[],
-  newMaterials: Material[]
+  newMaterials: Material[],
+  reduceInventory: boolean
 ) => {
   const newInventory = [...baseInventory];
   newMaterials.forEach((material) => {
@@ -18,12 +19,14 @@ export const formatNewInventory = (
       const indexItem = newInventory.findIndex(
         (item) => item.material === material.material
       );
-      newInventory[indexItem].amount += material.amount;
+      !reduceInventory
+        ? (newInventory[indexItem].amount += material.amount)
+        : (newInventory[indexItem].amount -= material.amount);
     } else {
       newInventory.push(material);
     }
   });
-  return newInventory;
+  return newInventory.filter((material) => material.amount > 0);
 };
 
 export const formatSpentsList = (

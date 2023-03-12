@@ -46,7 +46,11 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   }
 
   async function confirmChangeStatus() {
-    const response = await handleStatusActivity(activity.id, currentProject);
+    const response = await handleStatusActivity(
+      activity.id,
+      currentProject,
+      false
+    );
     if (typeof response === 'string')
       Swal.fire({
         text: 'Hubo un error al cambiar el estado de la actividad',
@@ -66,9 +70,7 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
     <tr
       className={`[&>*]:bg-slate-100 [&>*]:text-black [&>*]:border-b-2 [&>*]:border-white`}
     >
-      <td className='md:pl-5 pl-2 w-10'>
-        {activity.completed ? '✔️' : '❕'}
-      </td>
+      <td className='md:pl-5 pl-2 w-10'>{activity.completed ? '✔️' : '❕'}</td>
       <td>{activity.activityName}</td>
       <td>
         {activity.priority === 1

@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1678423386031" clover="3.2.0">
-  <project timestamp="1678423386031" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1678511533972" clover="3.2.0">
+  <project timestamp="1678511533973" name="All files">
+    <metrics statements="64" coveredstatements="55" conditionals="30" coveredconditionals="24" methods="24" coveredmethods="21" elements="118" coveredelements="100" complexity="0" loc="64" ncloc="64" packages="2" files="7" classes="7"/>
+    <package name="__test__">
+      <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="activities.mock.ts" path="C:\Users\jeva2\OneDrive\Escritorio\Cursos\MAKAIA\trabajos\Profundización\sprints\DEMO\demo-day-bitalog\src\__test__\activities.mock.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
+      </file>
+      <file name="inventory.mock.ts" path="C:\Users\jeva2\OneDrive\Escritorio\Cursos\MAKAIA\trabajos\Profundización\sprints\DEMO\demo-day-bitalog\src\__test__\inventory.mock.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+      </file>
+      <file name="projects.mock.ts" path="C:\Users\jeva2\OneDrive\Escritorio\Cursos\MAKAIA\trabajos\Profundización\sprints\DEMO\demo-day-bitalog\src\__test__\projects.mock.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="utilities">
+      <metrics statements="51" coveredstatements="42" conditionals="30" coveredconditionals="24" methods="24" coveredmethods="21"/>
+      <file name="formatActivities.ts" path="C:\Users\jeva2\OneDrive\Escritorio\Cursos\MAKAIA\trabajos\Profundización\sprints\DEMO\demo-day-bitalog\src\utilities\formatActivities.ts">
+        <metrics statements="10" coveredstatements="8" conditionals="3" coveredconditionals="2" methods="5" coveredmethods="5"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="14" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+      <file name="formatInventory.ts" path="C:\Users\jeva2\OneDrive\Escritorio\Cursos\MAKAIA\trabajos\Profundización\sprints\DEMO\demo-day-bitalog\src\utilities\formatInventory.ts">
+        <metrics statements="22" coveredstatements="18" conditionals="14" coveredconditionals="11" methods="11" coveredmethods="9"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="33" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="36" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="41" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="42" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="5" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+      </file>
+      <file name="formatProjects.ts" path="C:\Users\jeva2\OneDrive\Escritorio\Cursos\MAKAIA\trabajos\Profundización\sprints\DEMO\demo-day-bitalog\src\utilities\formatProjects.ts">
+        <metrics statements="17" coveredstatements="14" conditionals="13" coveredconditionals="11" methods="7" coveredmethods="6"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="24" count="6" type="stmt"/>
+        <line num="26" count="18" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="37" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="38" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="39" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+      </file>
+      <file name="formatString.ts" path="C:\Users\jeva2\OneDrive\Escritorio\Cursos\MAKAIA\trabajos\Profundización\sprints\DEMO\demo-day-bitalog\src\utilities\formatString.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

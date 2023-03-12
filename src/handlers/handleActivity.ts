@@ -1,11 +1,11 @@
 import { FirebaseError, uuidv4 } from '@firebase/util';
 import { format } from 'date-fns';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db, inventoryRef, projectsRef } from '../firebase/config';
+import { updateDoc } from 'firebase/firestore';
+import { projectsRef } from '../firebase/config';
 import { Activity, createActivitiesDTO } from '../model/activity.model';
 import { Material } from '../model/material.model';
 import { Project } from '../model/projects.model';
-import { formatNewInventory } from '../utilities/formatInventory';
+import { updateInventory } from './handleInventory';
 
 export const handleCreateActivity = async (
   values: createActivitiesDTO,
@@ -42,6 +42,7 @@ export const handleUpdateActivity = async (
       activities[activityIndex] = {
         ...currentProject.activities[activityIndex],
         ...values,
+        updatedAt: format(new Date(), 'dd/MM/yyyy'),
       };
       await updateDoc(projectsRef(currentProject.id), {
         activities: activities,
@@ -69,75 +70,43 @@ export const handleDeleteActivity = async (
   }
 };
 
-const updateInventory = async (inventoryId: string, materials: Material[]) => {
-  try {
-    const inventory = await (await getDoc(inventoryRef(inventoryId))).data();
-    if (inventory) {
-      if (!inventory.materials) {
-        await updateDoc(inventoryRef(inventoryId), {
-          materials: materials.map((material) => {
-            return {
-              material: material.material,
-              amount: material.amount,
-              unit: material.unit,
-            };
-          }),
-        });
-      } else {
-        const newInventory = formatNewInventory(inventory.materials, materials);
-        await updateDoc(doc(db, 'inventory', inventoryId), {
-          materials: newInventory.map((material) => {
-            return {
-              material: material.material,
-              amount: material.amount,
-              unit: material.unit,
-            };
-          }),
-        });
-      }
-    }
-  } catch (error) {
-    throw error;
-  }
-};
-
-const updateActivity = async (project: Project, activityId: string) => {
-  try {
-    const currentActivity = {
-      ...project.activities.find((activity) => activity.id === activityId),
-    };
-    await updateInventory(
-      project.inventoryId,
-      currentActivity.materials?.map((material: Material) => {
-        return {
-          amount: material.amount,
-          material: material.material,
-          unit: material.unit,
-        };
-      }) ?? []
-    );
-    const activities = project.activities.filter(
-      (activity) => activity.id !== activityId
-    );
-    currentActivity.completed = !currentActivity.completed;
-    activities.push(currentActivity as Activity);
-    return await updateDoc(projectsRef(project.id), {
-      activities: activities,
-    });
-  } catch (error) {
-    throw error;
-  }
+const updateStatusActivity = async (
+  project: Project,
+  currentActivity: Activity
+) => {
+  const otherActivities = project.activities.filter(
+    (activity) => activity.id !== currentActivity.id
+  );
+  currentActivity.completed = !currentActivity.completed;
+  return await updateDoc(projectsRef(project.id), {
+    activities: [...otherActivities, currentActivity],
+  });
 };
 
 export const handleStatusActivity = async (
   activityId: string,
-  project: Project
+  project: Project,
+  reduceInventory: boolean
 ) => {
   try {
     if (project.activities.find((activity) => activity.id === activityId)) {
-      await updateActivity(project, activityId);
+      const currentActivity = {
+        ...project.activities.find((activity) => activity.id === activityId),
+      };
+      await updateInventory(
+        project.inventoryId,
+        currentActivity.materials?.map((material: Material) => {
+          return {
+            amount: material.amount,
+            material: material.material,
+            unit: material.unit,
+          };
+        }) ?? [],
+        reduceInventory
+      );
+      await updateStatusActivity(project, currentActivity as Activity);
     } else {
-      throw new Error('No hemos podido encontrar la actividad');
+      throw new Error('No hemos encontrado la actividad');
     }
   } catch (error) {
     if (error instanceof Error || error instanceof FirebaseError)

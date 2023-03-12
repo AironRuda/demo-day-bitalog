@@ -10,6 +10,7 @@ import { Project } from '../../model/projects.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import FormActivity from './form/FormActivity';
 import Swal from 'sweetalert2';
+import { updateInventory } from '../../handlers/handleInventory';
 
 const EMPTY_VALUES: createActivitiesDTO = {
   activityName: '',
@@ -52,6 +53,14 @@ const UpdateActivity: React.FunctionComponent = (props) => {
         id ?? '',
         currentProject
       );
+      if (INITIAL_VALUES.completed !== values.completed) {
+        console.log('holi');
+        await updateInventory(
+          currentProject.inventoryId,
+          values.materials,
+          values.completed ? false : true
+        );
+      }
       if (typeof response === 'string') helpers.setStatus(response);
       else if (response) {
         dispatch(updateActivity(response));
