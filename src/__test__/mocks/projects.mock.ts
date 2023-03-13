@@ -1,4 +1,4 @@
-import { Project } from '../model/projects.model';
+import { Project } from '../../model/projects.model';
 import { unorderedActivities } from './activities.mock';
 
 export const unorderedProjects: Project[] = [

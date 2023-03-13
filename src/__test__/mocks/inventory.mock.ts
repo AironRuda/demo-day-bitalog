@@ -1,4 +1,4 @@
-import { Material } from '../model/material.model';
+import { Material } from '../../model/material.model';
 
 export const baseInventory: Material[] = [
   { amount: 15, material: 'carbón', unit: 'units' },

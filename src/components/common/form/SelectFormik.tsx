@@ -10,7 +10,7 @@ const SelectFormik: React.FunctionComponent<Props> = ({
   name,
   options,
   placeholder,
-  renderList
+  renderList,
 }) => {
   const [field, meta, helpers] = useField(name);
 
@@ -22,6 +22,7 @@ const SelectFormik: React.FunctionComponent<Props> = ({
   return (
     <div className='w-full'>
       <select
+        title='Select Formik'
         className='select w-full bg-white border-1 border-primary text-slate-700'
         name={field.name}
         onChange={(e) =>

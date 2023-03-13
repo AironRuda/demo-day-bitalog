@@ -8,7 +8,7 @@ import App from './App';
 import ActivityContainer from './components/activities/ActivityContainer';
 import CreateActivities from './components/activities/CreateActivities';
 import UpdateActivity from './components/activities/UpdateActivity';
-import CreateProjects from './components/projects/CreateProjects';
+import CreateProjects from './components/projects/CreateProject.tsx/CreateProjects';
 import ProjectContainer from './components/projects/ProjectContainer';
 import Dashboard from './pages/Dashboard';
 import Display from './pages/Display';

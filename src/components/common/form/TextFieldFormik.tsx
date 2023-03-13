@@ -15,12 +15,15 @@ const TextFieldFormik: React.FunctionComponent<IAppProps> = ({
   return (
     <div className='w-full'>
       <input
+        role='textbox'
         type={type ?? 'text'}
         placeholder={placeholder}
         {...field}
         className='input input-primary w-full bg-white text-slate-600'
       />
-      {meta.touched && meta.error ? <div className='text-red-500 pl-2'>{meta.error}</div> : null}
+      {meta.touched && meta.error ? (
+        <div className='text-red-500 pl-2'>{meta.error}</div>
+      ) : null}
     </div>
   );
 };

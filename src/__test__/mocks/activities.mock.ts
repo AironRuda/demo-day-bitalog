@@ -1,4 +1,4 @@
-import { Activity } from '../model/activity.model';
+import { Activity } from '../../model/activity.model';
 
 export const unorderedActivities: Activity[] = [
   {
