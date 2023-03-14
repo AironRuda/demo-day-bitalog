@@ -38,7 +38,7 @@ export const orderedProjects = [
     adminId: '21qrqw',
     completed: false,
     inventoryId: 'asddassad',
-    name: 'Actividad',
+    name: 'ACTIVIDAD',
     workers: [],
   },
   {
@@ -47,7 +47,7 @@ export const orderedProjects = [
     adminId: '21qrqw',
     completed: false,
     inventoryId: 'asddassad',
-    name: 'Actividad',
+    name: 'ACTIVIDAD',
     workers: [],
   },
   {
@@ -56,7 +56,7 @@ export const orderedProjects = [
     adminId: '21qrqw',
     completed: true,
     inventoryId: 'asddassad',
-    name: 'Actividad',
+    name: 'ACTIVIDAD',
     workers: [],
   },
 ];

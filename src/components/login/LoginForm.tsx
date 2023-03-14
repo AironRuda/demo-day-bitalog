@@ -1,7 +1,7 @@
 import TextFieldFormik from '../common/form/TextFieldFormik';
 import { fetchUser } from '../../context/thunks';
 import { Form, Formik, FormikHelpers } from 'formik';
-import { handleLogin } from '../../handlers/loginHandle';
+import { handleLogin } from '../../handlers/handleLogin';
 import { useDispatch } from 'react-redux';
 import { LOGIN_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import LoginValues from '../../model/login.model';

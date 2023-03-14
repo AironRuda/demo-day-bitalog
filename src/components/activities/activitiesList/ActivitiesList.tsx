@@ -16,10 +16,10 @@ const ActivitiesList: React.FunctionComponent = () => {
   const [filter, setFilter] = useState(true);
 
   return (
-    <div className='h-4/5 lg:w-4/5 w-full'>
+    <div className='h-4/5 lg:w-4/5 w-11/12'>
       {currentProject && !!currentProject.activities.length ? (
         <div className='h-full w-full mt-12'>
-          <table className='table table-compact w-full '>
+          <table className='table table-compact w-full'>
             <thead>
               <tr className='[&>*]:bg-primary [&>*]:text-white border-6'>
                 <th
@@ -34,7 +34,10 @@ const ActivitiesList: React.FunctionComponent = () => {
                   <span className='md:block hidden'>Prioridad</span>
                 </th>
                 <th>Materiales</th>
-                <th className='text-center'>Acciones</th>
+                <th className='text-center sm:w-10'>
+                  <span className='md:hidden block'>Act</span>
+                  <span className='md:block hidden'>Acciones</span>
+                </th>
               </tr>
             </thead>
             <tbody>

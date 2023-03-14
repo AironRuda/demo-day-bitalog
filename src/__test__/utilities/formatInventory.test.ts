@@ -1,3 +1,5 @@
+import { InventoryFilter } from '../../model/inventory.model';
+import { Material } from '../../model/material.model';
 import {
   formatNewInventory,
   formatSpentsList,
@@ -21,18 +23,16 @@ describe('The utilities of inventory page works', () => {
   });
 
   test('Return the expected formatted array', () => {
-    expect(formatSpentsList(newInventory, '')).toStrictEqual(
-      alphabeticallyInventory
-    );
-    expect(formatSpentsList(newInventory, 'reverse')).toStrictEqual(
-      reverseAlphabeticallyInventory
-    );
-    expect(formatSpentsList(newInventory, 'max')).toStrictEqual(
-      majorAmountInventory
-    );
-    expect(formatSpentsList(newInventory, 'min')).toStrictEqual(
-      minAmountInventory
-    );
+    const options: [Material[], InventoryFilter][] = [
+      [alphabeticallyInventory, ''],
+      [reverseAlphabeticallyInventory, 'reverse'],
+      [majorAmountInventory, 'max'],
+      [minAmountInventory, 'min'],
+    ];
+
+    options.forEach((item) => {
+      expect(formatSpentsList(newInventory, item[1])).toStrictEqual(item[0]);
+    });
   });
 
   test('Return the reduced array', () => {

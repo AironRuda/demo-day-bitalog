@@ -14,9 +14,8 @@ const REGISTER_VALIDATION_SCHEMA = yup.object().shape({
     .string()
     .min(6, 'contraseña muy corta')
     .required('Campo requerido'),
-  rol: yup
-    .string()
-    .required("Debe indicar el rol del usuario")
+  name: yup.string().required('Debe indicar un nombre de usuario'),
+  rol: yup.string().required('Debe indicar el rol del usuario'),
 });
 
 const CREATE_PROJECT_VALIDATION_SCHEMA = yup.object().shape({
@@ -49,5 +48,5 @@ export {
   LOGIN_VALIDATION_SCHEMA,
   CREATE_PROJECT_VALIDATION_SCHEMA,
   ACTIVITY_VALIDATION_SCHEMA,
-  REGISTER_VALIDATION_SCHEMA
+  REGISTER_VALIDATION_SCHEMA,
 };

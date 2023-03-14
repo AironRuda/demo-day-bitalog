@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchUser } from '../../context/thunks';
 import { db } from '../../firebase/config';
-import { registerHandle } from '../../handlers/registerHandle';
+import { registerHandle } from '../../handlers/handleRegister';
 import { RegisterDTO } from '../../model/user.model';
 import { REGISTER_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import TextFieldFormik from '../common/form/TextFieldFormik';
@@ -13,6 +13,7 @@ const INITIAL_VALUES: RegisterDTO = {
   email: '',
   rol: '',
   password: '',
+  name: '',
 };
 
 const RegisterForm: React.FunctionComponent = (props) => {
@@ -22,14 +23,10 @@ const RegisterForm: React.FunctionComponent = (props) => {
     values: RegisterDTO,
     helpers: FormikHelpers<RegisterDTO>
   ) => {
-    const rol = values.rol;
     const response = await registerHandle(values);
     if (typeof response === 'string') {
       helpers.setStatus(response);
     } else if (response) {
-      await setDoc(doc(db, 'users', response.user.uid), {
-        rol,
-      });
       dispatch(fetchUser(response.user.uid));
     }
   };
@@ -46,7 +43,12 @@ const RegisterForm: React.FunctionComponent = (props) => {
             Registrate
           </h1>
           <TextFieldFormik name='email' placeholder='Email' type='email' />
-
+          <TextFieldFormik
+            name='password'
+            placeholder='Password'
+            type='password'
+          />
+          <TextFieldFormik name='name' placeholder='Nombre de usuario' />
           <select
             className='select w-full bg-white border-1 border-primary text-slate-700'
             name='rol'
@@ -61,12 +63,6 @@ const RegisterForm: React.FunctionComponent = (props) => {
           {errors.rol && (
             <div className='text-red-500 pl-2 -mt-5'>{errors.rol}</div>
           )}
-
-          <TextFieldFormik
-            name='password'
-            placeholder='Password'
-            type='password'
-          />
           <button type='submit' className='btn btn-primary text-white'>
             Registrarse
           </button>

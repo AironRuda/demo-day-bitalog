@@ -21,7 +21,7 @@ const SelectStatus: React.FunctionComponent<Props> = ({ status }) => {
       <div className='btn-group w-full' id='priority'>
         <input
           type='button'
-          value='Activa'
+          value='Pendiente'
           className={`w-1/2 btn border-primary bg-white hover:text-white hover:border-0 hover:bg-primary text-primary  ${
             !status && 'btn-primary btn-active'
           }`}
@@ -31,7 +31,7 @@ const SelectStatus: React.FunctionComponent<Props> = ({ status }) => {
         />
         <input
           type='button'
-          value='Inactiva'
+          value='Finalizada'
           className={`w-1/2 btn border-primary bg-white hover:text-white hover:border-0 hover:bg-primary text-primary  ${
             status && 'btn-primary btn-active'
           }`}

@@ -12,7 +12,7 @@ const Spent: React.FunctionComponent<SpentProps> = ({ spent, id }) => {
     >
       <th>{id + 1}</th>
       <td>{spent.material}</td>
-      <td>{spent.amount}</td>
+      <td className='text-center'>{spent.amount}</td>
       <td className='text-center'>{spent.unit}</td>
     </tr>
   );

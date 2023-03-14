@@ -33,19 +33,15 @@ export const formatSpentsList = (
   inventory: Material[],
   filter: InventoryFilter
 ) => {
-  return filter === ''
+  return filter === '' || filter === 'reverse'
     ? inventory.sort((a, b) => {
-        if (a.material > b.material) return 1;
-        if (a.material < b.material) return -1;
+        if (filter === '' ? a.material > b.material : a.material < b.material)
+          return 1;
+        if (filter === '' ? a.material < b.material : a.material > b.material)
+          return -1;
         else return 0;
       })
-    : filter === 'reverse'
-    ? inventory.sort((a, b) => {
-        if (a.material < b.material) return 1;
-        if (a.material > b.material) return -1;
-        else return 0;
-      })
-    : filter === 'max'
-    ? inventory.sort((a, b) => b.amount - a.amount)
-    : inventory.sort((a, b) => a.amount - b.amount);
+    : inventory.sort((a, b) =>
+        filter === 'max' ? b.amount - a.amount : a.amount - b.amount
+      );
 };

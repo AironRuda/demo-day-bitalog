@@ -1,35 +1,34 @@
-import { FirebaseError, uuidv4 } from '@firebase/util';
-import { format } from 'date-fns';
-import { updateDoc } from 'firebase/firestore';
-import { projectsRef } from '../firebase/config';
+import { FirebaseError } from '@firebase/util';
 import { Activity, createActivitiesDTO } from '../model/activity.model';
-import { Material } from '../model/material.model';
 import { Project } from '../model/projects.model';
-import { updateInventory } from './handleInventory';
+import {
+  createActivity,
+  deleteActivity,
+  updateActivity,
+  updateStatusActivity,
+} from '../services/activity.service';
+import { updateInventory } from '../services/inventory.service';
 
 export const handleCreateActivity = async (
   values: createActivitiesDTO,
   currentProject: Project
 ) => {
   try {
-    const activities = currentProject.activities;
-    const newActivity: Activity = {
-      ...values,
-      id: uuidv4(),
-      completed: false,
-      updatedAt: format(new Date(), 'dd/MM/yyyy'),
-    };
-    await updateDoc(projectsRef(currentProject.id), {
-      activities: [...activities, newActivity],
-    });
+    const otherActivities = currentProject.activities;
+    const newActivity = await createActivity(
+      currentProject.id,
+      otherActivities,
+      values
+    );
     return { projectId: currentProject.id, activity: newActivity };
   } catch (error) {
-    if (error instanceof FirebaseError) return error.message;
+    if (error instanceof FirebaseError || error instanceof Error)
+      return error.message;
   }
 };
 
 export const handleUpdateActivity = async (
-  values: createActivitiesDTO,
+  newValues: createActivitiesDTO,
   activityId: string,
   currentProject: Project
 ) => {
@@ -39,18 +38,16 @@ export const handleUpdateActivity = async (
       (activity) => activity.id === activityId
     );
     if (activityIndex >= 0) {
-      activities[activityIndex] = {
-        ...currentProject.activities[activityIndex],
-        ...values,
-        updatedAt: format(new Date(), 'dd/MM/yyyy'),
-      };
-      await updateDoc(projectsRef(currentProject.id), {
-        activities: activities,
-      });
-      return activities[activityIndex];
+      return await updateActivity(
+        activities,
+        activityIndex,
+        newValues,
+        currentProject.id
+      );
     }
   } catch (error) {
-    if (error instanceof FirebaseError) return error.message;
+    if (error instanceof FirebaseError || error instanceof Error)
+      return error.message;
   }
 };
 
@@ -59,30 +56,14 @@ export const handleDeleteActivity = async (
   project: Project
 ) => {
   try {
-    const filteredActivities = project.activities.filter(
-      (activity) => activity.id !== activityId
-    );
-    await updateDoc(projectsRef(project.id), {
-      activities: filteredActivities,
-    });
+    await deleteActivity(project.activities, activityId, project.id);
   } catch (error) {
-    if (error instanceof FirebaseError) return error.message;
+    if (error instanceof FirebaseError || error instanceof Error)
+      return error.message;
   }
 };
 
-const updateStatusActivity = async (
-  project: Project,
-  currentActivity: Activity
-) => {
-  const otherActivities = project.activities.filter(
-    (activity) => activity.id !== currentActivity.id
-  );
-  currentActivity.completed = !currentActivity.completed;
-  return await updateDoc(projectsRef(project.id), {
-    activities: [...otherActivities, currentActivity],
-  });
-};
-
+//Si esta función falla es porque llega algún material con id
 export const handleStatusActivity = async (
   activityId: string,
   project: Project,
@@ -92,19 +73,17 @@ export const handleStatusActivity = async (
     if (project.activities.find((activity) => activity.id === activityId)) {
       const currentActivity = {
         ...project.activities.find((activity) => activity.id === activityId),
-      };
+      } as Activity;
       await updateInventory(
         project.inventoryId,
-        currentActivity.materials?.map((material: Material) => {
-          return {
-            amount: material.amount,
-            material: material.material,
-            unit: material.unit,
-          };
-        }) ?? [],
+        currentActivity.materials,
         reduceInventory
       );
-      await updateStatusActivity(project, currentActivity as Activity);
+      await updateStatusActivity(
+        project.activities,
+        currentActivity,
+        project.id
+      );
     } else {
       throw new Error('No hemos encontrado la actividad');
     }

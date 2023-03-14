@@ -1,16 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Activity } from '../model/activity.model';
-import { Project } from '../model/projects.model';
 import { User } from '../model/user.model';
-import {
-  fetchAllProjectsAdmin,
-  fetchProjectsWorker,
-  fetchUser,
-} from './thunks';
+import { fetchUser } from './thunks';
 
-const initialState: Pick<User, 'id' | 'rol'> = {
+const initialState: Omit<User, 'projects'> = {
   id: '',
   rol: '',
+  name: '',
 };
 
 const userSlice = createSlice({
@@ -25,7 +20,7 @@ const userSlice = createSlice({
     builder
       .addCase(
         fetchUser.fulfilled,
-        (state, action: PayloadAction<User | undefined>) => {
+        (state, action: PayloadAction<Omit<User, 'projects'> | undefined>) => {
           if (action.payload) {
             state = action.payload;
           }
