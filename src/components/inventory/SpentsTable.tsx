@@ -3,6 +3,7 @@ import { downArrow, upArrow } from '../../assets/icons';
 import { InventoryFilter } from '../../model/inventory.model';
 import { Material } from '../../model/material.model';
 import { formatSpentsList } from '../../utilities/formatInventory';
+import { filterWhite } from '../common/customStyles';
 import Spent from './Spent';
 
 interface Props {
@@ -27,10 +28,7 @@ const SpentsTable: React.FunctionComponent<Props> = ({ inventory }) => {
               <span className='flex items-center'>
                 Material{' '}
                 <img
-                  style={{
-                    filter:
-                      'invert(100%) sepia(94%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%)',
-                  }}
+                  style={filterWhite}
                   src={filter === '' ? upArrow : downArrow}
                 />
               </span>
@@ -44,10 +42,7 @@ const SpentsTable: React.FunctionComponent<Props> = ({ inventory }) => {
               <span className='flex items-center'>
                 Gasto{' '}
                 <img
-                  style={{
-                    filter:
-                      'invert(100%) sepia(94%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%)',
-                  }}
+                  style={filterWhite}
                   src={filter === 'max' ? upArrow : downArrow}
                 />
               </span>

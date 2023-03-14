@@ -2,19 +2,12 @@ import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { clipboard, folder, group, spreadsheet } from '../../assets/icons';
 import { selectRol } from '../../context/selectors';
+import { filterSlate, filterWhite } from './customStyles';
 
 const Navbar: React.FunctionComponent = () => {
   const location = useLocation().pathname;
   const rol = useSelector(selectRol);
 
-  const iconBase = {
-    filter:
-      'invert(100%) sepia(94%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%)',
-  };
-  const iconSelected = {
-    filter:
-      'invert(20%) sepia(11%) saturate(1907%) hue-rotate(176deg) brightness(93%) contrast(81%)',
-  };
   const link = 'flex flex-col justify-center items-center cursor-pointer ';
 
   return (
@@ -27,7 +20,7 @@ const Navbar: React.FunctionComponent = () => {
           to=''
         >
           <img
-            style={location === '/app/dashboard' ? iconSelected : iconBase}
+            style={location === '/app/dashboard' ? filterSlate : filterWhite}
             className='w-10'
             src={folder}
           />
@@ -41,7 +34,7 @@ const Navbar: React.FunctionComponent = () => {
           to='activities'
         >
           <img
-            style={location.includes('activities') ? iconSelected : iconBase}
+            style={location.includes('activities') ? filterSlate : filterWhite}
             className='w-10'
             src={clipboard}
           />
@@ -55,7 +48,7 @@ const Navbar: React.FunctionComponent = () => {
           to='team'
         >
           <img
-            style={location.includes('team') ? iconSelected : iconBase}
+            style={location.includes('team') ? filterSlate : filterWhite}
             className='w-10'
             src={group}
           />
@@ -70,7 +63,7 @@ const Navbar: React.FunctionComponent = () => {
             to='inventory'
           >
             <img
-              style={location.includes('inventory') ? iconSelected : iconBase}
+              style={location.includes('inventory') ? filterSlate : filterWhite}
               className='w-10'
               src={spreadsheet}
             />
