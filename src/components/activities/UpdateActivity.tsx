@@ -10,7 +10,7 @@ import { Project } from '../../model/projects.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import FormActivity from './form/FormActivity';
 import Swal from 'sweetalert2';
-import { updateInventory } from '../../handlers/handleInventory';
+import { updateInventory } from '../../services/inventory.service';
 
 const EMPTY_VALUES: createActivitiesDTO = {
   activityName: '',

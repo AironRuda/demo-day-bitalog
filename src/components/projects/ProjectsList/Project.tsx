@@ -39,7 +39,7 @@ const Project: React.FunctionComponent<IProjectProps> = ({
         }
         src={folder}
       />
-      <b>{project.name}</b>
+      <b className='text-center'>{project.name}</b>
     </li>
   );
 };

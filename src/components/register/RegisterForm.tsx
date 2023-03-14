@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchUser } from '../../context/thunks';
 import { db } from '../../firebase/config';
-import { registerHandle } from '../../handlers/registerHandle';
+import { registerHandle } from '../../handlers/handleRegister';
 import { RegisterDTO } from '../../model/user.model';
 import { REGISTER_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import TextFieldFormik from '../common/form/TextFieldFormik';

@@ -1,5 +1,4 @@
 import { filterProjects, Project } from '../model/projects.model';
-import { capitalizeFirstLetter } from './formatString';
 
 export const sortAlphabetically = (projects: Project[]) => {
   return projects.sort((a, b) => {
@@ -25,7 +24,7 @@ const getProjectsByCondition = (
     projects
       .filter((project) => getCondition(project, filter))
       .map((project) => {
-        return { ...project, name: capitalizeFirstLetter(project.name) };
+        return { ...project, name: project.name.toUpperCase() };
       })
   );
 };

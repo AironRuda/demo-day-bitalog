@@ -14,15 +14,16 @@
 
   </br>
 
- <h2 id="usage">Uso</h2>
-
-  <p>La versión estable más reciente de la aplicación se encuentra en este <a href="https://www.enlace.com/" target="_blank">enlace.</a></br></br>
- </p>
-
+  
 <h2 id="description">Descripción</h2></br>
  <p>Bitalog es una bitácora virtual que surge con la idea de agilizar procesos y llevar un registro de estos. Para ello se brinda la posibilidad de crear usuarios con diferentes roles; administrador y usuario.</br> El primero tendrá la capacidad de crear proyectos con un equipo de trabajo, posterior a esto podrá asignar actividades con una serie de recursos y alguna prioridad; estas actividades pueden ser modificadas en cualquier momento. También el administrador tendrá un muro de anuncios que servirá como canal de comunicación con sus encargados. Por último, el administrador podrá ver gastos del proyecto según las actividades que se cumplan en el apartado de inventario.</br>
  El segundo rol, el usuario, podrá ser asignado a un proyecto con actividades, podrá usar el muro de anuncios para comunicarse y podrá notificar el cumplimiento de las tareas que le han sido asignadas.
  </p></br>
+
+ <h2 id="usage">Uso</h2>
+
+  <p>La versión estable más reciente de la aplicación se encuentra en este <a href="https://www.enlace.com/" target="_blank">enlace.</a></br></br>
+ </p>
 
   <h2 id="features">Características</h2>
   <ul>
@@ -30,6 +31,7 @@
   <li>Fácil creación de usuarios</li>
   <li>Gestión ágil de actividades</li>
   <li>Información accesible por proyecto</li>
+  <li>Manejo de equipos de trabajo</li>
   </ul>
   </br>
 
