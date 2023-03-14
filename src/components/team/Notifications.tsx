@@ -1,30 +1,11 @@
-import {
-  doc,
-  DocumentData,
-  DocumentSnapshot,
-  onSnapshot,
-} from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getSelectedProject } from "../../context/projectsSlice";
-import { db } from "../../firebase/config";
+import { getNovelties } from "../../context/noveltiesSlice";
 import NoveltyCard from "./NoveltyCard";
 
 const Notifications: React.FunctionComponent = (props) => {
-  const [novelties, setNovelties] = useState([]);
-  const currentProjectId = useSelector(getSelectedProject);
-
-  useEffect(() => {
-    onSnapshot(
-      doc(db, "novelty", currentProjectId),
-      (novelties: DocumentSnapshot<DocumentData>) => {
-        setNovelties(novelties.data()?.novelties ?? []);
-      }
-    );
-  }, [currentProjectId]);
-
+  const novelties = useSelector(getNovelties) as unknown as NoveltyCard[];
   return (
-    <div>
+    <div className="flex">
       <ul>
         {novelties.length ? (
           novelties.map((novelty: NoveltyCard) => (

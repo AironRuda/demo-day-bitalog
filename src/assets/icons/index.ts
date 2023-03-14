@@ -14,7 +14,9 @@ import logout from './logout.svg';
 import leftArrow from './leftArrow.svg';
 import upArrow from './upArrow.svg';
 import downArrow from './downArrow.svg';
-import imgLogo from './img.svg';
+import img from './img.svg';
+import plusLogo from './plusLogo.svg';
+import imgLogo from './imgLogo.svg';
 
 export {
   pointerLogo,
@@ -34,4 +36,5 @@ export {
   imgLogo,
   upArrow,
   downArrow,
+  plusLogo
 };

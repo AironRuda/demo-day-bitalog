@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { imgLogo } from "../../assets/icons";
+import { imgLogo, plusLogo } from "../../assets/icons";
 import { selectUser } from "../../context/selectors";
 import Swal from "sweetalert2";
 import { handleCreateNovelty } from "../../handlers/handleNovelties";
@@ -25,9 +25,14 @@ const CreateNotification: React.FunctionComponent = (props) => {
   };
 
   return (
-    <form onSubmit={handleSend}>
-      <h1>Generar notificacion</h1>
+    <form
+      className="bg-secondary p-3 m-5 rounded-md flex flex-col items-center h-72"
+      onSubmit={handleSend}
+    >
+      <h1 className="text-black font-bold mb-4">GENERAR NOTIFICACION</h1>
       <input
+        className="p-2 rounded-md border-2 border-primary m-1"
+        placeholder="Ingrese texto"
         type="text"
         name="text"
         value={text}
@@ -35,7 +40,7 @@ const CreateNotification: React.FunctionComponent = (props) => {
           setText(e.target.value);
         }}
       />
-      <div className="send">
+      <div className="">
         <input
           type="file"
           name="file"
@@ -44,9 +49,11 @@ const CreateNotification: React.FunctionComponent = (props) => {
           onChange={(e) => e.target.files && setImg(e.target.files[0])}
         />
         <label htmlFor="file">
-          <img src={imgLogo} alt="" />
+          <img className="w-20 cursor-pointer" src={imgLogo} alt="imgLogo" />
         </label>
-        <button type="submit">Send</button>
+        <button type="submit">
+          <img src={plusLogo} className="w-20 cursor-cell" alt="" />
+        </button>
       </div>
     </form>
   );

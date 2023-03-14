@@ -10,16 +10,16 @@ const NotificationField: React.FunctionComponent<IAppProps> = (props) => {
   const currentProjectId = useSelector(getSelectedProject);
   return (
     <main className="flex items-center flex-col m-5">
-      <h1 className="items-center font-bold text-3xl">NotificationField</h1>
-      {currentProjectId ? (
+      {currentProjectId && (
         <>
-          <CreateNotification />
-          <Notifications />
+          <h1 className="text-center text-4xl text-slate-700 font-bold">
+            NOVEDADES
+          </h1>
+          <div className="flex flex-col">
+            <CreateNotification />
+            <Notifications />
+          </div>
         </>
-      ) : (
-        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-          No se ha seleccionado un ptoyecto
-        </h5>
       )}
     </main>
   );

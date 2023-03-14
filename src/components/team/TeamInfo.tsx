@@ -1,4 +1,4 @@
-import Team from "../Team";
+import Team from "./Team";
 import NotificationField from "./NotificationField";
 
 const TeamInfo: React.FunctionComponent = (props) => {
