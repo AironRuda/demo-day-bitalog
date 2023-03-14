@@ -15,12 +15,12 @@ const SpentsTable: React.FunctionComponent<Props> = ({ inventory }) => {
 
   return (
     <div className='lg:w-2/3 w-screen h-full'>
-      <table className='table table-compact lg:w-4/5 w-full mx-auto h-full'>
+      <table className='table table-compact lg:w-4/5 w-11/12 mx-auto h-full'>
         <thead>
           <tr className='[&>*]:bg-primary [&>*]:text-white border-6'>
             <th className='w-10 z-0'></th>
             <th
-              className='w-20 cursor-pointer'
+              className='w-20 overflow-hidden cursor-pointer'
               onClick={() =>
                 setFilter((prev) => (prev === '' ? 'reverse' : ''))
               }
@@ -39,7 +39,7 @@ const SpentsTable: React.FunctionComponent<Props> = ({ inventory }) => {
                 setFilter((prev) => (prev === 'max' ? 'min' : 'max'))
               }
             >
-              <span className='flex items-center'>
+              <span className='flex items-center mr-3'>
                 Gasto{' '}
                 <img
                   style={filterWhite}

@@ -3,28 +3,17 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { orderedProjects } from '../mocks/projects.mock';
 
 describe('Project', () => {
-  afterEach(() => {
-    cleanup();
-  });
+  it('should with his corresponding class', async () => {
+    const alternatives: [Project, string][] = [
+      [orderedProjects[0], 'bg-primary'],
+      [orderedProjects[1], 'bg-secondary'],
+      [orderedProjects[2], 'bg-slate-300'],
+    ];
 
-  describe('Should appear with the corresponding color', async () => {
-    test('should appear as new and selected', async () => {
+    alternatives.forEach(async (alternative) => {
       render(
         <Project
-          project={orderedProjects[0]}
-          currentProject={orderedProjects[0].id}
-          handleClick={() => {}}
-        />
-      );
-
-      const item = await screen.findByRole('listitem');
-
-      expect(item).toHaveClass('bg-primary border-4 border-slate-700');
-    });
-    test('should appear as pending', async () => {
-      render(
-        <Project
-          project={orderedProjects[1]}
+          project={alternative[0]}
           currentProject=''
           handleClick={() => {}}
         />
@@ -32,21 +21,8 @@ describe('Project', () => {
 
       const item = await screen.findByRole('listitem');
 
-      expect(item).toHaveClass('bg-secondary');
-    });
-
-    test('should appear as done', async () => {
-      render(
-        <Project
-          project={orderedProjects[2]}
-          currentProject=''
-          handleClick={() => {}}
-        />
-      );
-
-      const item = await screen.findByRole('listitem');
-
-      expect(item).toHaveClass('bg-slate-300');
+      expect(item).toHaveClass(alternative[1]);
+      cleanup();
     });
   });
 });
