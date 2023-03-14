@@ -15,10 +15,8 @@ const NotificationField: React.FunctionComponent<IAppProps> = (props) => {
           <h1 className="text-center text-4xl text-slate-700 font-bold">
             NOVEDADES
           </h1>
-          <div className="flex flex-col">
-            <CreateNotification />
-            <Notifications />
-          </div>
+          <CreateNotification />
+          <Notifications />
         </>
       )}
     </main>

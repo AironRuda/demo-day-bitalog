@@ -31,7 +31,7 @@ const CreateNotification: React.FunctionComponent = (props) => {
     >
       <h1 className="text-black font-bold mb-4">GENERAR NOTIFICACION</h1>
       <input
-        className="p-2 rounded-md border-2 border-primary m-1"
+        className="p-2 rounded-md border-2 border-primary m-1 text-black"
         placeholder="Ingrese texto"
         type="text"
         name="text"
