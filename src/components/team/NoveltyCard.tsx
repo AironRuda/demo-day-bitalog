@@ -4,19 +4,20 @@ import Swal from "sweetalert2";
 import { getNovelties } from "../../context/noveltiesSlice";
 import { getSelectedProject } from "../../context/projectsSlice";
 import { db } from "../../firebase/config";
-import { NoveltyCard } from "../../model/novelties.model";
+import {
+  handleCreateNovelty,
+  handleDeleteNotify,
+} from "../../handlers/handleNovelties";
+import { Novelties, NoveltyCard } from "../../model/novelties.model";
 
 interface Props {
   novelty: NoveltyCard;
 }
 const NoveltyCard = ({ novelty }: Props) => {
-  const currentProjectId = useSelector(getSelectedProject);
-  const novelties = useSelector(getNovelties);
+  const novelties = useSelector(getNovelties) as unknown as NoveltyCard[];
 
   const handleDelete = async (id: string) => {
-    await updateDoc(doc(db, "novelty", currentProjectId), {
-      novelties: novelties.filter((novelty) => novelty.noveltyId !== id),
-    });
+    await handleDeleteNotify(id, novelties);
     Swal.fire({
       text: "Su notifiacacion fue eliminada correctamente",
       icon: "success",
@@ -36,12 +37,11 @@ const NoveltyCard = ({ novelty }: Props) => {
           className="m-2 p-2"
           onClick={() => handleDelete(novelty.noveltyId)}
         >
-          ❌
+          ✔
         </button>
       </div>
 
       <p className="m-3 p-3 text-black">{novelty.text}</p>
-      {/* <p>{novelty.noveltyId}</p> */}
       {novelty.img && (
         <img src={novelty.img} className="rounded-md m-3" alt="" />
       )}

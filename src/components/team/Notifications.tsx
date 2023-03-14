@@ -3,14 +3,17 @@ import { getNovelties } from "../../context/noveltiesSlice";
 import NoveltyCard from "./NoveltyCard";
 
 const Notifications: React.FunctionComponent = (props) => {
-  const novelties = useSelector(getNovelties) as unknown as NoveltyCard[];
+  const novelties = [...useSelector(getNovelties)] as unknown as NoveltyCard[];
+
   return (
     <div className="flex flex-row items-center justify-between">
       <ul>
         {novelties.length ? (
-          novelties.map((novelty: NoveltyCard) => (
-            <NoveltyCard key={novelty.noveltyId} novelty={novelty} />
-          ))
+          novelties
+            .reverse()
+            .map((novelty: NoveltyCard) => (
+              <NoveltyCard key={novelty.noveltyId} novelty={novelty} />
+            ))
         ) : (
           <li>
             <h5 className="text-3xl text-center px-20 text-secondary mt-20">

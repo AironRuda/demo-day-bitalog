@@ -3,9 +3,10 @@ import {
   DocumentData,
   DocumentSnapshot,
   onSnapshot,
+  orderBy,
 } from "@firebase/firestore";
 import { Unsubscribe } from "@firebase/util";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { clipboard, folder, group, spreadsheet } from "../../assets/icons";
@@ -79,7 +80,7 @@ const Navbar: React.FunctionComponent = () => {
         </NavLink>
 
         <NavLink
-          className={`${link} ${
+          className={`relative ${link} ${
             location.includes("team") ? "text-slate-700" : " text-white"
           }`}
           to="team"
@@ -90,7 +91,7 @@ const Navbar: React.FunctionComponent = () => {
             src={group}
           />
           {currentProjectId && (
-            <p className="bg-red-600 rounded-md p-1 absolute ">
+            <p className="bg-red-600 rounded-md p-1 absolute right-0 top-1 text-white">
               {!!novelties.length && novelties.length}
             </p>
           )}

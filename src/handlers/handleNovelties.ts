@@ -1,4 +1,4 @@
-import { Novelty } from "../model/novelties.model";
+import { Novelties, Novelty, NoveltyCard } from "../model/novelties.model";
 import { uuidv4 } from "@firebase/util";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../firebase/config";
@@ -26,3 +26,10 @@ export const handleCreateNovelty = async (
         novelties: arrayUnion(img ? { ...noveltyInfo, img: url } : noveltyInfo),
     });
 };
+
+export const handleDeleteNotify = async (id: string, novelties: NoveltyCard[]) => {
+    const currentProjectId = store.getState().projects.selectedProject
+    await updateDoc(doc(db, "novelty", currentProjectId), {
+        novelties: novelties.filter((novelty: NoveltyCard) => novelty.noveltyId !== id),
+    });
+}
