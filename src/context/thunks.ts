@@ -11,8 +11,8 @@ export const fetchUser = createAsyncThunk(
     const userRef = doc(db, 'users', id);
     const firebaseUserDocument = await (await getDoc(userRef)).data();
     if (firebaseUserDocument) {
-      const rol = firebaseUserDocument.rol;
-      const user: User = { id, projects: [], rol };
+      const { rol, name } = firebaseUserDocument;
+      const user: Omit<User, 'projects'> = { id, rol, name };
       return user;
     }
   }
