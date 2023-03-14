@@ -90,7 +90,7 @@ const Navbar: React.FunctionComponent = () => {
             src={group}
           />
           {currentProjectId && (
-            <p className="bg-red-600">
+            <p className="bg-red-600 rounded-md p-1 absolute ">
               {!!novelties.length && novelties.length}
             </p>
           )}
