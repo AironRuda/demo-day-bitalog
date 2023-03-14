@@ -19,7 +19,7 @@ const NoveltyCard = ({ novelty }: Props) => {
   const handleDelete = async (id: string) => {
     await handleDeleteNotify(id, novelties);
     Swal.fire({
-      text: "Su notifiacacion fue eliminada correctamente",
+      text: "Su notifiacacion fue completada correctamente",
       icon: "success",
       confirmButtonColor: "#31C48D",
       confirmButtonText: "Aceptar",
