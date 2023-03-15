@@ -26,3 +26,4 @@ export const basicInventoryRef = doc(db, 'inventory', 'basic');
 export const projectsRef = (id: string) => doc(db, 'projects', id);
 export const inventoryRef = (id: string) => doc(db, 'inventory', id);
 export const noveltyRef = (id: string) => doc(db, 'novelty', id);
+export const userRef = (id: string) => doc(db, 'users', id);

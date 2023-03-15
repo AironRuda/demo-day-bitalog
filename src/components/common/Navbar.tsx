@@ -19,25 +19,7 @@ import { filterSlate, filterWhite } from './customStyles';
 const Navbar: React.FunctionComponent = () => {
   const location = useLocation().pathname;
   const rol = useSelector(selectRol);
-
-  const dispatch = useDispatch();
-  const currentProjectId = useSelector(getSelectedProject);
   const novelties = useSelector(getNovelties);
-
-  useEffect(() => {
-    let unsub: Unsubscribe | undefined;
-    if (!!currentProjectId) {
-      unsub = onSnapshot(
-        doc(db, 'novelty', currentProjectId),
-        (novelties: DocumentSnapshot<DocumentData>) => {
-          dispatch(setNovelties(novelties.data()?.novelties ?? []));
-        }
-      );
-    }
-    return () => {
-      unsub && unsub();
-    };
-  }, [currentProjectId]);
 
   const link = 'flex flex-col justify-center items-center cursor-pointer ';
 
@@ -83,9 +65,9 @@ const Navbar: React.FunctionComponent = () => {
             className='w-10'
             src={group}
           />
-          {currentProjectId && (
+          {!!novelties.length && (
             <p className='bg-red-600 w-6 h-6 rounded-full p-1 absolute -right-1 -top-1 text-white flex items-center justify-center'>
-              {!!novelties.length && novelties.length}
+              {novelties.length}
             </p>
           )}
           <b className=''>Equipo</b>

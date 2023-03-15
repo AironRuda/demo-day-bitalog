@@ -25,14 +25,16 @@ const CreateProjectForm: React.FunctionComponent<Props> = ({
       onSubmit={handleSubmit}
     >
       {({ status }) => (
-        <Form className='h-11/12 md:w-1/3 mx-2 flex flex-col items-center gap-5 p-10 '>
-          <TextFieldFormik name='name' placeholder='Nombre del proyecto' />
-          <SelectFormik
-            name='workers'
-            options={avalaibleWorkers}
-            placeholder='Selecciona a los encargados'
-            renderList
-          />
+        <Form className='h-11/12 md:w-1/3 mx-2 flex flex-col items-center p-10 '>
+          <div className='w-full flex flex-col gap-5'>
+            <TextFieldFormik name='name' placeholder='Nombre del proyecto' />
+            <SelectFormik
+              name='workers'
+              options={avalaibleWorkers}
+              placeholder='Selecciona a los encargados'
+              renderList
+            />
+          </div>
           <button type='submit' className='btn btn-primary text-white w-full'>
             Crear
           </button>

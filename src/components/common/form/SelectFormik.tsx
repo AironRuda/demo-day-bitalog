@@ -44,7 +44,7 @@ const SelectFormik: React.FunctionComponent<Props> = ({
       {meta.touched && meta.error ? (
         <div className='text-red-500 pl-2'>{meta.error}</div>
       ) : null}
-      <ul className='my-5 overflow-auto max-h-24 w-11-12 [&>*:nth-child(odd)]:bg-slate-100'>
+      <ul className='my-7 w-11-12 [&>*:nth-child(odd)]:bg-slate-100'>
         {Array.isArray(field.value) &&
           field.value.map((item, index) => (
             <li

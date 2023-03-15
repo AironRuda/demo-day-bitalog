@@ -63,7 +63,6 @@ export const handleDeleteActivity = async (
   }
 };
 
-//Si esta función falla es porque llega algún material con id
 export const handleStatusActivity = async (
   activityId: string,
   project: Project,
