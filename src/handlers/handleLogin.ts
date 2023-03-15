@@ -1,16 +1,10 @@
-import LoginValues from '../model/login.model';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase/config';
+import { LoginValues } from '../model/login.model';
 import { FirebaseError } from 'firebase/app';
+import { login } from '../services/login.service';
 
 export const handleLogin = async (values: LoginValues) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      values.email,
-      values.password
-    );
-    return userCredential;
+    return await login(values);
   } catch (error) {
     if (error instanceof FirebaseError || error instanceof Error)
       return error.message;

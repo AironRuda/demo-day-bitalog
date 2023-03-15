@@ -102,9 +102,6 @@ const projectSlice = createSlice({
   },
 });
 
-export const getSelectedProject = (state: { projects: ProjectContext }) =>
-  state.projects.selectedProject;
-
 export const {
   selectProject,
   addActivity,

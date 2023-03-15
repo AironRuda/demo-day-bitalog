@@ -1,8 +1,7 @@
 import { getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getSelectedProject } from '../../context/projectsSlice';
-import { getCurrentProject } from '../../context/selectors';
+import { getCurrentProject, getSelectedProject } from '../../context/selectors';
 import { searInventory } from '../../firebase/queries';
 import { Material } from '../../model/material.model';
 import SelectProjectMessage from '../common/SelectProjectMessage';

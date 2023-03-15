@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getSelectedProject } from '../../../context/projectsSlice';
+import { getSelectedProject } from '../../../context/selectors';
 import CreateNotification from './CreateNotification';
 import Notifications from './Notifications';
 

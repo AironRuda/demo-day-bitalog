@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProjects } from '../../../context/selectors';
 import {
-  getSelectedProject,
   selectProject,
   updateStatusProject,
 } from '../../../context/projectsSlice';
+import { getSelectedProject } from '../../../context/selectors';
 import Filter from './Filter';
 import { updateDoc } from 'firebase/firestore';
 import { projectsRef } from '../../../firebase/config';

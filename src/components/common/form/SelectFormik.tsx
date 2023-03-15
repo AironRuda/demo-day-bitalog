@@ -45,7 +45,8 @@ const SelectFormik: React.FunctionComponent<Props> = ({
         <div className='text-red-500 pl-2'>{meta.error}</div>
       ) : null}
       <ul className='my-7 w-11-12 [&>*:nth-child(odd)]:bg-slate-100'>
-        {Array.isArray(field.value) &&
+        {renderList &&
+          Array.isArray(field.value) &&
           field.value.map((item, index) => (
             <li
               key={item}

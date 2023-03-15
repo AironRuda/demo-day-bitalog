@@ -1,12 +1,16 @@
-import { Project, ProjectContext } from '../model/projects.model';
+import { Novelties } from '../model/novelties.model';
+import { ProjectContext } from '../model/projects.model';
 import { User } from '../model/user.model';
 
 export const selectUser = (state: { user: User }) => state.user;
 
 export const selectRol = (state: { user: User }) => state.user.rol;
 
-export const selectProjects = (state: { projects: { projects: Project[] } }) =>
+export const selectProjects = (state: { projects: ProjectContext }) =>
   state.projects.projects;
+
+export const getSelectedProject = (state: { projects: ProjectContext }) =>
+  state.projects.selectedProject;
 
 export const getCurrentProject = (state: { projects: ProjectContext }) => {
   return state.projects.projects.find(
@@ -24,3 +28,6 @@ export const getActivityById = (
       (activity) => activity.id === activityId
     );
 };
+
+export const getNovelties = (state: { novelties: Novelties }) =>
+  state.novelties.novelties;

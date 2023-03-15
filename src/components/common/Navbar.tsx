@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { clipboard, folder, group, spreadsheet } from '../../assets/icons';
-import { getNovelties } from '../../context/noveltiesSlice';
-import { getSelectedProject } from '../../context/projectsSlice';
-import { selectRol } from '../../context/selectors';
+import {
+  selectRol,
+  getNovelties,
+  getSelectedProject,
+} from '../../context/selectors';
 import { filterSlate, filterWhite } from './customStyles';
 
 const Navbar: React.FunctionComponent = () => {

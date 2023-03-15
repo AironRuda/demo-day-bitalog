@@ -59,6 +59,7 @@ const UpdateActivity: React.FunctionComponent = (props) => {
         Swal.fire({
           icon: 'success',
           text: 'La actividad se ha actualizado correctamente 😃',
+          confirmButtonColor: '#31C48D',
         });
       }
     }

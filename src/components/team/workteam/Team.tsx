@@ -1,6 +1,9 @@
 import { useSelector } from 'react-redux';
-import { getSelectedProject } from '../../../context/projectsSlice';
-import { getCurrentProject, selectUser } from '../../../context/selectors';
+import {
+  getCurrentProject,
+  selectUser,
+  getSelectedProject,
+} from '../../../context/selectors';
 import SelectProjectMessage from '../../common/SelectProjectMessage';
 import Member from './Member';
 

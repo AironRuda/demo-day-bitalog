@@ -33,6 +33,7 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
       Swal.fire({
         text: 'Hubo un error al eliminar la actividad',
         icon: 'error',
+        confirmButtonColor: '#31C48D',
       });
     else if (!response) {
       dispatch(deleteActivity(activity.id));
@@ -54,6 +55,7 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
       Swal.fire({
         text: 'Hubo un error al cambiar el estado de la actividad',
         icon: 'error',
+        confirmButtonColor: '#31C48D',
       });
     else if (!response) {
       dispatch(updateStatusActivity(activity.id));

@@ -3,13 +3,10 @@ import { useSelector } from 'react-redux';
 import { getCurrentProject } from '../../../context/selectors';
 import { formatActivitiesList } from '../../../utilities/formatActivities';
 import ActivityItem from './ActivityItem';
-import { uuidv4 } from '@firebase/util';
 
 const ActivitiesList: React.FunctionComponent = () => {
   const currentProject = useSelector(getCurrentProject);
   const [filter, setFilter] = useState(true);
-
-  console.log(currentProject);
 
   return (
     <div className='h-4/5 lg:w-4/5 w-11/12'>
@@ -40,7 +37,7 @@ const ActivitiesList: React.FunctionComponent = () => {
               {formatActivitiesList(currentProject.activities, filter).map(
                 (activity, index) => (
                   <ActivityItem
-                    key={uuidv4()}
+                    key={index}
                     activity={activity}
                     currentProject={currentProject}
                   />

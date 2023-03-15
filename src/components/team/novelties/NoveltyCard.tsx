@@ -1,7 +1,10 @@
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { getNovelties } from '../../../context/noveltiesSlice';
-import { getCurrentProject, selectUser } from '../../../context/selectors';
+import {
+  getCurrentProject,
+  selectUser,
+  getNovelties,
+} from '../../../context/selectors';
 import { handleDeleteNotify } from '../../../handlers/handleNovelties';
 import { Novelty } from '../../../model/novelties.model';
 

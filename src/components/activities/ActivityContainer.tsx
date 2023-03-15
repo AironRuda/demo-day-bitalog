@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { getSelectedProject } from '../../context/projectsSlice';
+import { getSelectedProject } from '../../context/selectors';
 import { selectRol } from '../../context/selectors';
 import CurrentPageButtons from '../common/CurrentPageButtons';
 import SelectProjectMessage from '../common/SelectProjectMessage';

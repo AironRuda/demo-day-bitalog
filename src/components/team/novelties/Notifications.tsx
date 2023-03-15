@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getNovelties } from '../../../context/noveltiesSlice';
+import { getNovelties } from '../../../context/selectors';
 import { Novelty } from '../../../model/novelties.model';
 import NoveltyCard from './NoveltyCard';
 
