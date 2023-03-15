@@ -1,25 +1,16 @@
-import {
-  doc,
-  DocumentData,
-  DocumentSnapshot,
-  onSnapshot,
-  orderBy,
-} from '@firebase/firestore';
-import { Unsubscribe } from '@firebase/util';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import { clipboard, folder, group, spreadsheet } from '../../assets/icons';
-import { getNovelties, setNovelties } from '../../context/noveltiesSlice';
+import { getNovelties } from '../../context/noveltiesSlice';
 import { getSelectedProject } from '../../context/projectsSlice';
 import { selectRol } from '../../context/selectors';
-import { db } from '../../firebase/config';
 import { filterSlate, filterWhite } from './customStyles';
 
 const Navbar: React.FunctionComponent = () => {
   const location = useLocation().pathname;
   const rol = useSelector(selectRol);
   const novelties = useSelector(getNovelties);
+  const currentProject = useSelector(getSelectedProject);
 
   const link = 'flex flex-col justify-center items-center cursor-pointer ';
 
@@ -65,7 +56,7 @@ const Navbar: React.FunctionComponent = () => {
             className='w-10'
             src={group}
           />
-          {!!novelties.length && (
+          {!!novelties.length && !!currentProject && (
             <p className='bg-red-600 w-6 h-6 rounded-full p-1 absolute -right-1 -top-1 text-white flex items-center justify-center'>
               {novelties.length}
             </p>
