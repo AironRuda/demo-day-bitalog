@@ -1,25 +1,17 @@
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { getNovelties } from '../../../context/noveltiesSlice';
-import { getSelectedProject } from '../../../context/projectsSlice';
-import { getCurrentProject } from '../../../context/selectors';
+import { getCurrentProject, selectUser } from '../../../context/selectors';
 import { handleDeleteNotify } from '../../../handlers/handleNovelties';
 import { Novelty } from '../../../model/novelties.model';
-import { Project } from '../../../model/projects.model';
 
 interface Props {
   novelty: Novelty;
 }
 const NoveltyCard = ({ novelty }: Props) => {
   const novelties = useSelector(getNovelties) as unknown as Novelty[];
-  const currentProjectId = useSelector(getSelectedProject);
-  const admin = useSelector(
-    (state: {
-      projects: {
-        projects: Project[];
-      };
-    }) => getCurrentProject(state, currentProjectId)?.adminId
-  );
+  const admin = useSelector(getCurrentProject)?.adminId;
+  const currentUser = useSelector(selectUser).id;
 
   const handleClick = async (id: string) => {
     await handleDeleteNotify(id, novelties);
@@ -46,10 +38,12 @@ const NoveltyCard = ({ novelty }: Props) => {
       <div className='w-full flex items-center justify-between px-5'>
         <small className='font-bold text-black m-3 p-1'>
           <b>Enviado por:</b>
-          <span className='text-slate-800'>
-            {' ' + admin && admin === novelty.senderId
+          <span className='text-slate-800 font-medium'>
+            {currentUser === novelty.senderId
+              ? ' Usuario actual'
+              : admin && admin === novelty.senderId
               ? ' Administrador'
-              : novelty.senderId}
+              : ' ' + novelty.senderId}
           </span>
         </small>
         <button

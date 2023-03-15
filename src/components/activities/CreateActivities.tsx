@@ -1,11 +1,9 @@
 import { Formik, FormikHelpers } from 'formik';
-import { createActivitiesDTO } from '../../model/activity.model';
+import { Activity, createActivitiesDTO } from '../../model/activity.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import { useDispatch, useSelector } from 'react-redux';
 import { addActivity } from '../../context/projectsSlice';
 import { getCurrentProject } from '../../context/selectors';
-import { Project } from '../../model/projects.model';
-import { getSelectedProject } from '../../context/projectsSlice';
 import { handleCreateActivity } from '../../handlers/handleActivity';
 import FormActivity from './form/FormActivity';
 import Swal from 'sweetalert2';
@@ -18,11 +16,7 @@ const INITIAL_VALUES: createActivitiesDTO = {
 
 const CreateActivities: React.FunctionComponent = (props) => {
   const dispatch = useDispatch();
-  const selectedProjectId = useSelector(getSelectedProject);
-  const currentProject = useSelector(
-    (state: { projects: { projects: Project[] } }) =>
-      getCurrentProject(state, selectedProjectId)
-  );
+  const currentProject = useSelector(getCurrentProject);
 
   const handleSubmit = async (
     values: createActivitiesDTO,
@@ -33,7 +27,7 @@ const CreateActivities: React.FunctionComponent = (props) => {
       if (typeof response === 'string') helpers.setStatus(response);
       else if (response) {
         helpers.resetForm();
-        dispatch(addActivity(response.activity));
+        dispatch(addActivity(response.activity as Activity));
         Swal.fire({
           icon: 'success',
           text: 'La actividad se ha generado correctamente 😃',

@@ -10,7 +10,7 @@ import {
   handleStatusActivity,
 } from '../../../handlers/handleActivity';
 import { Activity } from '../../../model/activity.model';
-import { Project } from '../../../model/projects.model';
+import { Project, ProjectContext } from '../../../model/projects.model';
 import ActivityOptions from './ActivityOptions';
 
 interface IActivityItemProps {
@@ -23,9 +23,8 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   currentProject,
 }) => {
   const dispatch = useDispatch();
-  const currentActivity = useSelector(
-    (state: { projects: { projects: Project[] } }) =>
-      getActivityById(state, currentProject.id, activity.id)
+  const currentActivity = useSelector((state: { projects: ProjectContext }) =>
+    getActivityById(state, activity.id)
   );
 
   async function confirmDelete() {

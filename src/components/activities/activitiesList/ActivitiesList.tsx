@@ -1,19 +1,15 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getSelectedProject } from '../../../context/projectsSlice';
 import { getCurrentProject } from '../../../context/selectors';
-import { Project } from '../../../model/projects.model';
 import { formatActivitiesList } from '../../../utilities/formatActivities';
 import ActivityItem from './ActivityItem';
 import { uuidv4 } from '@firebase/util';
 
 const ActivitiesList: React.FunctionComponent = () => {
-  const selectedProjectId = useSelector(getSelectedProject);
-  const currentProject = useSelector(
-    (state: { projects: { projects: Project[] } }) =>
-      getCurrentProject(state, selectedProjectId)
-  );
+  const currentProject = useSelector(getCurrentProject);
   const [filter, setFilter] = useState(true);
+
+  console.log(currentProject);
 
   return (
     <div className='h-4/5 lg:w-4/5 w-11/12'>

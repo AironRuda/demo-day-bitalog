@@ -33,7 +33,7 @@ const ProjectList: React.FunctionComponent = (props) => {
           project.completed === true &&
           !!project.activities.length)
       ) {
-        dispatch(updateStatusProject(project.id));
+        dispatch(updateStatusProject());
         try {
           await updateDoc(projectsRef(project.id), {
             completed: !project.completed,

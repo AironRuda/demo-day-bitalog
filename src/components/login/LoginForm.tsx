@@ -4,7 +4,7 @@ import { Form, Formik, FormikHelpers } from 'formik';
 import { handleLogin } from '../../handlers/handleLogin';
 import { useDispatch } from 'react-redux';
 import { LOGIN_VALIDATION_SCHEMA } from '../../utilities/formValidations';
-import LoginValues from '../../model/login.model';
+import { LoginValues } from '../../model/login.model';
 import { Link } from 'react-router-dom';
 
 const INITIAL_VALUES: LoginValues = {

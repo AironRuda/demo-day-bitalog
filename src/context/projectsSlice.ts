@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Activity } from '../model/activity.model';
-import { Project } from '../model/projects.model';
+import { Project, ProjectContext } from '../model/projects.model';
 import { fetchAllProjectsAdmin, fetchProjectsWorker } from './thunks';
 
-const initialState: { projects: Project[]; selectedProject: string } = {
+const initialState: ProjectContext = {
   projects: [],
   selectedProject: '',
 };
@@ -12,13 +12,12 @@ const getCurrentProjectIndex = (projects: Project[], projectId: string) => {
   return projects.findIndex((projects) => projects.id === projectId);
 };
 
-const getCurrentActivityIndex = (
-  projects: Project[],
-  projectId: string,
-  activityId: string
-) => {
-  const currentProjectIndex = getCurrentProjectIndex(projects, projectId);
-  const currentActivityIndex = projects[
+const getCurrentActivityIndex = (state: ProjectContext, activityId: string) => {
+  const currentProjectIndex = getCurrentProjectIndex(
+    state.projects,
+    state.selectedProject
+  );
+  const currentActivityIndex = state.projects[
     currentProjectIndex
   ].activities.findIndex((activity) => activity.id === activityId);
   return { currentProjectIndex, currentActivityIndex };
@@ -31,18 +30,21 @@ const projectSlice = createSlice({
     selectProject: (state, action: PayloadAction<string>) => {
       state.selectedProject = action.payload;
     },
+
     addProject: (state, action: PayloadAction<Project>) => {
       state.projects.push(action.payload);
     },
-    updateStatusProject: (state, action: PayloadAction<string>) => {
+
+    updateStatusProject: (state) => {
       const currentProjectIndex = getCurrentProjectIndex(
         state.projects,
-        action.payload
+        state.selectedProject
       );
       if (currentProjectIndex >= 0)
         state.projects[currentProjectIndex].completed =
           !state.projects[currentProjectIndex].completed;
     },
+
     addActivity: (state, action: PayloadAction<Activity>) => {
       const currentProjectIndex = getCurrentProjectIndex(
         state.projects,
@@ -51,18 +53,16 @@ const projectSlice = createSlice({
       if (currentProjectIndex >= 0)
         state.projects[currentProjectIndex].activities.push(action.payload);
     },
+
     updateActivity: (state, action: PayloadAction<Activity>) => {
       const { currentProjectIndex, currentActivityIndex } =
-        getCurrentActivityIndex(
-          state.projects,
-          state.selectedProject,
-          action.payload.id
-        );
+        getCurrentActivityIndex(state, action.payload.id);
       if (currentActivityIndex >= 0)
         state.projects[currentProjectIndex].activities[currentActivityIndex] = {
           ...action.payload,
         };
     },
+
     deleteActivity: (state, action: PayloadAction<string>) => {
       const currentProjectIndex = getCurrentProjectIndex(
         state.projects,
@@ -75,13 +75,10 @@ const projectSlice = createSlice({
         state.projects[currentProjectIndex].activities = newActivities;
       }
     },
+
     updateStatusActivity: (state, action: PayloadAction<string>) => {
       const { currentProjectIndex, currentActivityIndex } =
-        getCurrentActivityIndex(
-          state.projects,
-          state.selectedProject,
-          action.payload
-        );
+        getCurrentActivityIndex(state, action.payload);
       if (currentActivityIndex >= 0) {
         state.projects[currentProjectIndex].activities[
           currentActivityIndex
@@ -90,6 +87,7 @@ const projectSlice = createSlice({
             .completed;
       }
     },
+
     cleanProjects: (state) => {
       return initialState;
     },
@@ -104,9 +102,8 @@ const projectSlice = createSlice({
   },
 });
 
-export const getSelectedProject = (state: {
-  projects: { selectedProject: string };
-}) => state.projects.selectedProject;
+export const getSelectedProject = (state: { projects: ProjectContext }) =>
+  state.projects.selectedProject;
 
 export const {
   selectProject,

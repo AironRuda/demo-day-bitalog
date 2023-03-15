@@ -13,3 +13,5 @@ export interface Project {
 export type filterProjects = '' | 'new' | 'pending' | 'done';
 
 export type createProjectDTO = Pick<Project, 'name' | 'workers'>;
+
+export type ProjectContext = { projects: Project[]; selectedProject: string };

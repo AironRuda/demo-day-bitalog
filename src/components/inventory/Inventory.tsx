@@ -5,18 +5,13 @@ import { getSelectedProject } from '../../context/projectsSlice';
 import { getCurrentProject } from '../../context/selectors';
 import { searInventory } from '../../firebase/queries';
 import { Material } from '../../model/material.model';
-import { Project } from '../../model/projects.model';
 import SelectProjectMessage from '../common/SelectProjectMessage';
 import PieChart from './PieChart';
 import SpentsTable from './SpentsTable';
 
 const Inventory: React.FunctionComponent = () => {
   const currentProjectId = useSelector(getSelectedProject);
-
-  const currentProject: any = useSelector(
-    (state: { projects: { projects: Project[] } }) =>
-      getCurrentProject(state, currentProjectId)
-  );
+  const currentProject: any = useSelector(getCurrentProject);
 
   const [inventory, setInventory] = useState<Material[]>([]);
 
