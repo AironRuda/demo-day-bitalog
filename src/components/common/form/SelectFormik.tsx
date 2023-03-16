@@ -35,7 +35,7 @@ const SelectFormik: React.FunctionComponent<Props> = ({
         <option value=''>{placeholder}</option>
         {options
           ? options.map((e, index) => (
-              <option key={index} value={e} role='listitem'>
+              <option key={index} value={e} role='item'>
                 {e}
               </option>
             ))
