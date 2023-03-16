@@ -1,9 +1,7 @@
-import { doc, setDoc } from 'firebase/firestore';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchUser } from '../../context/thunks';
-import { db } from '../../firebase/config';
 import { registerHandle } from '../../handlers/handleRegister';
 import { RegisterDTO } from '../../model/user.model';
 import { REGISTER_VALIDATION_SCHEMA } from '../../utilities/formValidations';
@@ -42,10 +40,14 @@ const RegisterForm: React.FunctionComponent = (props) => {
           <h1 className='self-center text-center font-bold text-4xl text-slate-600 mb-5'>
             Registrate
           </h1>
-          <TextFieldFormik name='email' placeholder='Email' type='email' />
+          <TextFieldFormik
+            name='email'
+            placeholder='Correo Electrónico'
+            type='email'
+          />
           <TextFieldFormik
             name='password'
-            placeholder='Password'
+            placeholder='Contraseña'
             type='password'
           />
           <TextFieldFormik name='name' placeholder='Nombre de usuario' />
@@ -57,8 +59,8 @@ const RegisterForm: React.FunctionComponent = (props) => {
             onChange={handleChange}
           >
             <option value=''>Seleccione rol</option>
-            <option value='admin'>Admin</option>
-            <option value='worker'>worker</option>
+            <option value='admin'>Administrador</option>
+            <option value='worker'>Trabajador</option>
           </select>
           {errors.rol && (
             <div className='text-red-500 pl-2 -mt-5'>{errors.rol}</div>

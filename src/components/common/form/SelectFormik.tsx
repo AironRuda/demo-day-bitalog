@@ -22,7 +22,7 @@ const SelectFormik: React.FunctionComponent<Props> = ({
   return (
     <div className='w-full'>
       <select
-        title='Select Formik'
+        role='listbox'
         className='select w-full bg-white border-1 border-primary text-slate-700'
         name={field.name}
         onChange={(e) =>
@@ -35,7 +35,7 @@ const SelectFormik: React.FunctionComponent<Props> = ({
         <option value=''>{placeholder}</option>
         {options
           ? options.map((e, index) => (
-              <option key={index} value={e}>
+              <option key={index} value={e} role='listitem'>
                 {e}
               </option>
             ))
@@ -44,7 +44,10 @@ const SelectFormik: React.FunctionComponent<Props> = ({
       {meta.touched && meta.error ? (
         <div className='text-red-500 pl-2'>{meta.error}</div>
       ) : null}
-      <ul className='my-7 w-11-12 [&>*:nth-child(odd)]:bg-slate-100'>
+      <ul
+        role='list'
+        className='my-7 w-11-12 [&>*:nth-child(odd)]:bg-slate-100'
+      >
         {renderList &&
           Array.isArray(field.value) &&
           field.value.map((item, index) => (

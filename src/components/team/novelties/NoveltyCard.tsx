@@ -34,7 +34,7 @@ const NoveltyCard = ({ novelty }: Props) => {
         </p>
       )}
       {novelty.img && (
-        <div className='bg-white w-fit p-2'>
+        <div className='bg-white w-fit p-2 mt-7'>
           <img src={novelty.img} className='rounded-md mx-auto' alt='' />
         </div>
       )}

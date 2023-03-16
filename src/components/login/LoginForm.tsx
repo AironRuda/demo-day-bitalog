@@ -38,15 +38,19 @@ const LoginForm: React.FunctionComponent = (props) => {
           <h1 className='text-center font-bold text-4xl text-slate-600 mb-5 '>
             Inicia Sesión
           </h1>
-          <TextFieldFormik name='email' placeholder='Email' type='email' />
+          <TextFieldFormik
+            name='email'
+            placeholder='Correo Electrónico'
+            type='email'
+          />
           <TextFieldFormik
             name='password'
-            placeholder='Password'
+            placeholder='Contraseña'
             type='password'
           />
 
           <button type='submit' className='btn btn-primary text-white'>
-            Login
+            Iniciar Sesión
           </button>
           {!!status && <div className='text-red-500 pl-2'>{status}</div>}
           <span className='text-slate-700 text-center'>
