@@ -6,11 +6,12 @@ const Return: React.FunctionComponent = () => {
 
   return (
     <div
-      className='return absolute top-10 left-5 flex items-center cursor-pointer'
+      className='absolute top-10 left-5 flex items-center cursor-pointer'
+      id='return'
       onClick={() => navigate('/')}
     >
       <img src={leftArrow} className='w-12 ' />
-      <span className='font-bold text-lg'>Regresar</span>
+      <span className='font-bold text-lg text-black'>Regresar</span>
     </div>
   );
 };

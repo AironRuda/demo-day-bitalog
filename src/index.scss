@@ -10,27 +10,8 @@ html {
   user-select: none;
 }
 
-.return {
-  img {
-    filter: invert(100%) sepia(94%) saturate(0%) hue-rotate(248deg)
-      brightness(106%) contrast(106%);
-  }
-
-  span {
-    color: white;
-  }
-}
-
-@media (max-height: 739px) {
-  .return {
-    top: 5px;
-
-    img {
-      filter: invert(2%) sepia(49%) saturate(1280%) hue-rotate(95deg)
-        brightness(90%) contrast(104%);
-    }
-    span {
-      color: black;
-    }
+@media (max-height: 515px) {
+  #return {
+    top: 10px;
   }
 }
