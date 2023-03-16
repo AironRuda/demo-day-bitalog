@@ -49,7 +49,7 @@ const Dashboard: React.FunctionComponent = (props) => {
       >
         <img className='w-10' src={logout} />
       </div>
-      <main className='pt-10 w-screen h-fit pb-32 bg-white'>
+      <main className='pt-12 w-screen h-fit pb-32 bg-white'>
         <Outlet />
       </main>
       <Navbar />

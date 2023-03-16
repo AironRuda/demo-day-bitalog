@@ -69,11 +69,11 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
 
   return (
     <tr
-      className={`[&>*]:bg-slate-100 [&>*]:text-black [&>*]:border-b-2 [&>*]:border-white`}
+      className={`w-full [&>*]:bg-slate-100 [&>*]:text-black [&>*]:border-b-2 [&>*]:border-white`}
     >
       <td className='md:pl-5 pl-2 w-10'>{activity.completed ? '✔️' : '❕'}</td>
-      <td>{activity.activityName}</td>
-      <td>
+      <td className='max-w-0 overflow-x-auto'>{activity.activityName}</td>
+      <td className='text-center'>
         {activity.priority === 1
           ? 'Baja'
           : activity.priority === 2

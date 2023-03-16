@@ -16,18 +16,18 @@ const ActivitiesList: React.FunctionComponent = () => {
             <thead>
               <tr className='[&>*]:bg-primary [&>*]:text-white border-6'>
                 <th
-                  className='md:pl-5 pl-2 w-10 cursor-pointer'
+                  className='md:pl-5 pl-2 cursor-pointer'
                   onClick={() => setFilter((prev) => !prev)}
                 >
                   {filter ? '❕' : '✔️'}
                 </th>
-                <th>Actividad</th>
-                <th>
+                <th className=''>Actividad</th>
+                <th className='text-center'>
                   <span className='md:hidden block'>Pr</span>
                   <span className='md:block hidden'>Prioridad</span>
                 </th>
                 <th>Materiales</th>
-                <th className='text-center sm:w-10'>
+                <th className='text-center'>
                   <span className='md:hidden block'>Act</span>
                   <span className='md:block hidden'>Acciones</span>
                 </th>

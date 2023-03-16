@@ -10,7 +10,7 @@ const ActivityContainer: React.FunctionComponent = () => {
   const rol = useSelector(selectRol);
 
   return (
-    <div className='w-full h-full flex flex-col items-center justify-center'>
+    <div className='w-screen h-full flex flex-col items-center justify-center'>
       <div className='h-full w-full flex flex-col justify-center items-center gap-5'>
         <h1 className='text-center text-4xl text-slate-700 font-bold'>
           ACTIVIDADES
