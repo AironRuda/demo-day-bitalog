@@ -4,7 +4,7 @@ import { hero } from '../../assets/bg';
 const Presentation: React.FunctionComponent = () => {
   return (
     <section
-      className='relative bg-cover bg-center bg-no-repeat'
+      className='relative bg-cover bg-center bg-no-repeat w-screen'
       style={{ backgroundImage: `url(${hero})` }}
     >
       <div className='absolute h-full inset-0 bg-white/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-white/95 sm:to-white/25'></div>

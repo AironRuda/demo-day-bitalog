@@ -2,14 +2,14 @@ import { logo } from '../../assets/logo';
 
 const Footer: React.FunctionComponent = () => {
   return (
-    <footer aria-label='Site Footer' className='bg-white'>
-      <div className='w-screen mx-auto px-4 pt-8  space-y-8 sm:px-6 lg:space-y-16 lg:px-8'>
-        <div className='flex sm:flex-row flex-col items-center justify-between'>
+    <footer aria-label='Site Footer' className='bg-white w-screen'>
+      <div className='w-full mx-auto px-4 pt-8  space-y-8 sm:px-6 lg:space-y-16 lg:px-8'>
+        <div className='w-full flex sm:flex-row flex-col items-center justify-between'>
           <div className='text-teal-600'>
             <img src={logo} className='w-36' />
           </div>
 
-          <ul className='flex justify-center gap-6 mt-8 sm:mt-0 sm:justify-end md:mr-10'>
+          <ul className='w-full flex justify-center gap-6 mt-8 sm:mt-0 sm:justify-end md:mr-10'>
             <li>
               <a
                 href='/'
@@ -80,7 +80,7 @@ const Footer: React.FunctionComponent = () => {
           </ul>
         </div>
 
-        <div className='w-screen justify-evenly flex md:flex-row flex-col md:items-start items-center mt-4 gap-8 pt-4 border-t border-gray-100 lg:pt-8 text-start md:pr-96'>
+        <div className='w-full justify-evenly flex flex-row flex-wrap items-start mt-4 gap-8 pt-4 border-t border-gray-100 lg:pt-8 text-start md:pr-96'>
           <div>
             <p className='font-medium text-gray-900'>Compañía</p>
 

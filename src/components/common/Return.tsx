@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { leftArrow } from '../../assets/icons';
-import { filterWhite } from './customStyles';
 
 const Return: React.FunctionComponent = () => {
   const navigate = useNavigate();
