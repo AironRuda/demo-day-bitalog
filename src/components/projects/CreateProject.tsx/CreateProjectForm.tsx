@@ -1,4 +1,6 @@
 import { Form, Formik, FormikHelpers } from "formik";
+import { useSelector } from "react-redux";
+import { getWorkers } from "../../../context/selectors";
 import { createProjectDTO } from "../../../model/projects.model";
 import { CREATE_PROJECT_VALIDATION_SCHEMA } from "../../../utilities/formValidations";
 import SelectFormik from "../../common/form/SelectFormik";
@@ -18,6 +20,9 @@ const CreateProjectForm: React.FunctionComponent<Props> = ({
   handleSubmit,
   avalaibleWorkers,
 }) => {
+  const workers = useSelector(getWorkers);
+  console.log(workers);
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}
@@ -30,7 +35,7 @@ const CreateProjectForm: React.FunctionComponent<Props> = ({
             <TextFieldFormik name="name" placeholder="Nombre del proyecto" />
             <SelectFormik
               name="workers"
-              options={avalaibleWorkers}
+              options={workers.map((worker) => worker.name)}
               placeholder="Selecciona a los encargados"
               renderList
             />

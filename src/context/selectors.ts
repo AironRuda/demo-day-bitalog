@@ -31,3 +31,6 @@ export const getActivityById = (
 
 export const getNovelties = (state: { novelties: Novelties }) =>
   state.novelties.novelties;
+
+export const getWorkers = (state: { workers: { workers: Pick<User, "name" | "id">[] } }) =>
+  state.workers.workers

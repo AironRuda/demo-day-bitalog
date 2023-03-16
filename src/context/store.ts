@@ -9,6 +9,6 @@ export const store = configureStore({
     user: userReducer,
     projects: projectsReducer,
     novelties: noveltiesReducer,
-    Workers: workersReducer
+    workers: workersReducer
   },
 });

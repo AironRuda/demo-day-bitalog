@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { User } from "../model/user.model";
 
-const initialState = {
+const initialState: { workers: Pick<User, "name" | "id">[] } = {
     workers: []
 }
 
