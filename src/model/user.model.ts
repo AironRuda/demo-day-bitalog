@@ -12,3 +12,5 @@ export interface RegisterDTO extends Pick<User, 'rol'> {
   password: string;
   name: string;
 }
+
+export type IWorker = Pick<User, 'name' | 'id'>;

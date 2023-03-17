@@ -4,6 +4,7 @@ import {
   getCurrentProject,
   selectUser,
   getNovelties,
+  getWorkers,
 } from '../../../context/selectors';
 import { handleDeleteNotify } from '../../../handlers/handleNovelties';
 import { Novelty } from '../../../model/novelties.model';
@@ -15,6 +16,9 @@ const NoveltyCard = ({ novelty }: Props) => {
   const novelties = useSelector(getNovelties) as unknown as Novelty[];
   const admin = useSelector(getCurrentProject)?.adminId;
   const currentUser = useSelector(selectUser).id;
+  const sender = useSelector(getWorkers).find(
+    (worker) => worker.id === novelty.senderId
+  );
 
   const handleClick = async (id: string) => {
     await handleDeleteNotify(id, novelties);
@@ -40,13 +44,13 @@ const NoveltyCard = ({ novelty }: Props) => {
       )}
       <div className='w-full flex items-center justify-between px-5'>
         <small className='font-bold text-black m-3 p-1'>
-          <b>Enviado por:</b>
+          <b className='mr-2'>Enviado por:</b>
           <span className='text-slate-800 font-medium'>
-            {currentUser === novelty.senderId
-              ? ' Usuario actual'
-              : admin && admin === novelty.senderId
-              ? ' Administrador'
-              : ' ' + novelty.senderId}
+            {admin === novelty.senderId
+              ? 'Administrador'
+              : sender && sender.id === currentUser
+              ? sender.name
+              : 'Usuario actual'}
           </span>
         </small>
         <button

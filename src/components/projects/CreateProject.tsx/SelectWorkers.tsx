@@ -1,16 +1,15 @@
 import { useField } from 'formik';
+import { User } from '../../../model/user.model';
 
 interface Props {
   name: string;
-  options: string[];
+  workers: Pick<User, 'name' | 'id'>[];
   placeholder: string;
-  renderList?: true;
 }
-const SelectFormik: React.FunctionComponent<Props> = ({
+const SelectWorkers: React.FunctionComponent<Props> = ({
   name,
-  options,
+  workers,
   placeholder,
-  renderList,
 }) => {
   const [field, meta, helpers] = useField(name);
 
@@ -33,13 +32,12 @@ const SelectFormik: React.FunctionComponent<Props> = ({
         onClick={() => helpers.setTouched(true)}
       >
         <option value=''>{placeholder}</option>
-        {options
-          ? options.map((e, index) => (
-              <option key={index} value={e} role='item'>
-                {e}
-              </option>
-            ))
-          : null}
+        {workers &&
+          workers.map((e, index) => (
+            <option key={index} value={e.id} role='item'>
+              {e.name}
+            </option>
+          ))}
       </select>
       {meta.touched && meta.error ? (
         <div className='text-red-500 pl-2'>{meta.error}</div>
@@ -48,16 +46,15 @@ const SelectFormik: React.FunctionComponent<Props> = ({
         role='list'
         className='my-7 w-11-12 [&>*:nth-child(odd)]:bg-slate-100'
       >
-        {renderList &&
-          Array.isArray(field.value) &&
+        {Array.isArray(field.value) &&
           field.value.map((item, index) => (
             <li
               key={item}
               className='text-slate-800 w-full flex justify-between items-center px-2 py-2'
             >
               <span className='text-xs'>
-                <b>ID: </b>
-                {item}
+                <b className='mr-1'>Nombre: </b>
+                {workers.find((worker) => worker.id === item)?.name ?? item}
               </span>
               <span
                 onClick={() => removeItem(index)}
@@ -72,4 +69,4 @@ const SelectFormik: React.FunctionComponent<Props> = ({
   );
 };
 
-export default SelectFormik;
+export default SelectWorkers;

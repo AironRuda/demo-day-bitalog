@@ -1,17 +1,21 @@
 import { useSelector } from 'react-redux';
 import {
   getCurrentProject,
-  selectUser,
   getSelectedProject,
+  getWorkers,
 } from '../../../context/selectors';
+import { IWorker } from '../../../model/user.model';
 import SelectProjectMessage from '../../common/SelectProjectMessage';
 import Member from './Member';
 
 const Team: React.FunctionComponent = () => {
   const currentProjectId = useSelector(getSelectedProject);
   const currentProject = useSelector(getCurrentProject);
-  const currentUser = useSelector(selectUser);
   const workerArray = currentProject?.workers;
+  const workers = useSelector(getWorkers).filter((worker: IWorker) => {
+    const exist = workerArray?.find((item) => item === worker.id);
+    if (exist) return { id: worker.id, name: worker.name };
+  });
 
   return (
     <main
@@ -28,9 +32,7 @@ const Team: React.FunctionComponent = () => {
         {!currentProjectId && !workerArray ? (
           <SelectProjectMessage />
         ) : (
-          workerArray
-            ?.filter((teammate) => teammate !== currentUser.id)
-            .map((worker) => <Member key={worker} workerId={worker} />)
+          workers.map((worker) => <Member key={worker.id} worker={worker} />)
         )}
       </ul>
     </main>

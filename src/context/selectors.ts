@@ -1,6 +1,6 @@
 import { Novelties } from '../model/novelties.model';
 import { ProjectContext } from '../model/projects.model';
-import { User } from '../model/user.model';
+import { IWorker, User } from '../model/user.model';
 
 export const selectUser = (state: { user: User }) => state.user;
 
@@ -32,5 +32,5 @@ export const getActivityById = (
 export const getNovelties = (state: { novelties: Novelties }) =>
   state.novelties.novelties;
 
-export const getWorkers = (state: { workers: { workers: Pick<User, "name" | "id">[] } }) =>
-  state.workers.workers
+export const getWorkers = (state: { workers: { workers: IWorker[] } }) =>
+  state.workers.workers;
