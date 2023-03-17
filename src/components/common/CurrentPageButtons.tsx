@@ -21,7 +21,7 @@ const CurrentPageButtons: React.FunctionComponent<Props> = ({
       <button
         className={`btn md:w-64 ${
           selectedButton !== secondPage
-            ? 'btn-active text-white'
+            ? 'btn-active'
             : 'btn-outline btn-primary'
         }`}
         onClick={() => {
@@ -33,7 +33,7 @@ const CurrentPageButtons: React.FunctionComponent<Props> = ({
       <button
         className={`btn md:w-64 ${
           selectedButton === secondPage
-            ? 'btn-active text-white'
+            ? 'btn-active'
             : 'btn-outline btn-primary'
         }`}
         onClick={() => {

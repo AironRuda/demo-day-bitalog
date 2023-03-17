@@ -6,7 +6,7 @@ interface Props {
   handleFilter: (filterBySpent: boolean) => void;
 }
 
-const TableHeader: React.FunctionComponent<Props> = ({
+const SpentsHeader: React.FunctionComponent<Props> = ({
   filter,
   handleFilter,
 }) => {
@@ -27,7 +27,7 @@ const TableHeader: React.FunctionComponent<Props> = ({
           </span>
         </th>
         <th className='w-10 cursor-pointer' onClick={() => handleFilter(false)}>
-          <span className='flex items-center mr-3'>
+          <span className='flex items-center justify-center mr-3'>
             Gasto{' '}
             <img
               style={filterWhite}
@@ -41,4 +41,4 @@ const TableHeader: React.FunctionComponent<Props> = ({
   );
 };
 
-export default TableHeader;
+export default SpentsHeader;

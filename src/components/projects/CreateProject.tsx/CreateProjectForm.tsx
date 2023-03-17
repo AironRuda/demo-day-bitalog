@@ -4,7 +4,7 @@ import { getWorkers } from '../../../context/selectors';
 import { createProjectDTO } from '../../../model/projects.model';
 import { CREATE_PROJECT_VALIDATION_SCHEMA } from '../../../utilities/formValidations';
 import SelectWorkers from './SelectWorkers';
-import TextFieldFormik from '../../common/form/TextFieldFormik';
+import TextFieldFormik from '../../common/TextFieldFormik';
 
 interface Props {
   INITIAL_VALUES: createProjectDTO;

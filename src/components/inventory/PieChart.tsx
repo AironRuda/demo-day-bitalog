@@ -17,14 +17,14 @@ const PieChart: React.FunctionComponent<IPieProps> = ({ spents }) => {
         label: 'Gasto',
         data: getMajorSpents(spents).map((spent) => spent.amount),
         backgroundColor: [
-          '#31C48D',
-          '#007046',
+          '#0C8658',
           '#3A80BF',
-          '#83EA3A',
-          '#73EABD',
+          '#FF7C40',
+          '#FFB040',
+          '#73EABD'
         ],
-        borderWidth: 2,
-        borderColor: '#334155',
+        borderWidth: 1,
+        borderColor: '#fff',
       },
     ],
   };

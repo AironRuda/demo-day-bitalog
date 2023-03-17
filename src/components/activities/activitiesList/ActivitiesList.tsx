@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { getCurrentProject } from '../../../context/selectors';
 import { formatActivitiesList } from '../../../utilities/formatActivities';
 import ActivityItem from './ActivityItem';
-import TableHeader from './TableHeader';
+import ActivitiesHeader from './ActivitiesHeader';
 
 const ActivitiesList: React.FunctionComponent = () => {
   const currentProject = useSelector(getCurrentProject);
@@ -18,7 +18,7 @@ const ActivitiesList: React.FunctionComponent = () => {
       {currentProject && !!currentProject.activities.length ? (
         <div className='h-full w-full mt-12'>
           <table className='table table-compact w-full'>
-            <TableHeader filter={filter} handleFilter={handleFilter} />
+            <ActivitiesHeader filter={filter} handleFilter={handleFilter} />
             <tbody>
               {formatActivitiesList(currentProject.activities, filter).map(
                 (activity, index) => (

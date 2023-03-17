@@ -12,8 +12,11 @@ const workersSlice = createSlice({
     setWorkers: (state, action) => {
       state.workers = action.payload;
     },
+    clearWorkers: () => {
+      return initialState;
+    },
   },
 });
 
-export const { setWorkers } = workersSlice.actions;
+export const { setWorkers, clearWorkers } = workersSlice.actions;
 export default workersSlice.reducer;

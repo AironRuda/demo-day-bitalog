@@ -1,4 +1,4 @@
-import TextFieldFormik from '../common/form/TextFieldFormik';
+import TextFieldFormik from '../common/TextFieldFormik';
 import { fetchUser } from '../../context/thunks';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { handleLogin } from '../../handlers/handleLogin';

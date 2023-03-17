@@ -88,7 +88,7 @@ const projectSlice = createSlice({
       }
     },
 
-    cleanProjects: (state) => {
+    clearProjects: (state) => {
       return initialState;
     },
   },
@@ -110,6 +110,6 @@ export const {
   updateStatusActivity,
   updateStatusProject,
   deleteActivity,
-  cleanProjects,
+  clearProjects,
 } = projectSlice.actions;
 export default projectSlice.reducer;

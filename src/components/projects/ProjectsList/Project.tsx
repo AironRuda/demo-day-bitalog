@@ -20,7 +20,7 @@ const Project: React.FunctionComponent<IProjectProps> = ({
         !project.completed && !project.activities.length
           ? 'text-white bg-primary'
           : !project.completed && project.activities.length
-          ? 'bg-secondary text-white'
+          ? 'bg-[#3A80BF] text-white'
           : 'text-slate-700 bg-slate-300'
       } ${currentProject === project.id && 'border-4 border-slate-700'}`}
       onClick={() => handleClick(project.id)}

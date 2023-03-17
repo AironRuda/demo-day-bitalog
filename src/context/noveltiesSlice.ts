@@ -12,8 +12,11 @@ const noveltiesSlice = createSlice({
     setNovelties: (state: Novelties, action: PayloadAction<Novelty[]>) => {
       state.novelties = action.payload;
     },
+    clearNovelties: () => {
+      return initialState;
+    },
   },
 });
 
-export const { setNovelties } = noveltiesSlice.actions;
+export const { setNovelties, clearNovelties } = noveltiesSlice.actions;
 export default noveltiesSlice.reducer;

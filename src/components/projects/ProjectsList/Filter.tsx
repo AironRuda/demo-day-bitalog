@@ -15,7 +15,7 @@ const Filter: React.FunctionComponent<Props> = ({ filter, setFilter }) => {
         Todos
       </li>
       <li
-        className={`${filter === 'new' ? 'text-primary' : 'text-slate-600'}`}
+        className={`${filter === 'new' ? 'text-primary' : 'text-slate-600'} border-b-4 border-primary`}
         onClick={() => setFilter('new')}
       >
         Nuevos
@@ -23,13 +23,13 @@ const Filter: React.FunctionComponent<Props> = ({ filter, setFilter }) => {
       <li
         className={`${
           filter === 'pending' ? 'text-primary' : 'text-slate-600'
-        }`}
+        } border-b-4 border-[#3A80BF]`}
         onClick={() => setFilter('pending')}
       >
         Pendientes
       </li>
       <li
-        className={`${filter === 'done' ? 'text-primary' : 'text-slate-600'}`}
+        className={`${filter === 'done' ? 'text-primary' : 'text-slate-600'} border-b-4 border-slate-300`}
         onClick={() => setFilter('done')}
       >
         Completos

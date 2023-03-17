@@ -3,7 +3,7 @@ interface Props {
   handleFilter: () => void;
 }
 
-const TableHeader: React.FunctionComponent<Props> = ({
+const ActivitiesHeader: React.FunctionComponent<Props> = ({
   filter,
   handleFilter,
 }) => {
@@ -28,4 +28,4 @@ const TableHeader: React.FunctionComponent<Props> = ({
   );
 };
 
-export default TableHeader;
+export default ActivitiesHeader;
