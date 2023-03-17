@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectRol } from '../../../context/selectors';
 import { Activity } from '../../../model/activity.model';
-import Swal from 'sweetalert2';
+import { confirmAlert } from '../../../utilities/alert';
 
 interface Props {
   confirmDelete(): Promise<void>;
@@ -18,31 +18,10 @@ const ActivityOptions: React.FunctionComponent<Props> = ({
   const navigate = useNavigate();
   const rol = useSelector(selectRol);
 
-  async function handleClickDelete() {
-    Swal.fire({
-      title: '¿Estás seguro de eliminar la actividad?',
-      text: 'Al eliminar la actividad, si esta ya se ha cumplido su registro permanecerá en el inventario. Para evitar esto puede modificar el estado de la actividad antes de elimnarla.',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Eliminar',
-      confirmButtonColor: 'red',
-    }).then(async (result) => {
+  async function handleClick(text: string, callback: () => Promise<void>) {
+    confirmAlert(text).then(async (result) => {
       if (result.isConfirmed) {
-        await confirmDelete();
-      }
-    });
-  }
-  async function handleClickStatus() {
-    Swal.fire({
-      title: '¿Estás seguro de finalizar la actividad?',
-      text: 'Al cumplir con la actividad, sólo el encargado del proyecto podrá volver a modificar su estado. En caso de no estar seguro puede enviar una notificación a su encargado por medio del muro en la sección de equipo',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Finalizar',
-      confirmButtonColor: '#31C48D',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        confirmChangeStatus();
+        await callback();
       }
     });
   }
@@ -59,7 +38,12 @@ const ActivityOptions: React.FunctionComponent<Props> = ({
           </span>
           <span
             className='cursor-pointer text-red-500'
-            onClick={handleClickDelete}
+            onClick={() =>
+              handleClick(
+                'Al eliminar la actividad, si esta ya se ha cumplido su registro permanecerá en el inventario. Para evitar esto puede modificar el estado de la actividad antes de elimnarla.',
+                confirmDelete
+              )
+            }
           >
             ❌
           </span>
@@ -70,7 +54,12 @@ const ActivityOptions: React.FunctionComponent<Props> = ({
             <button
               className='btn btn-xs btn-primary'
               type='button'
-              onClick={handleClickStatus}
+              onClick={() =>
+                handleClick(
+                  'Al cumplir con la actividad, sólo el encargado del proyecto podrá volver a modificar su estado. En caso de no estar seguro puede enviar una notificación a su encargado por medio del muro en la sección de equipo',
+                  confirmChangeStatus
+                )
+              }
             >
               Cumplir
             </button>

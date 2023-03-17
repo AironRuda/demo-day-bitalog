@@ -6,7 +6,7 @@ import { addActivity } from '../../context/projectsSlice';
 import { getCurrentProject } from '../../context/selectors';
 import { handleCreateActivity } from '../../handlers/handleActivity';
 import FormActivity from './form/FormActivity';
-import Swal from 'sweetalert2';
+import { successAlert } from '../../utilities/alert';
 
 const INITIAL_VALUES: createActivitiesDTO = {
   activityName: '',
@@ -28,10 +28,7 @@ const CreateActivities: React.FunctionComponent = (props) => {
       else if (response) {
         helpers.resetForm();
         dispatch(addActivity(response.activity as Activity));
-        Swal.fire({
-          icon: 'success',
-          text: 'La actividad se ha generado correctamente 😃',
-        });
+        successAlert('La actividad se ha generado correctamente 😃');
       }
     }
   };

@@ -17,6 +17,6 @@ export const searchWorkers = query(
   where('rol', '==', 'worker')
 );
 
-export const searInventory = (id: string) => {
-  return doc(db, "inventory", id);
-}
+export const searchInventory = (id: string) => {
+  return doc(db, 'inventory', id);
+};

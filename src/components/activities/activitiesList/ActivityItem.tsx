@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
 import {
   deleteActivity,
   updateStatusActivity,
@@ -11,6 +10,7 @@ import {
 } from '../../../handlers/handleActivity';
 import { Activity } from '../../../model/activity.model';
 import { Project, ProjectContext } from '../../../model/projects.model';
+import { errorAlert, successAlert } from '../../../utilities/alert';
 import ActivityOptions from './ActivityOptions';
 
 interface IActivityItemProps {
@@ -30,18 +30,10 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
   async function confirmDelete() {
     const response = await handleDeleteActivity(activity.id, currentProject);
     if (typeof response === 'string')
-      Swal.fire({
-        text: 'Hubo un error al eliminar la actividad',
-        icon: 'error',
-        confirmButtonColor: '#31C48D',
-      });
+      errorAlert('Hubo un error al eliminar la actividad 😟');
     else if (!response) {
       dispatch(deleteActivity(activity.id));
-      Swal.fire({
-        text: 'La actividad se ha eliminado correctamente',
-        icon: 'success',
-        confirmButtonColor: '#31C48D',
-      });
+      successAlert('La actividad se ha eliminado correctamente 😀');
     }
   }
 
@@ -52,18 +44,10 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
       false
     );
     if (typeof response === 'string')
-      Swal.fire({
-        text: 'Hubo un error al cambiar el estado de la actividad',
-        icon: 'error',
-        confirmButtonColor: '#31C48D',
-      });
+      errorAlert('Hubo un error al cambiar el estado de la actividad 😟');
     else if (!response) {
       dispatch(updateStatusActivity(activity.id));
-      Swal.fire({
-        text: 'La actividad ha finalizado correctamente',
-        icon: 'success',
-        confirmButtonColor: '#31C48D',
-      });
+      successAlert('La actividad ha finalizado correctamente 😀');
     }
   }
 

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { imgLogo, plusLogo } from '../../../assets/icons';
 import { selectUser } from '../../../context/selectors';
-import Swal from 'sweetalert2';
 import { handleCreateNovelty } from '../../../handlers/handleNovelties';
 import { filterPrimary } from '../../common/customStyles';
+import { successAlert } from '../../../utilities/alert';
 
 const CreateNotification: React.FunctionComponent = (props) => {
   const user = useSelector(selectUser);
@@ -17,12 +17,7 @@ const CreateNotification: React.FunctionComponent = (props) => {
     e.preventDefault();
     if (img !== null || text !== '') {
       await handleCreateNovelty(user.id, text, img);
-      Swal.fire({
-        text: 'Su novedad fue publicada correctamente 😀',
-        icon: 'success',
-        confirmButtonColor: '#31C48D',
-        confirmButtonText: 'Aceptar',
-      });
+      successAlert('Su novedad fue publicada correctamente 😀');
       setText('');
       setImg(null);
       setError('');
@@ -36,7 +31,9 @@ const CreateNotification: React.FunctionComponent = (props) => {
       className='px-3 pt-4 rounded-md flex flex-col items-center border-2 border-primary w-11/12 mt-3'
       onSubmit={handleSend}
     >
-      <h3 className='text-slate-500 font-bold mb-4 text-lg'>Generar notificación</h3>
+      <h3 className='text-slate-500 font-bold mb-4 text-lg'>
+        Generar notificación
+      </h3>
       <div className='flex sm:flex-row flex-col items-center gap-2 md:w-4/5 w-full mx-5 mb-10'>
         <textarea
           className='textarea textarea-bordered textarea-sm p-2 rounded-md border-2 bg-white border-primary mx-2 text-black h-10 md:w-3/4 w-full px-5 text-xl'

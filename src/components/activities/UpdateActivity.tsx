@@ -8,8 +8,8 @@ import { createActivitiesDTO } from '../../model/activity.model';
 import { ProjectContext } from '../../model/projects.model';
 import { ACTIVITY_VALIDATION_SCHEMA } from '../../utilities/formValidations';
 import FormActivity from './form/FormActivity';
-import Swal from 'sweetalert2';
 import { updateInventory } from '../../services/inventory.service';
+import { successAlert } from '../../utilities/alert';
 
 const EMPTY_VALUES: createActivitiesDTO = {
   activityName: '',
@@ -56,11 +56,7 @@ const UpdateActivity: React.FunctionComponent = (props) => {
       if (typeof response === 'string') helpers.setStatus(response);
       else if (response) {
         dispatch(updateActivity(response));
-        Swal.fire({
-          icon: 'success',
-          text: 'La actividad se ha actualizado correctamente 😃',
-          confirmButtonColor: '#31C48D',
-        });
+        successAlert('La actividad se ha generado correctamente 😃');
       }
     }
   }

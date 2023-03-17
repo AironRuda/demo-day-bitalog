@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
 import {
   getCurrentProject,
   selectUser,
@@ -8,6 +7,7 @@ import {
 } from '../../../context/selectors';
 import { handleDeleteNotify } from '../../../handlers/handleNovelties';
 import { Novelty } from '../../../model/novelties.model';
+import { successAlert } from '../../../utilities/alert';
 
 interface Props {
   novelty: Novelty;
@@ -22,12 +22,7 @@ const NoveltyCard = ({ novelty }: Props) => {
 
   const handleClick = async (id: string) => {
     await handleDeleteNotify(id, novelties);
-    Swal.fire({
-      text: 'Su novedad fue completada correctamente 😀',
-      icon: 'success',
-      confirmButtonColor: '#31C48D',
-      confirmButtonText: 'Aceptar',
-    });
+    successAlert('Su novedad fue completada correctamente 😀');
   };
 
   return (

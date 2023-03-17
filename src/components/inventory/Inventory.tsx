@@ -2,7 +2,7 @@ import { getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getCurrentProject, getSelectedProject } from '../../context/selectors';
-import { searInventory } from '../../firebase/queries';
+import { searchInventory } from '../../firebase/queries';
 import { Material } from '../../model/material.model';
 import SelectProjectMessage from '../common/SelectProjectMessage';
 import PieChart from './PieChart';
@@ -17,7 +17,7 @@ const Inventory: React.FunctionComponent = () => {
   useEffect(() => {
     if (currentProjectId) {
       const inventoryId = currentProject.inventoryId;
-      getDoc(searInventory(inventoryId)).then((res) => {
+      getDoc(searchInventory(inventoryId)).then((res) => {
         const data = res.data();
         if (data) {
           setInventory(data.materials);

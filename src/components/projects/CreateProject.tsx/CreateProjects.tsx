@@ -4,7 +4,7 @@ import { addProject } from '../../../context/projectsSlice';
 import { handleCreateProject } from '../../../handlers/handleProject';
 import { createProjectDTO } from '../../../model/projects.model';
 import CreateProjectForm from './CreateProjectForm';
-import Swal from 'sweetalert2';
+import { successAlert } from '../../../utilities/alert';
 
 const INITIAL_VALUES: createProjectDTO = {
   name: '',
@@ -23,12 +23,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
     else if (newProject) {
       helpers.resetForm();
       dispatch(addProject(newProject));
-      Swal.fire({
-        text: 'Se ha creado el proyecto de forma exitosa',
-        icon: 'success',
-        confirmButtonColor: '#31C48D',
-        confirmButtonText: 'Aceptar',
-      });
+      successAlert('Se ha creado el proyecto de forma exitosa 😀');
     }
   };
 
