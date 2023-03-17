@@ -28,7 +28,7 @@ const Presentation: React.FunctionComponent = () => {
 
           <div className='mt-8 flex flex-wrap gap-4 lg:justify-start justify-center'>
             <Link className='text-white' to='app'>
-              <button className='btn btn-primary text-white rounded-sm'>
+              <button className='btn btn-primary w-40 text-white rounded-sm'>
                 Iniciar sesión
               </button>
             </Link>

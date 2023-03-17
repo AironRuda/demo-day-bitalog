@@ -34,7 +34,7 @@ const LoginForm: React.FunctionComponent = (props) => {
       validationSchema={LOGIN_VALIDATION_SCHEMA}
     >
       {({ status }) => (
-        <Form className='lg:w-1/2 md:w-2/3 w-full flex flex-col justify-center px-10 py-60 rounded gap-5 bg-white h-2/3'>
+        <Form className='lg:w-1/2 sm:w-2/3 w-full flex flex-col justify-center px-10 py-60 rounded gap-5 bg-white h-2/3'>
           <h1 className='text-center font-bold text-4xl text-slate-600 mb-5 '>
             Inicia Sesión
           </h1>
