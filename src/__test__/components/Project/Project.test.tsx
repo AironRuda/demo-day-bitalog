@@ -1,6 +1,6 @@
-import Project from '../../components/projects/ProjectsList/Project';
+import Project from '../../../components/projects/ProjectsList/Project';
 import { cleanup, render, screen } from '@testing-library/react';
-import { orderedProjects } from '../mocks/projects.mock';
+import { orderedProjects } from '../../mocks/projects.mock';
 
 describe('Project', () => {
   afterEach(() => cleanup());
@@ -8,7 +8,7 @@ describe('Project', () => {
   it('should appears with his corresponding color', async () => {
     const alternatives: [Project, string][] = [
       [orderedProjects[0], 'bg-primary'],
-      [orderedProjects[1], 'bg-secondary'],
+      [orderedProjects[1], 'bg-[#3A80BF]'],
       [orderedProjects[2], 'bg-slate-300'],
     ];
 

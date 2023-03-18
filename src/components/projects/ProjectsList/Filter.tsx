@@ -9,18 +9,23 @@ const Filter: React.FunctionComponent<Props> = ({ filter, setFilter }) => {
   return (
     <menu className='flex md:gap-10 gap-3 [&>*]:md:text-2xl [&>*]:font-bold cursor-pointer hover:[&>*]:text-primary'>
       <li
+        role='listitem'
         className={`${filter === '' ? 'text-primary' : 'text-slate-600'}`}
         onClick={() => setFilter('')}
       >
         Todos
       </li>
       <li
-        className={`${filter === 'new' ? 'text-primary' : 'text-slate-600'} border-b-4 border-primary`}
+        role='listitem'
+        className={`${
+          filter === 'new' ? 'text-primary' : 'text-slate-600'
+        } border-b-4 border-primary`}
         onClick={() => setFilter('new')}
       >
         Nuevos
       </li>
       <li
+        role='listitem'
         className={`${
           filter === 'pending' ? 'text-primary' : 'text-slate-600'
         } border-b-4 border-[#3A80BF]`}
@@ -29,7 +34,10 @@ const Filter: React.FunctionComponent<Props> = ({ filter, setFilter }) => {
         Pendientes
       </li>
       <li
-        className={`${filter === 'done' ? 'text-primary' : 'text-slate-600'} border-b-4 border-slate-300`}
+        role='listitem'
+        className={`${
+          filter === 'done' ? 'text-primary' : 'text-slate-600'
+        } border-b-4 border-slate-300`}
         onClick={() => setFilter('done')}
       >
         Completos
