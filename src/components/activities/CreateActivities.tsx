@@ -22,7 +22,15 @@ const CreateActivities: React.FunctionComponent = (props) => {
     values: createActivitiesDTO,
     helpers: FormikHelpers<createActivitiesDTO>
   ) => {
-    console.log(values);
+    if (currentProject) {
+      const response = await handleCreateActivity(values, currentProject);
+      if (typeof response === 'string') helpers.setStatus(response);
+      else if (response) {
+        helpers.resetForm();
+        dispatch(addActivity(response.activity as Activity));
+        successAlert('La actividad se ha generado correctamente 😃');
+      }
+    }
   };
 
   return (
