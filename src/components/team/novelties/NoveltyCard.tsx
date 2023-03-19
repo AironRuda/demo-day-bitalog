@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import {
   getCurrentProject,
-  selectUser,
   getNovelties,
   getWorkers,
 } from '../../../context/selectors';
@@ -15,7 +14,6 @@ interface Props {
 const NoveltyCard = ({ novelty }: Props) => {
   const novelties = useSelector(getNovelties) as unknown as Novelty[];
   const admin = useSelector(getCurrentProject)?.adminId;
-  const currentUser = useSelector(selectUser).id;
   const sender = useSelector(getWorkers).find(
     (worker) => worker.id === novelty.senderId
   );
@@ -43,9 +41,7 @@ const NoveltyCard = ({ novelty }: Props) => {
           <span className='text-slate-800 font-medium'>
             {admin === novelty.senderId
               ? 'Administrador'
-              : sender && sender.id === currentUser
-              ? sender.name
-              : 'Usuario actual'}
+              : sender?.name ?? novelty.senderId}
           </span>
         </small>
         <button

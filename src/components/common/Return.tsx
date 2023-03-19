@@ -10,8 +10,8 @@ const Return: React.FunctionComponent = () => {
       id='return'
       onClick={() => navigate('/')}
     >
-      <img src={leftArrow} className='w-12 ' />
-      <span className='font-bold text-lg text-black'>Regresar</span>
+      <img src={leftArrow} className='w-10 ' />
+      <span className='font-bold text-2xl text-black mb-1'>Regresar</span>
     </div>
   );
 };

@@ -64,7 +64,7 @@ const ActivityItem: React.FunctionComponent<IActivityItemProps> = ({
           ? 'Media'
           : 'Alta'}
       </td>
-      <td className='flex flex-col overflow-x-hidden'>
+      <td className='flex flex-col overflow-x-hidden min-h-12'>
         {activity.materials.map((material, index) => (
           <>
             <span className='md:w-full w-10'>{material.material}</span>
