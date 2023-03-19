@@ -1,10 +1,11 @@
 import { FormikHelpers } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProject } from '../../../context/projectsSlice';
 import { handleCreateProject } from '../../../handlers/handleProject';
 import { createProjectDTO } from '../../../model/projects.model';
 import CreateProjectForm from './CreateProjectForm';
 import { successAlert } from '../../../utilities/alert';
+import { getWorkers } from '../../../context/selectors';
 
 const INITIAL_VALUES: createProjectDTO = {
   name: '',
@@ -13,6 +14,7 @@ const INITIAL_VALUES: createProjectDTO = {
 
 const CreateProjects: React.FunctionComponent = (props) => {
   const dispatch = useDispatch();
+  const workers = useSelector(getWorkers);
 
   const handleSubmit = async (
     values: createProjectDTO,
@@ -31,6 +33,7 @@ const CreateProjects: React.FunctionComponent = (props) => {
     <CreateProjectForm
       INITIAL_VALUES={INITIAL_VALUES}
       handleSubmit={handleSubmit}
+      workers={workers}
     />
   );
 };

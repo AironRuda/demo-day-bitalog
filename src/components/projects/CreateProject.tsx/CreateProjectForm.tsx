@@ -1,10 +1,9 @@
 import { Form, Formik, FormikHelpers } from 'formik';
-import { useSelector } from 'react-redux';
-import { getWorkers } from '../../../context/selectors';
 import { createProjectDTO } from '../../../model/projects.model';
 import { CREATE_PROJECT_VALIDATION_SCHEMA } from '../../../utilities/formValidations';
 import SelectWorkers from './SelectWorkers';
 import TextFieldFormik from '../../common/TextFieldFormik';
+import { IWorker } from '../../../model/user.model';
 
 interface Props {
   INITIAL_VALUES: createProjectDTO;
@@ -12,14 +11,14 @@ interface Props {
     values: createProjectDTO,
     helpers: FormikHelpers<createProjectDTO> | any
   ) => Promise<void>;
+  workers: IWorker[];
 }
 
 const CreateProjectForm: React.FunctionComponent<Props> = ({
   INITIAL_VALUES,
   handleSubmit,
+  workers,
 }) => {
-  const workers = useSelector(getWorkers);
-
   return (
     <Formik
       initialValues={INITIAL_VALUES}
@@ -36,7 +35,11 @@ const CreateProjectForm: React.FunctionComponent<Props> = ({
               placeholder='Selecciona a los encargados'
             />
           </div>
-          <button type='submit' className='btn btn-primary text-white w-full'>
+          <button
+            role='button'
+            type='submit'
+            className='btn btn-primary text-white w-full'
+          >
             Crear
           </button>
           {!!status && <div className='text-red-500 pl-2'>{status}</div>}
