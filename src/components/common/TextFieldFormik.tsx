@@ -23,7 +23,7 @@ const TextFieldFormik: React.FunctionComponent<IAppProps> = ({
         autoComplete='on'
       />
       {meta.touched && meta.error ? (
-        <div className='text-red-500 pl-2'>{meta.error}</div>
+        <div className='text-red-500 pl-2 w-full h-fit'>{meta.error}</div>
       ) : null}
     </div>
   );

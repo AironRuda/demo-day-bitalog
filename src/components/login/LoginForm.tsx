@@ -34,31 +34,33 @@ const LoginForm: React.FunctionComponent = (props) => {
       validationSchema={LOGIN_VALIDATION_SCHEMA}
     >
       {({ status }) => (
-        <Form className='lg:w-1/2 sm:w-2/3 w-full flex flex-col justify-center px-10 py-60 rounded gap-5 bg-white h-2/3'>
-          <h1 className='text-center font-bold text-4xl text-slate-600 mb-5 '>
-            Inicia Sesión
-          </h1>
-          <TextFieldFormik
-            name='email'
-            placeholder='Correo Electrónico'
-            type='email'
-          />
-          <TextFieldFormik
-            name='password'
-            placeholder='Contraseña'
-            type='password'
-          />
+        <Form className='sm:w-4/6 w-full lg:px-14 md:px-10 px-10 py-16 rounded bg-white h-fit'>
+          <div className='flex flex-col gap-5 justify-center h-full max-w-[350px] mx-auto'>
+            <h1 className='text-center font-bold text-4xl text-slate-600 mb-5 '>
+              Inicia Sesión
+            </h1>
+            <TextFieldFormik
+              name='email'
+              placeholder='Correo Electrónico'
+              type='email'
+            />
+            <TextFieldFormik
+              name='password'
+              placeholder='Contraseña'
+              type='password'
+            />
 
-          <button type='submit' className='btn btn-primary text-white'>
-            Iniciar Sesión
-          </button>
-          {!!status && <div className='text-red-500 pl-2'>{status}</div>}
-          <span className='text-slate-700 text-center'>
-            ¿No tienes una cuenta? {'    '}
-            <Link to='/app/register' className='text-primary font-bold'>
-              Regístrate{' '}
-            </Link>
-          </span>
+            <button type='submit' className='btn btn-primary text-white mt-3'>
+              Iniciar Sesión
+            </button>
+            {!!status && <div className='text-red-500 pl-2'>{status}</div>}
+            <span className='text-slate-700 text-center'>
+              ¿No tienes una cuenta? {'    '}
+              <Link to='/app/register' className='text-primary font-bold'>
+                Regístrate{' '}
+              </Link>
+            </span>
+          </div>
         </Form>
       )}
     </Formik>

@@ -34,7 +34,7 @@ const Presentation: React.FunctionComponent = () => {
             </Link>
             <Link to='app/register'>
               <button className='btn bg-white w-40 border-0 rounded-sm text-slate-700 hover:bg-slate-100'>
-                Registro
+                Regístrate
               </button>
             </Link>
           </div>

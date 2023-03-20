@@ -14,8 +14,8 @@ const REGISTER_VALIDATION_SCHEMA = yup.object().shape({
     .string()
     .min(6, 'contraseña muy corta')
     .required('Campo requerido'),
-  name: yup.string().required('Debe indicar un nombre de usuario'),
-  rol: yup.string().required('Debe indicar el rol del usuario'),
+  name: yup.string().required('Campo requerido'),
+  rol: yup.string().required('Campo requerido'),
 });
 
 const CREATE_PROJECT_VALIDATION_SCHEMA = yup.object().shape({
@@ -28,17 +28,16 @@ const CREATE_PROJECT_VALIDATION_SCHEMA = yup.object().shape({
 
 const ACTIVITY_VALIDATION_SCHEMA = yup.object().shape({
   activityName: yup.string().required('Campo requerido'),
-  materials: yup
-    .array(
-      yup.object({
-        unit: yup.string().required(),
-        material: yup.string().required(),
-        amount: yup
-          .number()
-          .positive('La cantidad debe ser mayor a cero')
-          .required('Se requiere de una cantidad'),
-      })
-    ),
+  materials: yup.array(
+    yup.object({
+      unit: yup.string().required(),
+      material: yup.string().required(),
+      amount: yup
+        .number()
+        .positive('La cantidad debe ser mayor a cero')
+        .required('Campo requerido'),
+    })
+  ),
   priority: yup.number().required('Campo requerido'),
 });
 
