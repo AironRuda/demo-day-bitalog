@@ -36,7 +36,7 @@ const RegisterForm: React.FunctionComponent = (props) => {
       validationSchema={REGISTER_VALIDATION_SCHEMA}
     >
       {({ status, values, handleChange, errors }) => (
-        <Form className='md:w-5/6 w-full md:px-16 px-7 flex flex-col justify-center sm:py-14 py-20 rounded gap-5 bg-white sm:h-fit h-fit sm:mt-0 mt-10'>
+        <Form className='md:w-5/6 w-full md:px-16 px-7 flex flex-col justify-center sm:py-14 py-28 rounded gap-5 bg-white sm:h-fit h-screen'>
           <h1 className='self-center text-center font-bold text-4xl text-slate-600 mb-3'>
             Regístrate
           </h1>
